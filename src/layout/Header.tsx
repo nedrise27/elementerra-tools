@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 import { createSignal } from "solid-js";
 
 type Props = {};
@@ -59,9 +60,12 @@ export function Header(props: Props) {
         <div class="navbar-start"></div>
 
         <div class="navbar-end">
-          <a class="navbar-item" href="/">
+          <A class="navbar-item" href="/">
             Home
-          </a>
+          </A>
+          <A class="navbar-item" href="/about">
+            About
+          </A>
         </div>
       </div>
     </nav>
