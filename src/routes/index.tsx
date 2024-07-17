@@ -38,9 +38,9 @@ export default function Home() {
 
   return (
     <>
-      <h1 class="title">{ELE_CURRENCY_SYMBOL} income</h1>
-
       <div class="container is-max-desktop">
+        <h1 class="title">{ELE_CURRENCY_SYMBOL} income</h1>
+
         <div class="field columns is-mobile is-vcentered">
           <div class="column">
             <label class="label">{ELE_CURRENCY_SYMBOL}/h</label>
@@ -64,17 +64,17 @@ export default function Home() {
           </div>
         </div>
 
-        <table class="table is-striped is-fullwidth">
-          <thead>
-            <tr>
-              <th>Period</th>
-              <th class="has-text-right">{ELE_CURRENCY_SYMBOL}</th>
-              <th class="has-text-right">USDC</th>
-              <th class="has-text-right">SOL</th>
-            </tr>
-          </thead>
+        <Suspense fallback={<progress class="progress"/>}>
+          <table class="table is-striped is-fullwidth">
+            <thead>
+              <tr>
+                <th>Period</th>
+                <th class="has-text-right">{ELE_CURRENCY_SYMBOL}</th>
+                <th class="has-text-right">USDC</th>
+                <th class="has-text-right">SOL</th>
+              </tr>
+            </thead>
 
-          <Suspense>
             <tbody>
               <tr>
                 <th>Hour</th>
@@ -101,8 +101,8 @@ export default function Home() {
                 <td class="has-text-right">{calcSol(24 * 30)}</td>
               </tr>
             </tbody>
-          </Suspense>
-        </table>
+          </table>
+        </Suspense>
       </div>
     </>
   );

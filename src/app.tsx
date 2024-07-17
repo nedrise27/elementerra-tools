@@ -4,7 +4,7 @@ import { Layout } from "./layout/Layout";
 
 export default function App() {
   return (
-    <Router root={Layout}>
+    <Router base={import.meta.env.SERVER_BASE_URL} root={Layout}>
       <FileRoutes />
     </Router>
   );
