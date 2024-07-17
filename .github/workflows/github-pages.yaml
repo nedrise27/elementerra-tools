@@ -2,7 +2,7 @@ name: Build package
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     tags: [ '*' ]
   pull_request:
   workflow_dispatch:
