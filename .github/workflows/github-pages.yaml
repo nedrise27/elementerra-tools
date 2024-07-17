@@ -2,8 +2,8 @@ name: Build package
 
 on:
   push:
-    branches: [ main ]
-    tags: [ '*' ]
+    branches: [main]
+    tags: ["*"]
   pull_request:
   workflow_dispatch:
 
@@ -25,21 +25,21 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
           cache: npm
 
       - name: install
         run: npm ci
 
       - name: build
-        run: npm build
+        run: npm run build
         env:
-          BASE_PATH: '/elementerra-tools'
+          BASE_PATH: "/elementerra-tools"
 
       - name: upload artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:
-          path: '.output/public'
+          path: ".output/public"
 
   deploy:
     name: Deploy
