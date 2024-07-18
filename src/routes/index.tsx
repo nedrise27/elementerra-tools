@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { createResource, createSignal, Suspense } from "solid-js";
+import { createResource, createSignal, onMount, Suspense } from "solid-js";
 
 import { ELE_CURRENCY_SYMBOL } from "~/lib/constants";
 import {
@@ -8,18 +8,13 @@ import {
   fetchEleUsdcPrice,
 } from "~/lib/prices";
 
+const ELE_PER_HOUR_KEY = "userElePerHour";
+
 export default function Home() {
   const [eleSolPrice, eleSolPriceActions] = createResource(fetchEleSolPrice);
   const [eleUsdcPrice, eleUsdcPriceActions] = createResource(fetchEleUsdcPrice);
 
   const [elePerHour, setElePerHour] = createSignal(1000);
-
-  async function handleRefreshPrices() {
-    await Promise.all([
-      eleSolPriceActions.refetch(),
-      eleUsdcPriceActions.refetch(),
-    ]);
-  }
 
   function calcUsdc(hours: number): string {
     return calculatePrice(eleUsdcPrice() || 0, elePerHour() * hours).toFixed(2);
@@ -29,11 +24,28 @@ export default function Home() {
     return calculatePrice(eleSolPrice() || 0, elePerHour() * hours);
   }
 
+  onMount(() => {
+    const savedElePerHour = _.toInteger(
+      localStorage?.getItem(ELE_PER_HOUR_KEY)
+    );
+    if (!_.isNil(savedElePerHour) && !_.isNaN(savedElePerHour)) {
+      setElePerHour(savedElePerHour);
+    }
+  });
+
   function handleElePerHourInput(value: string) {
     const v = _.toInteger(value);
     if (!_.isNil(v) && !_.isNaN(v)) {
       setElePerHour(v);
+      localStorage?.setItem(ELE_PER_HOUR_KEY, v.toString());
     }
+  }
+
+  async function handleRefreshPrices() {
+    await Promise.all([
+      eleSolPriceActions.refetch(),
+      eleUsdcPriceActions.refetch(),
+    ]);
   }
 
   return (
@@ -64,7 +76,7 @@ export default function Home() {
           </div>
         </div>
 
-        <Suspense fallback={<progress class="progress"/>}>
+        <Suspense fallback={<progress class="progress" />}>
           <table class="table is-striped is-fullwidth">
             <thead>
               <tr>
