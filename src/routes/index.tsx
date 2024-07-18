@@ -25,11 +25,10 @@ export default function Home() {
   }
 
   onMount(() => {
-    const savedElePerHour = _.toInteger(
-      localStorage?.getItem(ELE_PER_HOUR_KEY)
-    );
-    if (!_.isNil(savedElePerHour) && !_.isNaN(savedElePerHour)) {
-      setElePerHour(savedElePerHour);
+    const savedElePerHour = localStorage?.getItem(ELE_PER_HOUR_KEY);
+    if (!_.isNil(savedElePerHour)) {
+      const elePerHour = _.toInteger(savedElePerHour);
+      setElePerHour(elePerHour);
     }
   });
 
