@@ -1,5 +1,11 @@
 import _ from "lodash";
-import { createResource, createSignal, onMount, Suspense } from "solid-js";
+import {
+  createEffect,
+  createResource,
+  createSignal,
+  onMount,
+  Suspense,
+} from "solid-js";
 
 import { ELE_CURRENCY_SYMBOL } from "~/lib/constants";
 import {
@@ -17,11 +23,15 @@ export default function Home() {
   const [elePerHour, setElePerHour] = createSignal(1000);
 
   function calcUsdc(hours: number): string {
-    return calculatePrice(eleUsdcPrice() || 0, elePerHour() * hours).toFixed(2);
+    const price = eleUsdcPrice();
+    const eph = elePerHour();
+    return calculatePrice(price, eph * hours).toFixed(2);
   }
 
   function calcSol(hours: number): number {
-    return calculatePrice(eleSolPrice() || 0, elePerHour() * hours);
+    const price = eleSolPrice();
+    const eph = elePerHour();
+    return calculatePrice(price, eph * hours);
   }
 
   onMount(() => {
@@ -32,7 +42,8 @@ export default function Home() {
     }
   });
 
-  function handleElePerHourInput(value: string) {
+  async function handleElePerHourInput(value: string) {
+    await handleRefreshPrices();
     const v = _.toInteger(value);
     if (!_.isNil(v) && !_.isNaN(v)) {
       setElePerHour(v);

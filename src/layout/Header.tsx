@@ -63,9 +63,6 @@ export function Header(props: Props) {
           <A class="navbar-item" href="/">
             Home
           </A>
-          <A class="navbar-item" href="/about">
-            About
-          </A>
         </div>
       </div>
     </nav>
