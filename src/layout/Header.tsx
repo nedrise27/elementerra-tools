@@ -12,7 +12,7 @@ export function Header() {
 
           <div class="flex gap-4">
             <Navlink path="" name="Home" />
-            {/* <Navlink path="/invent" name="Invent" /> */}
+            <Navlink path="/invent" name="Invent" />
             <Navlink path="/elements" name="Elements" />
           </div>
         </div>

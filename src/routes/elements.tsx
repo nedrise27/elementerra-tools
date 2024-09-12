@@ -23,7 +23,7 @@ export default function Elements() {
   }
 
   function imageUrl(name: string) {
-    return `${ELEMENT_IMAGES_BASE_URL}/${_.kebabCase(name)}.png`;
+    return `/public/elements/${_.kebabCase(name)}.png`;
   }
 
   function handleChangeSeason(event: any) {
