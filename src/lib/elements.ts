@@ -4,7 +4,6 @@ import { Element } from "./programs/elementerra/accounts";
 import { solanaClient } from "./solanaClient";
 
 export async function fetchElements() {
-  "use server";
   const elementsRaw = await solanaClient.getProgramAccounts(ELE_PROGRAM_ID, {
     filters: [{ memcmp: { offset: 0, bytes: "Qhcg1qqD1g9" } }],
   });

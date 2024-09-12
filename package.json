@@ -1,6 +1,9 @@
 {
-  "name": "example-basic",
+  "name": "elementerra-tools",
   "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
@@ -19,13 +22,11 @@
     "solid-js": "^1.8.18",
     "vinxi": "^0.4.0"
   },
-  "engines": {
-    "node": ">=18"
-  },
   "devDependencies": {
     "@types/bn.js": "^5.1.5",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.45",
-    "tailwindcss": "^3.4.11"
+    "tailwindcss": "^3.4.11",
+    "vite-plugin-node-polyfills": "^0.22.0"
   }
 }
