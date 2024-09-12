@@ -11,6 +11,7 @@ export function Header() {
           <A href="/">Elementerra Tools</A>
 
           <div class="flex gap-4">
+            <Navlink path="" name="Home" />
             {/* <Navlink path="/invent" name="Invent" /> */}
             <Navlink path="/elements" name="Elements" />
           </div>

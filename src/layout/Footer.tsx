@@ -5,7 +5,7 @@ export function Footer() {
     <footer class="min-h-14 border-t border-slate-800">
       <div class="p-4 flex justify-between">
         <A
-          class="block w-fit"
+          class="block w-fit hover:text-sky-500"
           href="https://github.com/nedrise27/elementerra-tools"
           target="_blank"
         >
@@ -13,14 +13,14 @@ export function Footer() {
         </A>
 
         <div>
-          Made by
+          Made by{" "}
           <A
-            class="text-end"
+            class="underline hover:text-sky-500"
             href="https://github.com/nedrise27?tab=repositories"
             target="_blank"
             rel="noreferrer"
           >
-            Ned Rise (nedrise)
+            nedrise
           </A>
         </div>
       </div>

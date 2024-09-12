@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { createResource, createSignal, onMount } from "solid-js";
+import { createResource, createSignal, onMount, Suspense } from "solid-js";
 
 import { ELE_CURRENCY_SYMBOL } from "~/lib/constants";
 import {
@@ -72,7 +72,7 @@ export default function Home() {
           />
         </div>
 
-        <div class="mb-2 relative overflow-x-auto">
+        <div class="mb-2 min-h-40 relative overflow-x-auto">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -91,30 +91,32 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              <TableRow
-                period="Hour"
-                ele={elePerHour()}
-                usdc={calcUsdc(1)}
-                sol={calcSol(1)}
-              />
-              <TableRow
-                period="Day"
-                ele={elePerHour() * 24}
-                usdc={calcUsdc(24)}
-                sol={calcSol(24)}
-              />
-              <TableRow
-                period="Week"
-                ele={elePerHour() * 24 * 7}
-                usdc={calcUsdc(24 * 7)}
-                sol={calcSol(24 * 7)}
-              />
-              <TableRow
-                period="Month"
-                ele={elePerHour() * 24 * 30}
-                usdc={calcUsdc(24 * 30)}
-                sol={calcSol(24 * 30)}
-              />
+              <Suspense fallback={<FallbackRows />}>
+                <TableRow
+                  period="Hour"
+                  ele={elePerHour()}
+                  usdc={calcUsdc(1)}
+                  sol={calcSol(1)}
+                />
+                <TableRow
+                  period="Day"
+                  ele={elePerHour() * 24}
+                  usdc={calcUsdc(24)}
+                  sol={calcSol(24)}
+                />
+                <TableRow
+                  period="Week"
+                  ele={elePerHour() * 24 * 7}
+                  usdc={calcUsdc(24 * 7)}
+                  sol={calcSol(24 * 7)}
+                />
+                <TableRow
+                  period="Month"
+                  ele={elePerHour() * 24 * 30}
+                  usdc={calcUsdc(24 * 30)}
+                  sol={calcSol(24 * 30)}
+                />
+              </Suspense>
             </tbody>
           </table>
         </div>
@@ -153,5 +155,16 @@ function TableRow(props: TableRowProps) {
       <td class="px-6 py-4">{props.usdc}</td>
       <td class="px-6 py-4">{props.sol}</td>
     </tr>
+  );
+}
+
+function FallbackRows() {
+  return (
+    <>
+      <TableRow period="Hour" ele={""} usdc={""} sol={""} />
+      <TableRow period="Day" ele={""} usdc={""} sol={""} />
+      <TableRow period="Week" ele={""} usdc={""} sol={""} />
+      <TableRow period="Month" ele={""} usdc={""} sol={""} />
+    </>
   );
 }
