@@ -1,11 +1,5 @@
 import _ from "lodash";
-import {
-  createEffect,
-  createResource,
-  createSignal,
-  onMount,
-  Suspense,
-} from "solid-js";
+import { createResource, createSignal, onMount } from "solid-js";
 
 import { ELE_CURRENCY_SYMBOL } from "~/lib/constants";
 import {

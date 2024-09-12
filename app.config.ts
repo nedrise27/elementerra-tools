@@ -5,8 +5,10 @@ export default defineConfig({
   vite: {
     plugins: [nodePolyfills()],
   },
+  ssr: true,
   server: {
     baseURL: process.env.BASE_PATH,
+    preset: "static",
     static: true,
     prerender: {
       failOnError: true,
