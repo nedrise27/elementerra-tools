@@ -1,27 +1,19 @@
-import { MetaProvider } from "@solidjs/meta";
-import { ParentProps, Suspense } from "solid-js";
+import { ParentProps } from "solid-js";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
-type Props = {} & ParentProps;
-
-export function Layout(props: Props) {
+export function Layout(props: ParentProps) {
   return (
-    <MetaProvider>
-      <Header />
+    <>
+      <div class="bg-slate-900 text-slate-100">
+        <Header />
 
-      <Suspense>
-        <main
-          class="section"
-          style={{
-            "min-height": "calc(100vh - var(--bulma-navbar-height))",
-          }}
-        >
+        <main class="min-h-screen max-w-screen-xl mx-auto py-8 px-4 overflow-auto break-words text-balance">
           {props.children}
         </main>
-      </Suspense>
 
-      <Footer />
-    </MetaProvider>
+        <Footer />
+      </div>
+    </>
   );
 }

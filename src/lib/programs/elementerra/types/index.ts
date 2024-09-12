@@ -1,38 +1,36 @@
-import * as CrystalTier from "./CrystalTier"
-import * as ElementName from "./ElementName"
-import * as NFTType from "./NFTType"
-import * as ElementerraPNFTCriteria from "./ElementerraPNFTCriteria"
-import * as ElementerraCNFTCriteria from "./ElementerraCNFTCriteria"
-import * as MissionRequirement from "./MissionRequirement"
-import * as NFTRewardType from "./NFTRewardType"
-import * as ElementerraCNFTType from "./ElementerraCNFTType"
-import * as MissionReward from "./MissionReward"
-import * as MissionStatus from "./MissionStatus"
-import * as PendingGuessStatus from "./PendingGuessStatus"
-import * as StakingType from "./StakingType"
-import * as Tier from "./Tier"
+import * as CrystalTier from "./CrystalTier";
+import * as ElementName from "./ElementName";
+import * as NFTType from "./NFTType";
+import * as ElementerraPNFTCriteria from "./ElementerraPNFTCriteria";
+import * as ElementerraCNFTCriteria from "./ElementerraCNFTCriteria";
+import * as MissionRequirement from "./MissionRequirement";
+import * as NFTRewardType from "./NFTRewardType";
+import * as ElementerraCNFTType from "./ElementerraCNFTType";
+import * as MissionReward from "./MissionReward";
+import * as MissionStatus from "./MissionStatus";
+import * as PendingGuessStatus from "./PendingGuessStatus";
+import * as StakingType from "./StakingType";
+import * as Tier from "./Tier";
 
-export { AddRequirementParams } from "./AddRequirementParams"
+export { AddRequirementParams } from "./AddRequirementParams";
 export type {
   AddRequirementParamsFields,
   AddRequirementParamsJSON,
-} from "./AddRequirementParams"
-export { CNFTValues } from "./CNFTValues"
-export type { CNFTValuesFields, CNFTValuesJSON } from "./CNFTValues"
-export { RemoveRequirementParams } from "./RemoveRequirementParams"
+} from "./AddRequirementParams";
+export { CNFTValues } from "./CNFTValues";
+export type { CNFTValuesFields, CNFTValuesJSON } from "./CNFTValues";
+export { RemoveRequirementParams } from "./RemoveRequirementParams";
 export type {
   RemoveRequirementParamsFields,
   RemoveRequirementParamsJSON,
-} from "./RemoveRequirementParams"
-export { CNFTValues } from "./CNFTValues"
-export type { CNFTValuesFields, CNFTValuesJSON } from "./CNFTValues"
-export { MissionOdds } from "./MissionOdds"
-export type { MissionOddsFields, MissionOddsJSON } from "./MissionOdds"
-export { Ticket } from "./Ticket"
-export type { TicketFields, TicketJSON } from "./Ticket"
-export { StakingRate } from "./StakingRate"
-export type { StakingRateFields, StakingRateJSON } from "./StakingRate"
-export { CrystalTier }
+} from "./RemoveRequirementParams";
+export { MissionOdds } from "./MissionOdds";
+export type { MissionOddsFields, MissionOddsJSON } from "./MissionOdds";
+export { Ticket } from "./Ticket";
+export type { TicketFields, TicketJSON } from "./Ticket";
+export { StakingRate } from "./StakingRate";
+export type { StakingRateFields, StakingRateJSON } from "./StakingRate";
+export { CrystalTier };
 
 export type CrystalTierKind =
   | CrystalTier.Tier1
@@ -46,7 +44,7 @@ export type CrystalTierKind =
   | CrystalTier.Tier9
   | CrystalTier.Tier10
   | CrystalTier.Tier11
-  | CrystalTier.Tier12
+  | CrystalTier.Tier12;
 export type CrystalTierJSON =
   | CrystalTier.Tier1JSON
   | CrystalTier.Tier2JSON
@@ -59,9 +57,9 @@ export type CrystalTierJSON =
   | CrystalTier.Tier9JSON
   | CrystalTier.Tier10JSON
   | CrystalTier.Tier11JSON
-  | CrystalTier.Tier12JSON
+  | CrystalTier.Tier12JSON;
 
-export { ElementName }
+export { ElementName };
 
 export type ElementNameKind =
   | ElementName.Air
@@ -163,7 +161,7 @@ export type ElementNameKind =
   | ElementName.TShirt
   | ElementName.Yacht
   | ElementName.Party
-  | ElementName.Whale
+  | ElementName.Whale;
 export type ElementNameJSON =
   | ElementName.AirJSON
   | ElementName.FireJSON
@@ -264,120 +262,120 @@ export type ElementNameJSON =
   | ElementName.TShirtJSON
   | ElementName.YachtJSON
   | ElementName.PartyJSON
-  | ElementName.WhaleJSON
+  | ElementName.WhaleJSON;
 
-export { NFTType }
+export { NFTType };
 
-export type NFTTypeKind = NFTType.Normal | NFTType.PNFT | NFTType.CNFT
+export type NFTTypeKind = NFTType.Normal | NFTType.PNFT | NFTType.CNFT;
 export type NFTTypeJSON =
   | NFTType.NormalJSON
   | NFTType.PNFTJSON
-  | NFTType.CNFTJSON
+  | NFTType.CNFTJSON;
 
-export { ElementerraPNFTCriteria }
+export { ElementerraPNFTCriteria };
 
 export type ElementerraPNFTCriteriaKind =
   | ElementerraPNFTCriteria.Rabbit
   | ElementerraPNFTCriteria.Inventor
   | ElementerraPNFTCriteria.Familiar
-  | ElementerraPNFTCriteria.None
+  | ElementerraPNFTCriteria.None;
 export type ElementerraPNFTCriteriaJSON =
   | ElementerraPNFTCriteria.RabbitJSON
   | ElementerraPNFTCriteria.InventorJSON
   | ElementerraPNFTCriteria.FamiliarJSON
-  | ElementerraPNFTCriteria.NoneJSON
+  | ElementerraPNFTCriteria.NoneJSON;
 
-export { ElementerraCNFTCriteria }
+export { ElementerraCNFTCriteria };
 
 export type ElementerraCNFTCriteriaKind =
   | ElementerraCNFTCriteria.Crystal
   | ElementerraCNFTCriteria.Element
-  | ElementerraCNFTCriteria.None
+  | ElementerraCNFTCriteria.None;
 export type ElementerraCNFTCriteriaJSON =
   | ElementerraCNFTCriteria.CrystalJSON
   | ElementerraCNFTCriteria.ElementJSON
-  | ElementerraCNFTCriteria.NoneJSON
+  | ElementerraCNFTCriteria.NoneJSON;
 
-export { MissionRequirement }
+export { MissionRequirement };
 
 export type MissionRequirementKind =
   | MissionRequirement.ElementerraPNFT
   | MissionRequirement.ElementerraCNFT
   | MissionRequirement.Token
-  | MissionRequirement.None
+  | MissionRequirement.None;
 export type MissionRequirementJSON =
   | MissionRequirement.ElementerraPNFTJSON
   | MissionRequirement.ElementerraCNFTJSON
   | MissionRequirement.TokenJSON
-  | MissionRequirement.NoneJSON
+  | MissionRequirement.NoneJSON;
 
-export { NFTRewardType }
+export { NFTRewardType };
 
-export type NFTRewardTypeKind = NFTRewardType.Ticket | NFTRewardType.CNFT
+export type NFTRewardTypeKind = NFTRewardType.Ticket | NFTRewardType.CNFT;
 export type NFTRewardTypeJSON =
   | NFTRewardType.TicketJSON
-  | NFTRewardType.CNFTJSON
+  | NFTRewardType.CNFTJSON;
 
-export { ElementerraCNFTType }
+export { ElementerraCNFTType };
 
 export type ElementerraCNFTTypeKind =
   | ElementerraCNFTType.Crystal
   | ElementerraCNFTType.Element
   | ElementerraCNFTType.Pack
-  | ElementerraCNFTType.None
+  | ElementerraCNFTType.None;
 export type ElementerraCNFTTypeJSON =
   | ElementerraCNFTType.CrystalJSON
   | ElementerraCNFTType.ElementJSON
   | ElementerraCNFTType.PackJSON
-  | ElementerraCNFTType.NoneJSON
+  | ElementerraCNFTType.NoneJSON;
 
-export { MissionReward }
+export { MissionReward };
 
 export type MissionRewardKind =
   | MissionReward.Token
   | MissionReward.LoseNFT
   | MissionReward.WinNft
-  | MissionReward.Nothing
+  | MissionReward.Nothing;
 export type MissionRewardJSON =
   | MissionReward.TokenJSON
   | MissionReward.LoseNFTJSON
   | MissionReward.WinNftJSON
-  | MissionReward.NothingJSON
+  | MissionReward.NothingJSON;
 
-export { MissionStatus }
+export { MissionStatus };
 
 export type MissionStatusKind =
   | MissionStatus.NotStarted
   | MissionStatus.Pending
   | MissionStatus.Completed
-  | MissionStatus.Claimable
+  | MissionStatus.Claimable;
 export type MissionStatusJSON =
   | MissionStatus.NotStartedJSON
   | MissionStatus.PendingJSON
   | MissionStatus.CompletedJSON
-  | MissionStatus.ClaimableJSON
+  | MissionStatus.ClaimableJSON;
 
-export { PendingGuessStatus }
+export { PendingGuessStatus };
 
 export type PendingGuessStatusKind =
   | PendingGuessStatus.NotClaimed
   | PendingGuessStatus.Inventor
   | PendingGuessStatus.Reward
-  | PendingGuessStatus.Normal
+  | PendingGuessStatus.Normal;
 export type PendingGuessStatusJSON =
   | PendingGuessStatus.NotClaimedJSON
   | PendingGuessStatus.InventorJSON
   | PendingGuessStatus.RewardJSON
-  | PendingGuessStatus.NormalJSON
+  | PendingGuessStatus.NormalJSON;
 
-export { StakingType }
+export { StakingType };
 
-export type StakingTypeKind = StakingType.Collection | StakingType.MerkleNode
+export type StakingTypeKind = StakingType.Collection | StakingType.MerkleNode;
 export type StakingTypeJSON =
   | StakingType.CollectionJSON
-  | StakingType.MerkleNodeJSON
+  | StakingType.MerkleNodeJSON;
 
-export { Tier }
+export { Tier };
 
 export type TierKind =
   | Tier.Tier0
@@ -387,7 +385,7 @@ export type TierKind =
   | Tier.Tier4
   | Tier.Tier5
   | Tier.Tier6
-  | Tier.Tier7
+  | Tier.Tier7;
 export type TierJSON =
   | Tier.Tier0JSON
   | Tier.Tier1JSON
@@ -396,4 +394,4 @@ export type TierJSON =
   | Tier.Tier4JSON
   | Tier.Tier5JSON
   | Tier.Tier6JSON
-  | Tier.Tier7JSON
+  | Tier.Tier7JSON;

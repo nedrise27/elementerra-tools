@@ -60,72 +60,104 @@ export default function Home() {
 
   return (
     <>
-      <div class="container is-max-desktop">
-        <h1 class="title">{ELE_CURRENCY_SYMBOL} income</h1>
-
-        <div class="field columns is-mobile is-vcentered">
-          <div class="column">
-            <label class="label">{ELE_CURRENCY_SYMBOL}/h</label>
-          </div>
-
-          <div class="column control">
-            <input
-              class="input"
-              type="number"
-              value={elePerHour()}
-              onInput={(event) =>
-                handleElePerHourInput(event.currentTarget.value)
-              }
-            />
-          </div>
-
-          <div class="column">
-            <button class="button" onClick={handleRefreshPrices}>
-              refresh
-            </button>
-          </div>
+      <div class="">
+        <div class="w-full mb-8 flex justify-center">
+          <p class="text-xl text-bold">{ELE_CURRENCY_SYMBOL} income</p>
         </div>
 
-        <Suspense fallback={<progress class="progress" />}>
-          <table class="table is-striped is-fullwidth">
-            <thead>
+        <div class="w-full mb-2 flex items-center gap-4">
+          <label class="">{ELE_CURRENCY_SYMBOL}/h</label>
+          <input
+            type="number"
+            class="block p-4 ps-10 text-sm border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            placeholder="1000"
+            value={elePerHour()}
+            onInput={(event) =>
+              handleElePerHourInput(event.currentTarget.value)
+            }
+          />
+        </div>
+
+        <div class="mb-2 relative overflow-x-auto">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th>Period</th>
-                <th class="has-text-right">{ELE_CURRENCY_SYMBOL}</th>
-                <th class="has-text-right">USDC</th>
-                <th class="has-text-right">SOL</th>
+                <th scope="col" class="px-6 py-3">
+                  Period
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  {ELE_CURRENCY_SYMBOL}
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  USDC
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  SOL
+                </th>
               </tr>
             </thead>
-
             <tbody>
-              <tr>
-                <th>Hour</th>
-                <td class="has-text-right">{elePerHour()}</td>
-                <td class="has-text-right">{calcUsdc(1)}</td>
-                <td class="has-text-right">{calcSol(1)}</td>
-              </tr>
-              <tr>
-                <th>Day</th>
-                <td class="has-text-right">{elePerHour() * 24}</td>
-                <td class="has-text-right">{calcUsdc(24)}</td>
-                <td class="has-text-right">{calcSol(24)}</td>
-              </tr>
-              <tr>
-                <th>Week</th>
-                <td class="has-text-right">{elePerHour() * 24 * 7}</td>
-                <td class="has-text-right">{calcUsdc(24 * 7)}</td>
-                <td class="has-text-right">{calcSol(24 * 7)}</td>
-              </tr>
-              <tr>
-                <th>Month</th>
-                <td class="has-text-right">{elePerHour() * 24 * 30}</td>
-                <td class="has-text-right">{calcUsdc(24 * 30)}</td>
-                <td class="has-text-right">{calcSol(24 * 30)}</td>
-              </tr>
+              <TableRow
+                period="Hour"
+                ele={elePerHour()}
+                usdc={calcUsdc(1)}
+                sol={calcSol(1)}
+              />
+              <TableRow
+                period="Day"
+                ele={elePerHour() * 24}
+                usdc={calcUsdc(24)}
+                sol={calcSol(24)}
+              />
+              <TableRow
+                period="Week"
+                ele={elePerHour() * 24 * 7}
+                usdc={calcUsdc(24 * 7)}
+                sol={calcSol(24 * 7)}
+              />
+              <TableRow
+                period="Month"
+                ele={elePerHour() * 24 * 30}
+                usdc={calcUsdc(24 * 30)}
+                sol={calcSol(24 * 30)}
+              />
             </tbody>
           </table>
-        </Suspense>
+        </div>
+
+        <div class="w-full flex justify-end">
+          <button
+            type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            onClick={handleRefreshPrices}
+          >
+            Refresh
+          </button>
+        </div>
       </div>
     </>
+  );
+}
+
+type TableRowProps = {
+  period: string;
+  ele: number | string;
+  usdc: number | string;
+  sol: number | string;
+};
+
+function TableRow(props: TableRowProps) {
+  return (
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <th
+        scope="row"
+        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+      >
+        {props.period}
+      </th>
+      <td class="px-6 py-4">{props.ele}</td>
+      <td class="px-6 py-4">{props.usdc}</td>
+      <td class="px-6 py-4">{props.sol}</td>
+    </tr>
   );
 }
