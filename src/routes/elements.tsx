@@ -23,7 +23,9 @@ export default function Elements() {
   }
 
   function imageUrl(name: string) {
-    return `/images/elements/${_.kebabCase(name)}.png`;
+    return `${import.meta.env.VITE_BASE_PATH}/images/elements/${_.kebabCase(
+      name
+    )}.png`;
   }
 
   function handleChangeSeason(event: any) {

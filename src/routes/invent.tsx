@@ -4,18 +4,17 @@ import { ELEMENT_IMAGES_BASE_URL } from "~/lib/constants";
 import { fetchElements } from "~/lib/elements";
 
 export default function Invent() {
-  const [elements] = createResource(fetchElements);
+  const [elements] = createResource(async () => {
+    const e = await fetchElements();
+    return e[2];
+  });
 
   function imageUrl(name: string) {
     return `${ELEMENT_IMAGES_BASE_URL}/${_.kebabCase(name)}.png`;
   }
 
   createEffect(() => {
-    const imageUrls = _.values(_.get(elements(), 1)).map((e) =>
-      imageUrl(e.name)
-    );
-
-    console.log(imageUrls);
+    console.log(elements());
   });
 
   return <></>;

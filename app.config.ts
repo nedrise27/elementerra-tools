@@ -7,7 +7,7 @@ export default defineConfig({
   },
   ssr: true,
   server: {
-    baseURL: process.env.BASE_PATH,
+    baseURL: process.env.VITE_BASE_PATH,
     preset: "static",
     static: true,
     prerender: {
