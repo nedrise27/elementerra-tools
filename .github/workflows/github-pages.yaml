@@ -30,6 +30,7 @@ jobs:
         run: npm run build
         env:
           BASE_PATH: "/elementerra-tools"
+          VITE_HELIUS_API_URL: https://loree-mjwcfu-fast-mainnet.helius-rpc.com
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:
