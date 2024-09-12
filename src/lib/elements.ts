@@ -20,7 +20,15 @@ export type ElementJSON = {
 
 export async function fetchElements() {
   const elementsRaw = await solanaClient.getProgramAccounts(ELE_PROGRAM_ID, {
-    filters: [{ memcmp: { offset: 0, bytes: "Qhcg1qqD1g9" } }],
+    filters: [
+      {
+        memcmp: {
+          offset: 0,
+          bytes: RawElement.discriminator.toString("base64"),
+          encoding: "base64",
+        },
+      },
+    ],
   });
 
   const elements: Record<string, Record<string, ElementJSON>> = {};
@@ -40,4 +48,14 @@ export async function fetchElements() {
   }
 
   return elements;
+}
+
+export function getImageUrlByName(name: string): string {
+  return `${import.meta.env.VITE_BASE_PATH}/images/elements/${_.kebabCase(
+    name
+  )}.png`;
+}
+
+export function slugifyElementName(name: string | undefined): string {
+  return (name || "").replaceAll(" ", "").toLowerCase();
 }

@@ -2,13 +2,14 @@ import _ from "lodash";
 import { createResource, createSignal, For, Show, Suspense } from "solid-js";
 
 import { ELEMENT_IMAGES_BASE_URL } from "~/lib/constants";
-import { fetchElements } from "~/lib/elements";
+import { fetchElements, getImageUrlByName } from "~/lib/elements";
 import { ElementJSON } from "~/lib/programs/elementerra/accounts";
 
 type Elements = Record<number, Record<string, ElementJSON>>;
 
 export default function Elements() {
   const [season, setSeason] = createSignal("2");
+  const [tierFilter, setTierFilter] = createSignal<string[]>([]);
 
   const [elements] = createResource(fetchElements);
 
@@ -17,38 +18,91 @@ export default function Elements() {
     return _.keys(e);
   }
 
-  function elementsDisplay() {
-    const e = _.values(_.get(elements(), season()));
-    return _.orderBy(e, ["tier", "name"]);
+  function availableTiers() {
+    const maxTier =
+      _.max(_.values(_.get(elements(), season())).map((e) => e.tier)) || 1;
+    return _.range(0, maxTier + 1);
   }
 
-  function imageUrl(name: string) {
-    return `${import.meta.env.VITE_BASE_PATH}/images/elements/${_.kebabCase(
-      name
-    )}.png`;
+  function elementsDisplay() {
+    let filtered = _.clone(_.values(_.get(elements(), season())));
+
+    if (!_.isEmpty(tierFilter())) {
+      filtered = filtered.filter((e) =>
+        tierFilter().includes(e.tier.toString())
+      );
+    }
+
+    return _.orderBy(filtered, ["tier", "name"]);
   }
 
   function handleChangeSeason(event: any) {
     setSeason(event.target.value);
   }
 
+  function handleTierFilterSelect(target: HTMLInputElement) {
+    const checked = target.checked;
+    const tier = target.value;
+    let tiers = _.clone(tierFilter());
+    if (checked && !tiers.includes(tier)) {
+      tiers.push(tier);
+    }
+    if (!checked && tiers.includes(tier)) {
+      const i = tiers.indexOf(tier);
+      if (i != -1) {
+        tiers.splice(i, 1);
+      }
+    }
+    setTierFilter(tiers);
+  }
+
   return (
     <>
       <Suspense fallback={<strong>Fetching Elements ...</strong>}>
-        <Show
-          when={!_.isNil(elements())}
-          fallback={<strong>Loading ...</strong>}
-        >
+        <div class="w-full mb-4 pb-2 border-b border-gray-600 flex flex-wrap gap-1">
           <select
-            class="mb-2 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            class="min-w-28 mr-4 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
             value={season()}
             onInput={handleChangeSeason}
           >
             <For each={availableSeasons()}>
-              {(season) => <option value={season}>Season {season}</option>}
+              {(s) => (
+                <option selected={s == season()} value={s}>
+                  Season {s}
+                </option>
+              )}
             </For>
           </select>
 
+          <div class="flex flex-wrap items-center gap-3">
+            <For each={availableTiers()}>
+              {(tier) => (
+                <div class="flex items-center">
+                  <input
+                    id={"tier-checkbox-" + tier}
+                    type="checkbox"
+                    value={tier}
+                    onChange={({ currentTarget }) =>
+                      handleTierFilterSelect(currentTarget)
+                    }
+                    class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600"
+                  />
+                  <label
+                    for={"tier-checkbox-" + tier}
+                    class="ms-2 text-sm font-medium text-gray-300"
+                  >
+                    T{tier}
+                  </label>
+                </div>
+              )}
+            </For>
+          </div>
+        </div>
+
+        <Show
+          when={!_.isNil(elements())}
+          fallback={<strong>Loading ...</strong>}
+        >
           <div class="w-full flex flex-wrap justify-center gap-1">
             <For each={elementsDisplay()}>
               {(element) => (
@@ -57,7 +111,7 @@ export default function Elements() {
                     <a href="#">
                       <img
                         class="rounded-t-lg"
-                        src={imageUrl(element.name)}
+                        src={getImageUrlByName(element.name)}
                         alt=""
                       />
                     </a>
@@ -69,6 +123,9 @@ export default function Elements() {
                       </a>
                       <p class="mb-3 font-normal text-gray-400">
                         Tier: {element.tier}
+                      </p>
+                      <p class="mb-3 font-normal text-gray-400">
+                        Price: {element.cost != "0" ? element.cost : "TBD"}
                       </p>
                     </div>
                   </div>

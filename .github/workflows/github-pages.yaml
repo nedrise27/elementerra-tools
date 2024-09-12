@@ -31,6 +31,8 @@ jobs:
         env:
           VITE_BASE_PATH: "/elementerra-tools"
           VITE_HELIUS_API_URL: https://loree-mjwcfu-fast-mainnet.helius-rpc.com
+          VITE_ELEMENTERRA_SEASON: 2
+          VITE_API_BASE_URL: https://elementerra.line27.de
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:

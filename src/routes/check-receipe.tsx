@@ -1,0 +1,150 @@
+import _ from "lodash";
+import {
+  createEffect,
+  createResource,
+  createSignal,
+  For,
+  Show,
+  Suspense,
+} from "solid-js";
+import { checkReceipe, CheckReceipeResponse } from "~/lib/apiClient";
+import { ElementJSON, fetchElements, slugifyElementName } from "~/lib/elements";
+
+type Receipe = [string, string, string, string];
+
+export default function CheckReceipe() {
+  const [elements] = createResource(fetchElements);
+
+  const [request, setRequest] = createSignal<Receipe | undefined>();
+
+  const [receipe, setReceipe] = createSignal<
+    [
+      string | undefined,
+      string | undefined,
+      string | undefined,
+      string | undefined
+    ]
+  >([undefined, undefined, undefined, undefined]);
+
+  const [result] = createResource(request, async (request) => {
+    const res = await checkReceipe(request);
+    return res;
+  });
+
+  function availableElements(): ElementJSON[] {
+    const e = _.clone(elements());
+    if (_.isNil(e)) {
+      return [];
+    }
+    const available = _.orderBy(_.values(_.get(e, 2)), ["tier", "name"]);
+    setReceipe([
+      available[0].name,
+      available[0].name,
+      available[0].name,
+      available[0].name,
+    ]);
+    return available;
+  }
+
+  function handleSelectElement(position: number, element: string) {
+    const r = _.clone(receipe());
+    if (!_.inRange(position, 0, 4)) {
+      throw new Error(
+        "Receipe position out of bounds got " +
+          position +
+          " expected 0, 1, 2, or 3"
+      );
+    }
+    r[position] = element;
+    setReceipe(r);
+  }
+
+  async function handleCeckReciepe() {
+    const receipeToCheck = _.clone(receipe()).map(
+      slugifyElementName
+    ) as Receipe;
+    setRequest(receipeToCheck);
+  }
+
+  return (
+    <>
+      <Suspense>
+        <div class="mb-4 w-full flex flex-wrap justify-center items-center gap-2">
+          <select
+            class="min-w-28 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            value={receipe()[0]}
+            onInput={({ currentTarget }) =>
+              handleSelectElement(0, currentTarget.value)
+            }
+          >
+            <ElementsOptions elements={availableElements()} />
+          </select>
+          <select
+            class="min-w-28 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            value={receipe()[1]}
+            onInput={({ currentTarget }) =>
+              handleSelectElement(1, currentTarget.value)
+            }
+          >
+            <ElementsOptions elements={availableElements()} />
+          </select>
+          <select
+            class="min-w-28 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            value={receipe()[2]}
+            onInput={({ currentTarget }) =>
+              handleSelectElement(2, currentTarget.value)
+            }
+          >
+            <ElementsOptions elements={availableElements()} />
+          </select>
+          <select
+            class="min-w-28 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            value={receipe()[3]}
+            onInput={({ currentTarget }) =>
+              handleSelectElement(3, currentTarget.value)
+            }
+          >
+            <ElementsOptions elements={availableElements()} />
+          </select>
+          <button
+            type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            onClick={handleCeckReciepe}
+          >
+            Check
+          </button>
+        </div>
+      </Suspense>
+
+      <Suspense>
+        <div class="w-full flex flex-wrap justify-center items-center">
+          <Show when={!_.isNil(result()) && result()?.wasTried}>
+            <p class="text-xl text-rose-700">
+              Allready tried{" "}
+              {result()?.wasSuccessful
+                ? "and it was successful"
+                : "and it was not successful"}
+            </p>
+          </Show>
+          <Show when={!_.isNil(result()) && !result()?.wasTried}>
+            <p class="text-xl text-emerald-600">Not tried yet</p>
+          </Show>
+        </div>
+      </Suspense>
+    </>
+  );
+}
+
+function ElementsOptions(props: { elements: ElementJSON[] }) {
+  return (
+    <For each={props.elements}>
+      {(element) => (
+        <>
+          <option value={element.name}>
+            {element.name} T{element.tier}
+          </option>
+        </>
+      )}
+    </For>
+  );
+}
