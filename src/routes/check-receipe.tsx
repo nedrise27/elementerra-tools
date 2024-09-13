@@ -68,7 +68,7 @@ export default function CheckReceipe() {
 
   return (
     <>
-      <Suspense>
+      <Suspense fallback={<strong>Elements loading ...</strong>}>
         <div class="mb-4 w-full flex flex-wrap justify-center items-center gap-2">
           <select
             class="min-w-28 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
@@ -116,21 +116,16 @@ export default function CheckReceipe() {
         </div>
       </Suspense>
 
-      <Suspense>
-        <div class="w-full flex flex-wrap justify-center items-center">
+      <div class="w-full flex flex-wrap justify-center items-center">
+        <Suspense fallback={<strong>Answer Loading ...</strong>}>
           <Show when={!_.isNil(result()) && result()?.wasTried}>
-            <p class="text-xl text-rose-700">
-              Allready tried{" "}
-              {result()?.wasSuccessful
-                ? "and it was successful"
-                : "and it was not successful"}
-            </p>
+            <p class="text-xl text-rose-700">Allready tried</p>
           </Show>
-          <Show when={!_.isNil(result()) && !result()?.wasTried}>
-            <p class="text-xl text-emerald-600">Not tried yet</p>
+          <Show when={!_.isNil(result()) && !result()!.wasTried}>
+            <p class="text-xl text-emerald-500">Not tried yet</p>
           </Show>
-        </div>
-      </Suspense>
+        </Suspense>
+      </div>
     </>
   );
 }

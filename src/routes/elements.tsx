@@ -1,3 +1,4 @@
+import { PublicKey } from "@solana/web3.js";
 import _ from "lodash";
 import { createResource, createSignal, For, Show, Suspense } from "solid-js";
 
@@ -24,6 +25,16 @@ export default function Elements() {
     return _.range(0, maxTier + 1);
   }
 
+  function elementsById() {
+    let elementRecord: Record<string, ElementJSON> = {};
+    for (const e of _.values(_.get(elements(), season()))) {
+      const hash = new PublicKey(e.hash).toString();
+      _.set(elementRecord, hash, e);
+    }
+
+    return elementRecord;
+  }
+
   function elementsDisplay() {
     let filtered = _.clone(_.values(_.get(elements(), season())));
 
@@ -34,6 +45,14 @@ export default function Elements() {
     }
 
     return _.orderBy(filtered, ["tier", "name"]);
+  }
+
+  function elementReceipe(element: ElementJSON) {
+    const record = elementsById();
+    console.log(record);
+    console.log(element.elementsRequired);
+    console.log(element.elementsRequired.map((e) => _.get(record, e)));
+    return "";
   }
 
   function handleChangeSeason(event: any) {
@@ -126,6 +145,23 @@ export default function Elements() {
                       </p>
                       <p class="mb-3 font-normal text-gray-400">
                         Price: {element.cost != "0" ? element.cost : "TBD"}
+                      </p>
+                      <p>
+                        <Show
+                          when={element.isDiscovered || element.tier == 0}
+                          fallback={<p>Not discovered</p>}
+                        >
+                          <p>Discovered</p>
+                        </Show>
+
+                        <Show when={element.isDiscovered && element.tier != 0}>
+                          <p>Inventor:</p>{" "}
+                          <p class="text-sm">{element.inventor.toString()}</p>
+                        </Show>
+
+                        {/* <Show when={element.isDiscovered}>
+                          <p>{elementReceipe(element)}</p>
+                        </Show> */}
                       </p>
                     </div>
                   </div>
