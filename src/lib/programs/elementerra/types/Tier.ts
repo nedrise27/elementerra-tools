@@ -187,6 +187,121 @@ export class Tier7 {
   }
 }
 
+export interface Tier8JSON {
+  kind: "Tier8"
+}
+
+export class Tier8 {
+  static readonly discriminator = 8
+  static readonly kind = "Tier8"
+  readonly discriminator = 8
+  readonly kind = "Tier8"
+
+  toJSON(): Tier8JSON {
+    return {
+      kind: "Tier8",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier8: {},
+    }
+  }
+}
+
+export interface Tier9JSON {
+  kind: "Tier9"
+}
+
+export class Tier9 {
+  static readonly discriminator = 9
+  static readonly kind = "Tier9"
+  readonly discriminator = 9
+  readonly kind = "Tier9"
+
+  toJSON(): Tier9JSON {
+    return {
+      kind: "Tier9",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier9: {},
+    }
+  }
+}
+
+export interface Tier10JSON {
+  kind: "Tier10"
+}
+
+export class Tier10 {
+  static readonly discriminator = 10
+  static readonly kind = "Tier10"
+  readonly discriminator = 10
+  readonly kind = "Tier10"
+
+  toJSON(): Tier10JSON {
+    return {
+      kind: "Tier10",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier10: {},
+    }
+  }
+}
+
+export interface Tier11JSON {
+  kind: "Tier11"
+}
+
+export class Tier11 {
+  static readonly discriminator = 11
+  static readonly kind = "Tier11"
+  readonly discriminator = 11
+  readonly kind = "Tier11"
+
+  toJSON(): Tier11JSON {
+    return {
+      kind: "Tier11",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier11: {},
+    }
+  }
+}
+
+export interface Tier12JSON {
+  kind: "Tier12"
+}
+
+export class Tier12 {
+  static readonly discriminator = 12
+  static readonly kind = "Tier12"
+  readonly discriminator = 12
+  readonly kind = "Tier12"
+
+  toJSON(): Tier12JSON {
+    return {
+      kind: "Tier12",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier12: {},
+    }
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fromDecoded(obj: any): types.TierKind {
   if (typeof obj !== "object") {
@@ -216,6 +331,21 @@ export function fromDecoded(obj: any): types.TierKind {
   }
   if ("Tier7" in obj) {
     return new Tier7()
+  }
+  if ("Tier8" in obj) {
+    return new Tier8()
+  }
+  if ("Tier9" in obj) {
+    return new Tier9()
+  }
+  if ("Tier10" in obj) {
+    return new Tier10()
+  }
+  if ("Tier11" in obj) {
+    return new Tier11()
+  }
+  if ("Tier12" in obj) {
+    return new Tier12()
   }
 
   throw new Error("Invalid enum object")
@@ -247,6 +377,21 @@ export function fromJSON(obj: types.TierJSON): types.TierKind {
     case "Tier7": {
       return new Tier7()
     }
+    case "Tier8": {
+      return new Tier8()
+    }
+    case "Tier9": {
+      return new Tier9()
+    }
+    case "Tier10": {
+      return new Tier10()
+    }
+    case "Tier11": {
+      return new Tier11()
+    }
+    case "Tier12": {
+      return new Tier12()
+    }
   }
 }
 
@@ -260,6 +405,11 @@ export function layout(property?: string) {
     borsh.struct([], "Tier5"),
     borsh.struct([], "Tier6"),
     borsh.struct([], "Tier7"),
+    borsh.struct([], "Tier8"),
+    borsh.struct([], "Tier9"),
+    borsh.struct([], "Tier10"),
+    borsh.struct([], "Tier11"),
+    borsh.struct([], "Tier12"),
   ])
   if (property !== undefined) {
     return ret.replicate(property)

@@ -4,16 +4,16 @@ import * as types from "../types" // eslint-disable-line @typescript-eslint/no-u
 import * as borsh from "@coral-xyz/borsh"
 
 export type CrystalFields = {
-  tier: types.CrystalTierKind
+  crystal: types.CrystalTierKind
 }
 export type CrystalValue = {
-  tier: types.CrystalTierKind
+  crystal: types.CrystalTierKind
 }
 
 export interface CrystalJSON {
   kind: "Crystal"
   value: {
-    tier: types.CrystalTierJSON
+    crystal: types.CrystalTierJSON
   }
 }
 
@@ -26,7 +26,7 @@ export class Crystal {
 
   constructor(value: CrystalFields) {
     this.value = {
-      tier: value.tier,
+      crystal: value.crystal,
     }
   }
 
@@ -34,7 +34,7 @@ export class Crystal {
     return {
       kind: "Crystal",
       value: {
-        tier: this.value.tier.toJSON(),
+        crystal: this.value.crystal.toJSON(),
       },
     }
   }
@@ -42,23 +42,23 @@ export class Crystal {
   toEncodable() {
     return {
       Crystal: {
-        tier: this.value.tier.toEncodable(),
+        crystal: this.value.crystal.toEncodable(),
       },
     }
   }
 }
 
 export type ElementFields = {
-  tier: types.TierKind
+  element: types.ElementNameKind
 }
 export type ElementValue = {
-  tier: types.TierKind
+  element: types.ElementNameKind
 }
 
 export interface ElementJSON {
   kind: "Element"
   value: {
-    tier: types.TierJSON
+    element: types.ElementNameJSON
   }
 }
 
@@ -71,7 +71,7 @@ export class Element {
 
   constructor(value: ElementFields) {
     this.value = {
-      tier: value.tier,
+      element: value.element,
     }
   }
 
@@ -79,7 +79,7 @@ export class Element {
     return {
       kind: "Element",
       value: {
-        tier: this.value.tier.toJSON(),
+        element: this.value.element.toJSON(),
       },
     }
   }
@@ -87,7 +87,7 @@ export class Element {
   toEncodable() {
     return {
       Element: {
-        tier: this.value.tier.toEncodable(),
+        element: this.value.element.toEncodable(),
       },
     }
   }
@@ -117,7 +117,7 @@ export class None {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function fromDecoded(obj: any): types.ElementerraCNFTCriteriaKind {
+export function fromDecoded(obj: any): types.CnftToBurnKind {
   if (typeof obj !== "object") {
     throw new Error("Invalid enum object")
   }
@@ -125,13 +125,13 @@ export function fromDecoded(obj: any): types.ElementerraCNFTCriteriaKind {
   if ("Crystal" in obj) {
     const val = obj["Crystal"]
     return new Crystal({
-      tier: types.CrystalTier.fromDecoded(val["tier"]),
+      crystal: types.CrystalTier.fromDecoded(val["crystal"]),
     })
   }
   if ("Element" in obj) {
     const val = obj["Element"]
     return new Element({
-      tier: types.Tier.fromDecoded(val["tier"]),
+      element: types.ElementName.fromDecoded(val["element"]),
     })
   }
   if ("None" in obj) {
@@ -141,18 +141,16 @@ export function fromDecoded(obj: any): types.ElementerraCNFTCriteriaKind {
   throw new Error("Invalid enum object")
 }
 
-export function fromJSON(
-  obj: types.ElementerraCNFTCriteriaJSON
-): types.ElementerraCNFTCriteriaKind {
+export function fromJSON(obj: types.CnftToBurnJSON): types.CnftToBurnKind {
   switch (obj.kind) {
     case "Crystal": {
       return new Crystal({
-        tier: types.CrystalTier.fromJSON(obj.value.tier),
+        crystal: types.CrystalTier.fromJSON(obj.value.crystal),
       })
     }
     case "Element": {
       return new Element({
-        tier: types.Tier.fromJSON(obj.value.tier),
+        element: types.ElementName.fromJSON(obj.value.element),
       })
     }
     case "None": {
@@ -163,8 +161,8 @@ export function fromJSON(
 
 export function layout(property?: string) {
   const ret = borsh.rustEnum([
-    borsh.struct([types.CrystalTier.layout("tier")], "Crystal"),
-    borsh.struct([types.Tier.layout("tier")], "Element"),
+    borsh.struct([types.CrystalTier.layout("crystal")], "Crystal"),
+    borsh.struct([types.ElementName.layout("element")], "Element"),
     borsh.struct([], "None"),
   ])
   if (property !== undefined) {

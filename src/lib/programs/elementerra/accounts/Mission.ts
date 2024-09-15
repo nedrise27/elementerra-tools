@@ -55,7 +55,7 @@ export class Mission {
     borsh.u32("numberOfSuccesses"),
     borsh.u32("numberOfFailures"),
     borsh.u16("numberOfHoursToComplete"),
-    borsh.array(types.MissionRequirement.layout(), 6, "requirements"),
+    borsh.array(types.MissionRequirement.layout(), 4, "requirements"),
     borsh.array(types.MissionReward.layout(), 6, "potentialRewards"),
     borsh.array(types.MissionOdds.layout(), 6, "odds"),
   ])

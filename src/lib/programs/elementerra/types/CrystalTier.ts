@@ -279,6 +279,190 @@ export class Tier12 {
   }
 }
 
+export interface Tier13JSON {
+  kind: "Tier13"
+}
+
+export class Tier13 {
+  static readonly discriminator = 12
+  static readonly kind = "Tier13"
+  readonly discriminator = 12
+  readonly kind = "Tier13"
+
+  toJSON(): Tier13JSON {
+    return {
+      kind: "Tier13",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier13: {},
+    }
+  }
+}
+
+export interface Tier14JSON {
+  kind: "Tier14"
+}
+
+export class Tier14 {
+  static readonly discriminator = 13
+  static readonly kind = "Tier14"
+  readonly discriminator = 13
+  readonly kind = "Tier14"
+
+  toJSON(): Tier14JSON {
+    return {
+      kind: "Tier14",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier14: {},
+    }
+  }
+}
+
+export interface Tier15JSON {
+  kind: "Tier15"
+}
+
+export class Tier15 {
+  static readonly discriminator = 14
+  static readonly kind = "Tier15"
+  readonly discriminator = 14
+  readonly kind = "Tier15"
+
+  toJSON(): Tier15JSON {
+    return {
+      kind: "Tier15",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier15: {},
+    }
+  }
+}
+
+export interface Tier16JSON {
+  kind: "Tier16"
+}
+
+export class Tier16 {
+  static readonly discriminator = 15
+  static readonly kind = "Tier16"
+  readonly discriminator = 15
+  readonly kind = "Tier16"
+
+  toJSON(): Tier16JSON {
+    return {
+      kind: "Tier16",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier16: {},
+    }
+  }
+}
+
+export interface Tier17JSON {
+  kind: "Tier17"
+}
+
+export class Tier17 {
+  static readonly discriminator = 16
+  static readonly kind = "Tier17"
+  readonly discriminator = 16
+  readonly kind = "Tier17"
+
+  toJSON(): Tier17JSON {
+    return {
+      kind: "Tier17",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier17: {},
+    }
+  }
+}
+
+export interface Tier18JSON {
+  kind: "Tier18"
+}
+
+export class Tier18 {
+  static readonly discriminator = 17
+  static readonly kind = "Tier18"
+  readonly discriminator = 17
+  readonly kind = "Tier18"
+
+  toJSON(): Tier18JSON {
+    return {
+      kind: "Tier18",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier18: {},
+    }
+  }
+}
+
+export interface Tier19JSON {
+  kind: "Tier19"
+}
+
+export class Tier19 {
+  static readonly discriminator = 18
+  static readonly kind = "Tier19"
+  readonly discriminator = 18
+  readonly kind = "Tier19"
+
+  toJSON(): Tier19JSON {
+    return {
+      kind: "Tier19",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier19: {},
+    }
+  }
+}
+
+export interface Tier20JSON {
+  kind: "Tier20"
+}
+
+export class Tier20 {
+  static readonly discriminator = 19
+  static readonly kind = "Tier20"
+  readonly discriminator = 19
+  readonly kind = "Tier20"
+
+  toJSON(): Tier20JSON {
+    return {
+      kind: "Tier20",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Tier20: {},
+    }
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fromDecoded(obj: any): types.CrystalTierKind {
   if (typeof obj !== "object") {
@@ -320,6 +504,30 @@ export function fromDecoded(obj: any): types.CrystalTierKind {
   }
   if ("Tier12" in obj) {
     return new Tier12()
+  }
+  if ("Tier13" in obj) {
+    return new Tier13()
+  }
+  if ("Tier14" in obj) {
+    return new Tier14()
+  }
+  if ("Tier15" in obj) {
+    return new Tier15()
+  }
+  if ("Tier16" in obj) {
+    return new Tier16()
+  }
+  if ("Tier17" in obj) {
+    return new Tier17()
+  }
+  if ("Tier18" in obj) {
+    return new Tier18()
+  }
+  if ("Tier19" in obj) {
+    return new Tier19()
+  }
+  if ("Tier20" in obj) {
+    return new Tier20()
   }
 
   throw new Error("Invalid enum object")
@@ -363,6 +571,30 @@ export function fromJSON(obj: types.CrystalTierJSON): types.CrystalTierKind {
     case "Tier12": {
       return new Tier12()
     }
+    case "Tier13": {
+      return new Tier13()
+    }
+    case "Tier14": {
+      return new Tier14()
+    }
+    case "Tier15": {
+      return new Tier15()
+    }
+    case "Tier16": {
+      return new Tier16()
+    }
+    case "Tier17": {
+      return new Tier17()
+    }
+    case "Tier18": {
+      return new Tier18()
+    }
+    case "Tier19": {
+      return new Tier19()
+    }
+    case "Tier20": {
+      return new Tier20()
+    }
   }
 }
 
@@ -380,6 +612,14 @@ export function layout(property?: string) {
     borsh.struct([], "Tier10"),
     borsh.struct([], "Tier11"),
     borsh.struct([], "Tier12"),
+    borsh.struct([], "Tier13"),
+    borsh.struct([], "Tier14"),
+    borsh.struct([], "Tier15"),
+    borsh.struct([], "Tier16"),
+    borsh.struct([], "Tier17"),
+    borsh.struct([], "Tier18"),
+    borsh.struct([], "Tier19"),
+    borsh.struct([], "Tier20"),
   ])
   if (property !== undefined) {
     return ret.replicate(property)

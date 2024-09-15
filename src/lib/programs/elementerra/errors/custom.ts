@@ -62,6 +62,16 @@ export type CustomError =
   | InvalidCNFTAttributes
   | RequirementAlreadyRemoved
   | NoRequirementsToRemove
+  | PendingGuessEmpty
+  | MissionNotAvailable
+  | MissionNotReadyToBeCompleted
+  | InvalidRandomData
+  | RandomnessNotResolved
+  | InvalidCnftToBurn
+  | CrystalDoesNotMatchCrystalAccount
+  | InvalidFamiliarType
+  | FamiliarTypeMismatch
+  | UserNotWhitelisted
 
 export class NotSuperAdmin extends Error {
   static readonly code = 6000
@@ -756,6 +766,116 @@ export class NoRequirementsToRemove extends Error {
   }
 }
 
+export class PendingGuessEmpty extends Error {
+  static readonly code = 6063
+  readonly code = 6063
+  readonly name = "PendingGuessEmpty"
+  readonly msg = "Pending guess is empty."
+
+  constructor(readonly logs?: string[]) {
+    super("6063: Pending guess is empty.")
+  }
+}
+
+export class MissionNotAvailable extends Error {
+  static readonly code = 6064
+  readonly code = 6064
+  readonly name = "MissionNotAvailable"
+  readonly msg = "Mission not currently available."
+
+  constructor(readonly logs?: string[]) {
+    super("6064: Mission not currently available.")
+  }
+}
+
+export class MissionNotReadyToBeCompleted extends Error {
+  static readonly code = 6065
+  readonly code = 6065
+  readonly name = "MissionNotReadyToBeCompleted"
+  readonly msg = "Mission not ready to be completed."
+
+  constructor(readonly logs?: string[]) {
+    super("6065: Mission not ready to be completed.")
+  }
+}
+
+export class InvalidRandomData extends Error {
+  static readonly code = 6066
+  readonly code = 6066
+  readonly name = "InvalidRandomData"
+  readonly msg = "Invalid random data."
+
+  constructor(readonly logs?: string[]) {
+    super("6066: Invalid random data.")
+  }
+}
+
+export class RandomnessNotResolved extends Error {
+  static readonly code = 6067
+  readonly code = 6067
+  readonly name = "RandomnessNotResolved"
+  readonly msg = "Randomness not resolved."
+
+  constructor(readonly logs?: string[]) {
+    super("6067: Randomness not resolved.")
+  }
+}
+
+export class InvalidCnftToBurn extends Error {
+  static readonly code = 6068
+  readonly code = 6068
+  readonly name = "InvalidCnftToBurn"
+  readonly msg = "Invalid CNFT to burn."
+
+  constructor(readonly logs?: string[]) {
+    super("6068: Invalid CNFT to burn.")
+  }
+}
+
+export class CrystalDoesNotMatchCrystalAccount extends Error {
+  static readonly code = 6069
+  readonly code = 6069
+  readonly name = "CrystalDoesNotMatchCrystalAccount"
+  readonly msg = "Crystal does not match crystal account"
+
+  constructor(readonly logs?: string[]) {
+    super("6069: Crystal does not match crystal account")
+  }
+}
+
+export class InvalidFamiliarType extends Error {
+  static readonly code = 6070
+  readonly code = 6070
+  readonly name = "InvalidFamiliarType"
+  readonly msg = "Invalid familiar type."
+
+  constructor(readonly logs?: string[]) {
+    super("6070: Invalid familiar type.")
+  }
+}
+
+export class FamiliarTypeMismatch extends Error {
+  static readonly code = 6071
+  readonly code = 6071
+  readonly name = "FamiliarTypeMismatch"
+  readonly msg = "Familiar nft name does not match requirements."
+
+  constructor(readonly logs?: string[]) {
+    super("6071: Familiar nft name does not match requirements.")
+  }
+}
+
+export class UserNotWhitelisted extends Error {
+  static readonly code = 6072
+  readonly code = 6072
+  readonly name = "UserNotWhitelisted"
+  readonly msg = "User not whitelisted."
+
+  constructor(readonly logs?: string[]) {
+    super("6072: User not whitelisted.")
+  }
+}
+
 export function fromCode(code: number, logs?: string[]): CustomError | null {
   switch (code) {
     case 6000:
@@ -884,6 +1004,26 @@ export function fromCode(code: number, logs?: string[]): CustomError | null {
       return new RequirementAlreadyRemoved(logs)
     case 6062:
       return new NoRequirementsToRemove(logs)
+    case 6063:
+      return new PendingGuessEmpty(logs)
+    case 6064:
+      return new MissionNotAvailable(logs)
+    case 6065:
+      return new MissionNotReadyToBeCompleted(logs)
+    case 6066:
+      return new InvalidRandomData(logs)
+    case 6067:
+      return new RandomnessNotResolved(logs)
+    case 6068:
+      return new InvalidCnftToBurn(logs)
+    case 6069:
+      return new CrystalDoesNotMatchCrystalAccount(logs)
+    case 6070:
+      return new InvalidFamiliarType(logs)
+    case 6071:
+      return new FamiliarTypeMismatch(logs)
+    case 6072:
+      return new UserNotWhitelisted(logs)
   }
 
   return null

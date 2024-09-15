@@ -95,15 +95,18 @@ export class Inventor {
 
 export type FamiliarFields = {
   level: number
+  name: types.FamiliarTypeKind
 }
 export type FamiliarValue = {
   level: number
+  name: types.FamiliarTypeKind
 }
 
 export interface FamiliarJSON {
   kind: "Familiar"
   value: {
     level: number
+    name: types.FamiliarTypeJSON
   }
 }
 
@@ -117,6 +120,7 @@ export class Familiar {
   constructor(value: FamiliarFields) {
     this.value = {
       level: value.level,
+      name: value.name,
     }
   }
 
@@ -125,6 +129,7 @@ export class Familiar {
       kind: "Familiar",
       value: {
         level: this.value.level,
+        name: this.value.name.toJSON(),
       },
     }
   }
@@ -133,6 +138,7 @@ export class Familiar {
     return {
       Familiar: {
         level: this.value.level,
+        name: this.value.name.toEncodable(),
       },
     }
   }
@@ -183,6 +189,7 @@ export function fromDecoded(obj: any): types.ElementerraPNFTCriteriaKind {
     const val = obj["Familiar"]
     return new Familiar({
       level: val["level"],
+      name: types.FamiliarType.fromDecoded(val["name"]),
     })
   }
   if ("None" in obj) {
@@ -209,6 +216,7 @@ export function fromJSON(
     case "Familiar": {
       return new Familiar({
         level: obj.value.level,
+        name: types.FamiliarType.fromJSON(obj.value.name),
       })
     }
     case "None": {
@@ -221,7 +229,10 @@ export function layout(property?: string) {
   const ret = borsh.rustEnum([
     borsh.struct([borsh.u16("level")], "Rabbit"),
     borsh.struct([borsh.u16("level")], "Inventor"),
-    borsh.struct([borsh.u16("level")], "Familiar"),
+    borsh.struct(
+      [borsh.u16("level"), types.FamiliarType.layout("name")],
+      "Familiar"
+    ),
     borsh.struct([], "None"),
   ])
   if (property !== undefined) {

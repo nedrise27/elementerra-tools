@@ -49,14 +49,37 @@ export class Pending {
   }
 }
 
+export interface StartedJSON {
+  kind: "Started"
+}
+
+export class Started {
+  static readonly discriminator = 2
+  static readonly kind = "Started"
+  readonly discriminator = 2
+  readonly kind = "Started"
+
+  toJSON(): StartedJSON {
+    return {
+      kind: "Started",
+    }
+  }
+
+  toEncodable() {
+    return {
+      Started: {},
+    }
+  }
+}
+
 export interface CompletedJSON {
   kind: "Completed"
 }
 
 export class Completed {
-  static readonly discriminator = 2
+  static readonly discriminator = 3
   static readonly kind = "Completed"
-  readonly discriminator = 2
+  readonly discriminator = 3
   readonly kind = "Completed"
 
   toJSON(): CompletedJSON {
@@ -77,9 +100,9 @@ export interface ClaimableJSON {
 }
 
 export class Claimable {
-  static readonly discriminator = 3
+  static readonly discriminator = 4
   static readonly kind = "Claimable"
-  readonly discriminator = 3
+  readonly discriminator = 4
   readonly kind = "Claimable"
 
   toJSON(): ClaimableJSON {
@@ -107,6 +130,9 @@ export function fromDecoded(obj: any): types.MissionStatusKind {
   if ("Pending" in obj) {
     return new Pending()
   }
+  if ("Started" in obj) {
+    return new Started()
+  }
   if ("Completed" in obj) {
     return new Completed()
   }
@@ -127,6 +153,9 @@ export function fromJSON(
     case "Pending": {
       return new Pending()
     }
+    case "Started": {
+      return new Started()
+    }
     case "Completed": {
       return new Completed()
     }
@@ -140,6 +169,7 @@ export function layout(property?: string) {
   const ret = borsh.rustEnum([
     borsh.struct([], "NotStarted"),
     borsh.struct([], "Pending"),
+    borsh.struct([], "Started"),
     borsh.struct([], "Completed"),
     borsh.struct([], "Claimable"),
   ])

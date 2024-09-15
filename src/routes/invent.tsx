@@ -1,17 +1,15 @@
 import _ from "lodash";
-import { createEffect, createResource, For, Suspense } from "solid-js";
-import { ELEMENT_IMAGES_BASE_URL } from "~/lib/constants";
-import { fetchElements, getImageUrlByName } from "~/lib/elements";
+import { createResource, For, Suspense } from "solid-js";
+import { useElementsContext } from "~/contexts/ElementsContext";
+import { getImageUrlByName } from "~/lib/elements";
 
 export default function Invent() {
-  const [elements] = createResource(async () => {
-    const e = await fetchElements();
-    return e[import.meta.env.VITE_ELEMENTERRA_SEASON];
-  });
+  const { getElements } = useElementsContext();
+
+  const [elements] = createResource(async () => getElements(2));
 
   function elementsDisplay() {
-    const e = _.values(elements());
-    return _.orderBy(e, ["tier", "name"]);
+    return _.orderBy(elements(), ["tierNumber", "name"]);
   }
 
   return (
@@ -23,7 +21,7 @@ export default function Invent() {
               <>
                 <div class="relative w-28 border rounded shadow border-gray-700">
                   <div class="absolute top-1 right-1 w-2 h-2">
-                    {element.tier}
+                    {element.tierNumber}
                   </div>
                   <img
                     class="rounded max-w-28"

@@ -3,2302 +3,2302 @@ import BN from "bn.js" // eslint-disable-line @typescript-eslint/no-unused-vars
 import * as types from "../types" // eslint-disable-line @typescript-eslint/no-unused-vars
 import * as borsh from "@coral-xyz/borsh"
 
-export interface AirJSON {
-  kind: "Air"
+export interface FlameJSON {
+  kind: "Flame"
 }
 
-export class Air {
+export class Flame {
   static readonly discriminator = 0
-  static readonly kind = "Air"
+  static readonly kind = "Flame"
   readonly discriminator = 0
-  readonly kind = "Air"
+  readonly kind = "Flame"
 
-  toJSON(): AirJSON {
+  toJSON(): FlameJSON {
     return {
-      kind: "Air",
+      kind: "Flame",
     }
   }
 
   toEncodable() {
     return {
-      Air: {},
+      Flame: {},
     }
   }
 }
 
-export interface FireJSON {
-  kind: "Fire"
+export interface SeaJSON {
+  kind: "Sea"
 }
 
-export class Fire {
+export class Sea {
   static readonly discriminator = 1
-  static readonly kind = "Fire"
+  static readonly kind = "Sea"
   readonly discriminator = 1
-  readonly kind = "Fire"
+  readonly kind = "Sea"
 
-  toJSON(): FireJSON {
+  toJSON(): SeaJSON {
     return {
-      kind: "Fire",
+      kind: "Sea",
     }
   }
 
   toEncodable() {
     return {
-      Fire: {},
+      Sea: {},
     }
   }
 }
 
-export interface EarthJSON {
-  kind: "Earth"
+export interface LeafJSON {
+  kind: "Leaf"
 }
 
-export class Earth {
+export class Leaf {
   static readonly discriminator = 2
-  static readonly kind = "Earth"
+  static readonly kind = "Leaf"
   readonly discriminator = 2
-  readonly kind = "Earth"
+  readonly kind = "Leaf"
 
-  toJSON(): EarthJSON {
+  toJSON(): LeafJSON {
     return {
-      kind: "Earth",
+      kind: "Leaf",
     }
   }
 
   toEncodable() {
     return {
-      Earth: {},
+      Leaf: {},
     }
   }
 }
 
-export interface WaterJSON {
-  kind: "Water"
+export interface StickJSON {
+  kind: "Stick"
 }
 
-export class Water {
+export class Stick {
   static readonly discriminator = 3
-  static readonly kind = "Water"
+  static readonly kind = "Stick"
   readonly discriminator = 3
-  readonly kind = "Water"
+  readonly kind = "Stick"
 
-  toJSON(): WaterJSON {
+  toJSON(): StickJSON {
     return {
-      kind: "Water",
+      kind: "Stick",
     }
   }
 
   toEncodable() {
     return {
-      Water: {},
+      Stick: {},
     }
   }
 }
 
-export interface HeatJSON {
-  kind: "Heat"
+export interface BrokenGlassJSON {
+  kind: "BrokenGlass"
 }
 
-export class Heat {
+export class BrokenGlass {
   static readonly discriminator = 4
-  static readonly kind = "Heat"
+  static readonly kind = "BrokenGlass"
   readonly discriminator = 4
-  readonly kind = "Heat"
+  readonly kind = "BrokenGlass"
 
-  toJSON(): HeatJSON {
+  toJSON(): BrokenGlassJSON {
     return {
-      kind: "Heat",
+      kind: "BrokenGlass",
     }
   }
 
   toEncodable() {
     return {
-      Heat: {},
+      BrokenGlass: {},
     }
   }
 }
 
-export interface SteamJSON {
-  kind: "Steam"
+export interface CompressionJSON {
+  kind: "Compression"
 }
 
-export class Steam {
+export class Compression {
   static readonly discriminator = 5
-  static readonly kind = "Steam"
+  static readonly kind = "Compression"
   readonly discriminator = 5
-  readonly kind = "Steam"
+  readonly kind = "Compression"
 
-  toJSON(): SteamJSON {
+  toJSON(): CompressionJSON {
     return {
-      kind: "Steam",
+      kind: "Compression",
     }
   }
 
   toEncodable() {
     return {
-      Steam: {},
+      Compression: {},
     }
   }
 }
 
-export interface MudJSON {
-  kind: "Mud"
+export interface RubberJSON {
+  kind: "Rubber"
 }
 
-export class Mud {
+export class Rubber {
   static readonly discriminator = 6
-  static readonly kind = "Mud"
+  static readonly kind = "Rubber"
   readonly discriminator = 6
-  readonly kind = "Mud"
+  readonly kind = "Rubber"
 
-  toJSON(): MudJSON {
+  toJSON(): RubberJSON {
     return {
-      kind: "Mud",
+      kind: "Rubber",
     }
   }
 
   toEncodable() {
     return {
-      Mud: {},
+      Rubber: {},
     }
   }
 }
 
-export interface PressureJSON {
-  kind: "Pressure"
+export interface PebbleJSON {
+  kind: "Pebble"
 }
 
-export class Pressure {
+export class Pebble {
   static readonly discriminator = 7
-  static readonly kind = "Pressure"
+  static readonly kind = "Pebble"
   readonly discriminator = 7
-  readonly kind = "Pressure"
+  readonly kind = "Pebble"
 
-  toJSON(): PressureJSON {
+  toJSON(): PebbleJSON {
     return {
-      kind: "Pressure",
+      kind: "Pebble",
     }
   }
 
   toEncodable() {
     return {
-      Pressure: {},
+      Pebble: {},
     }
   }
 }
 
-export interface RainJSON {
-  kind: "Rain"
+export interface OxygenJSON {
+  kind: "Oxygen"
 }
 
-export class Rain {
+export class Oxygen {
   static readonly discriminator = 8
-  static readonly kind = "Rain"
+  static readonly kind = "Oxygen"
   readonly discriminator = 8
-  readonly kind = "Rain"
+  readonly kind = "Oxygen"
 
-  toJSON(): RainJSON {
+  toJSON(): OxygenJSON {
     return {
-      kind: "Rain",
+      kind: "Oxygen",
     }
   }
 
   toEncodable() {
     return {
-      Rain: {},
+      Oxygen: {},
     }
   }
 }
 
-export interface WindJSON {
-  kind: "Wind"
+export interface CarbonJSON {
+  kind: "Carbon"
 }
 
-export class Wind {
+export class Carbon {
   static readonly discriminator = 9
-  static readonly kind = "Wind"
+  static readonly kind = "Carbon"
   readonly discriminator = 9
-  readonly kind = "Wind"
+  readonly kind = "Carbon"
 
-  toJSON(): WindJSON {
+  toJSON(): CarbonJSON {
     return {
-      kind: "Wind",
+      kind: "Carbon",
     }
   }
 
   toEncodable() {
     return {
-      Wind: {},
+      Carbon: {},
     }
   }
 }
 
-export interface LavaJSON {
-  kind: "Lava"
+export interface RockJSON {
+  kind: "Rock"
 }
 
-export class Lava {
+export class Rock {
   static readonly discriminator = 10
-  static readonly kind = "Lava"
+  static readonly kind = "Rock"
   readonly discriminator = 10
-  readonly kind = "Lava"
+  readonly kind = "Rock"
 
-  toJSON(): LavaJSON {
+  toJSON(): RockJSON {
     return {
-      kind: "Lava",
+      kind: "Rock",
     }
   }
 
   toEncodable() {
     return {
-      Lava: {},
+      Rock: {},
     }
   }
 }
 
-export interface LifeJSON {
-  kind: "Life"
+export interface ToxicJSON {
+  kind: "Toxic"
 }
 
-export class Life {
+export class Toxic {
   static readonly discriminator = 11
-  static readonly kind = "Life"
+  static readonly kind = "Toxic"
   readonly discriminator = 11
-  readonly kind = "Life"
+  readonly kind = "Toxic"
 
-  toJSON(): LifeJSON {
+  toJSON(): ToxicJSON {
     return {
-      kind: "Life",
+      kind: "Toxic",
     }
   }
 
   toEncodable() {
     return {
-      Life: {},
+      Toxic: {},
     }
   }
 }
 
-export interface SmokeJSON {
-  kind: "Smoke"
+export interface TemperedGlassJSON {
+  kind: "TemperedGlass"
 }
 
-export class Smoke {
+export class TemperedGlass {
   static readonly discriminator = 12
-  static readonly kind = "Smoke"
+  static readonly kind = "TemperedGlass"
   readonly discriminator = 12
-  readonly kind = "Smoke"
+  readonly kind = "TemperedGlass"
 
-  toJSON(): SmokeJSON {
+  toJSON(): TemperedGlassJSON {
     return {
-      kind: "Smoke",
+      kind: "TemperedGlass",
     }
   }
 
   toEncodable() {
     return {
-      Smoke: {},
+      TemperedGlass: {},
     }
   }
 }
 
-export interface DustJSON {
-  kind: "Dust"
+export interface SaltJSON {
+  kind: "Salt"
 }
 
-export class Dust {
+export class Salt {
   static readonly discriminator = 13
-  static readonly kind = "Dust"
+  static readonly kind = "Salt"
   readonly discriminator = 13
-  readonly kind = "Dust"
+  readonly kind = "Salt"
 
-  toJSON(): DustJSON {
+  toJSON(): SaltJSON {
     return {
-      kind: "Dust",
+      kind: "Salt",
     }
   }
 
   toEncodable() {
     return {
-      Dust: {},
+      Salt: {},
     }
   }
 }
 
-export interface FogJSON {
-  kind: "Fog"
+export interface FreshWaterJSON {
+  kind: "FreshWater"
 }
 
-export class Fog {
+export class FreshWater {
   static readonly discriminator = 14
-  static readonly kind = "Fog"
+  static readonly kind = "FreshWater"
   readonly discriminator = 14
-  readonly kind = "Fog"
+  readonly kind = "FreshWater"
 
-  toJSON(): FogJSON {
+  toJSON(): FreshWaterJSON {
     return {
-      kind: "Fog",
+      kind: "FreshWater",
     }
   }
 
   toEncodable() {
     return {
-      Fog: {},
+      FreshWater: {},
     }
   }
 }
 
-export interface EnergyJSON {
-  kind: "Energy"
+export interface FlowerJSON {
+  kind: "Flower"
 }
 
-export class Energy {
+export class Flower {
   static readonly discriminator = 15
-  static readonly kind = "Energy"
+  static readonly kind = "Flower"
   readonly discriminator = 15
-  readonly kind = "Energy"
+  readonly kind = "Flower"
 
-  toJSON(): EnergyJSON {
+  toJSON(): FlowerJSON {
     return {
-      kind: "Energy",
+      kind: "Flower",
     }
   }
 
   toEncodable() {
     return {
-      Energy: {},
+      Flower: {},
     }
   }
 }
 
-export interface SeedJSON {
-  kind: "Seed"
+export interface MoldJSON {
+  kind: "Mold"
 }
 
-export class Seed {
+export class Mold {
   static readonly discriminator = 16
-  static readonly kind = "Seed"
+  static readonly kind = "Mold"
   readonly discriminator = 16
-  readonly kind = "Seed"
+  readonly kind = "Mold"
 
-  toJSON(): SeedJSON {
+  toJSON(): MoldJSON {
     return {
-      kind: "Seed",
+      kind: "Mold",
     }
   }
 
   toEncodable() {
     return {
-      Seed: {},
+      Mold: {},
     }
   }
 }
 
-export interface MetalJSON {
-  kind: "Metal"
+export interface WoodenPlankJSON {
+  kind: "WoodenPlank"
 }
 
-export class Metal {
+export class WoodenPlank {
   static readonly discriminator = 17
-  static readonly kind = "Metal"
+  static readonly kind = "WoodenPlank"
   readonly discriminator = 17
-  readonly kind = "Metal"
+  readonly kind = "WoodenPlank"
 
-  toJSON(): MetalJSON {
+  toJSON(): WoodenPlankJSON {
     return {
-      kind: "Metal",
+      kind: "WoodenPlank",
     }
   }
 
   toEncodable() {
     return {
-      Metal: {},
+      WoodenPlank: {},
     }
   }
 }
 
-export interface OceanJSON {
-  kind: "Ocean"
+export interface NestJSON {
+  kind: "Nest"
 }
 
-export class Ocean {
+export class Nest {
   static readonly discriminator = 18
-  static readonly kind = "Ocean"
+  static readonly kind = "Nest"
   readonly discriminator = 18
-  readonly kind = "Ocean"
+  readonly kind = "Nest"
 
-  toJSON(): OceanJSON {
+  toJSON(): NestJSON {
     return {
-      kind: "Ocean",
+      kind: "Nest",
     }
   }
 
   toEncodable() {
     return {
-      Ocean: {},
+      Nest: {},
     }
   }
 }
 
-export interface GlassJSON {
-  kind: "Glass"
+export interface BonesJSON {
+  kind: "Bones"
 }
 
-export class Glass {
+export class Bones {
   static readonly discriminator = 19
-  static readonly kind = "Glass"
+  static readonly kind = "Bones"
   readonly discriminator = 19
-  readonly kind = "Glass"
+  readonly kind = "Bones"
 
-  toJSON(): GlassJSON {
+  toJSON(): BonesJSON {
     return {
-      kind: "Glass",
+      kind: "Bones",
     }
   }
 
   toEncodable() {
     return {
-      Glass: {},
+      Bones: {},
     }
   }
 }
 
-export interface ClayJSON {
-  kind: "Clay"
+export interface IronJSON {
+  kind: "Iron"
 }
 
-export class Clay {
+export class Iron {
   static readonly discriminator = 20
-  static readonly kind = "Clay"
+  static readonly kind = "Iron"
   readonly discriminator = 20
-  readonly kind = "Clay"
+  readonly kind = "Iron"
 
-  toJSON(): ClayJSON {
+  toJSON(): IronJSON {
     return {
-      kind: "Clay",
+      kind: "Iron",
     }
   }
 
   toEncodable() {
     return {
-      Clay: {},
+      Iron: {},
     }
   }
 }
 
-export interface CloudJSON {
-  kind: "Cloud"
+export interface OrganismJSON {
+  kind: "Organism"
 }
 
-export class Cloud {
+export class Organism {
   static readonly discriminator = 21
-  static readonly kind = "Cloud"
+  static readonly kind = "Organism"
   readonly discriminator = 21
-  readonly kind = "Cloud"
+  readonly kind = "Organism"
 
-  toJSON(): CloudJSON {
+  toJSON(): OrganismJSON {
     return {
-      kind: "Cloud",
+      kind: "Organism",
     }
   }
 
   toEncodable() {
     return {
-      Cloud: {},
+      Organism: {},
     }
   }
 }
 
-export interface StoneJSON {
-  kind: "Stone"
+export interface LeadJSON {
+  kind: "Lead"
 }
 
-export class Stone {
+export class Lead {
   static readonly discriminator = 22
-  static readonly kind = "Stone"
+  static readonly kind = "Lead"
   readonly discriminator = 22
-  readonly kind = "Stone"
+  readonly kind = "Lead"
 
-  toJSON(): StoneJSON {
+  toJSON(): LeadJSON {
     return {
-      kind: "Stone",
+      kind: "Lead",
     }
   }
 
   toEncodable() {
     return {
-      Stone: {},
+      Lead: {},
     }
   }
 }
 
-export interface SunJSON {
-  kind: "Sun"
+export interface BrickJSON {
+  kind: "Brick"
 }
 
-export class Sun {
+export class Brick {
   static readonly discriminator = 23
-  static readonly kind = "Sun"
+  static readonly kind = "Brick"
   readonly discriminator = 23
-  readonly kind = "Sun"
+  readonly kind = "Brick"
 
-  toJSON(): SunJSON {
+  toJSON(): BrickJSON {
     return {
-      kind: "Sun",
+      kind: "Brick",
     }
   }
 
   toEncodable() {
     return {
-      Sun: {},
+      Brick: {},
     }
   }
 }
 
-export interface TimeJSON {
-  kind: "Time"
+export interface BeeJSON {
+  kind: "Bee"
 }
 
-export class Time {
+export class Bee {
   static readonly discriminator = 24
-  static readonly kind = "Time"
+  static readonly kind = "Bee"
   readonly discriminator = 24
-  readonly kind = "Time"
+  readonly kind = "Bee"
 
-  toJSON(): TimeJSON {
+  toJSON(): BeeJSON {
     return {
-      kind: "Time",
+      kind: "Bee",
     }
   }
 
   toEncodable() {
     return {
-      Time: {},
+      Bee: {},
     }
   }
 }
 
-export interface OilJSON {
-  kind: "Oil"
+export interface HourglassJSON {
+  kind: "Hourglass"
 }
 
-export class Oil {
+export class Hourglass {
   static readonly discriminator = 25
-  static readonly kind = "Oil"
+  static readonly kind = "Hourglass"
   readonly discriminator = 25
-  readonly kind = "Oil"
+  readonly kind = "Hourglass"
 
-  toJSON(): OilJSON {
+  toJSON(): HourglassJSON {
     return {
-      kind: "Oil",
+      kind: "Hourglass",
     }
   }
 
   toEncodable() {
     return {
-      Oil: {},
+      Hourglass: {},
     }
   }
 }
 
-export interface WaveJSON {
-  kind: "Wave"
+export interface TireJSON {
+  kind: "Tire"
 }
 
-export class Wave {
+export class Tire {
   static readonly discriminator = 26
-  static readonly kind = "Wave"
+  static readonly kind = "Tire"
   readonly discriminator = 26
-  readonly kind = "Wave"
+  readonly kind = "Tire"
 
-  toJSON(): WaveJSON {
+  toJSON(): TireJSON {
     return {
-      kind: "Wave",
+      kind: "Tire",
     }
   }
 
   toEncodable() {
     return {
-      Wave: {},
+      Tire: {},
     }
   }
 }
 
-export interface AshJSON {
-  kind: "Ash"
+export interface AluminumJSON {
+  kind: "Aluminum"
 }
 
-export class Ash {
+export class Aluminum {
   static readonly discriminator = 27
-  static readonly kind = "Ash"
+  static readonly kind = "Aluminum"
   readonly discriminator = 27
-  readonly kind = "Ash"
+  readonly kind = "Aluminum"
 
-  toJSON(): AshJSON {
+  toJSON(): AluminumJSON {
     return {
-      kind: "Ash",
+      kind: "Aluminum",
     }
   }
 
   toEncodable() {
     return {
-      Ash: {},
+      Aluminum: {},
     }
   }
 }
 
-export interface SwampJSON {
-  kind: "Swamp"
+export interface SilverJSON {
+  kind: "Silver"
 }
 
-export class Swamp {
+export class Silver {
   static readonly discriminator = 28
-  static readonly kind = "Swamp"
+  static readonly kind = "Silver"
   readonly discriminator = 28
-  readonly kind = "Swamp"
+  readonly kind = "Silver"
 
-  toJSON(): SwampJSON {
+  toJSON(): SilverJSON {
     return {
-      kind: "Swamp",
+      kind: "Silver",
     }
   }
 
   toEncodable() {
     return {
-      Swamp: {},
+      Silver: {},
     }
   }
 }
 
-export interface RiverJSON {
-  kind: "River"
+export interface SoilJSON {
+  kind: "Soil"
 }
 
-export class River {
+export class Soil {
   static readonly discriminator = 29
-  static readonly kind = "River"
+  static readonly kind = "Soil"
   readonly discriminator = 29
-  readonly kind = "River"
+  readonly kind = "Soil"
 
-  toJSON(): RiverJSON {
+  toJSON(): SoilJSON {
     return {
-      kind: "River",
+      kind: "Soil",
     }
   }
 
   toEncodable() {
     return {
-      River: {},
+      Soil: {},
     }
   }
 }
 
-export interface WormJSON {
-  kind: "Worm"
+export interface MarbleJSON {
+  kind: "Marble"
 }
 
-export class Worm {
+export class Marble {
   static readonly discriminator = 30
-  static readonly kind = "Worm"
+  static readonly kind = "Marble"
   readonly discriminator = 30
-  readonly kind = "Worm"
+  readonly kind = "Marble"
 
-  toJSON(): WormJSON {
+  toJSON(): MarbleJSON {
     return {
-      kind: "Worm",
+      kind: "Marble",
     }
   }
 
   toEncodable() {
     return {
-      Worm: {},
+      Marble: {},
     }
   }
 }
 
-export interface TornadoJSON {
-  kind: "Tornado"
+export interface GravelJSON {
+  kind: "Gravel"
 }
 
-export class Tornado {
+export class Gravel {
   static readonly discriminator = 31
-  static readonly kind = "Tornado"
+  static readonly kind = "Gravel"
   readonly discriminator = 31
-  readonly kind = "Tornado"
+  readonly kind = "Gravel"
 
-  toJSON(): TornadoJSON {
+  toJSON(): GravelJSON {
     return {
-      kind: "Tornado",
+      kind: "Gravel",
     }
   }
 
   toEncodable() {
     return {
-      Tornado: {},
+      Gravel: {},
     }
   }
 }
 
-export interface SandJSON {
-  kind: "Sand"
+export interface StringJSON {
+  kind: "String"
 }
 
-export class Sand {
+export class String {
   static readonly discriminator = 32
-  static readonly kind = "Sand"
+  static readonly kind = "String"
   readonly discriminator = 32
-  readonly kind = "Sand"
+  readonly kind = "String"
 
-  toJSON(): SandJSON {
+  toJSON(): StringJSON {
     return {
-      kind: "Sand",
+      kind: "String",
     }
   }
 
   toEncodable() {
     return {
-      Sand: {},
+      String: {},
     }
   }
 }
 
-export interface MountainJSON {
-  kind: "Mountain"
+export interface ChairJSON {
+  kind: "Chair"
 }
 
-export class Mountain {
+export class Chair {
   static readonly discriminator = 33
-  static readonly kind = "Mountain"
+  static readonly kind = "Chair"
   readonly discriminator = 33
-  readonly kind = "Mountain"
+  readonly kind = "Chair"
 
-  toJSON(): MountainJSON {
+  toJSON(): ChairJSON {
     return {
-      kind: "Mountain",
+      kind: "Chair",
     }
   }
 
   toEncodable() {
     return {
-      Mountain: {},
+      Chair: {},
     }
   }
 }
 
-export interface SnowJSON {
-  kind: "Snow"
+export interface FireplaceJSON {
+  kind: "Fireplace"
 }
 
-export class Snow {
+export class Fireplace {
   static readonly discriminator = 34
-  static readonly kind = "Snow"
+  static readonly kind = "Fireplace"
   readonly discriminator = 34
-  readonly kind = "Snow"
+  readonly kind = "Fireplace"
 
-  toJSON(): SnowJSON {
+  toJSON(): FireplaceJSON {
     return {
-      kind: "Snow",
+      kind: "Fireplace",
     }
   }
 
   toEncodable() {
     return {
-      Snow: {},
+      Fireplace: {},
     }
   }
 }
 
-export interface FrostJSON {
-  kind: "Frost"
+export interface WindowJSON {
+  kind: "Window"
 }
 
-export class Frost {
+export class Window {
   static readonly discriminator = 35
-  static readonly kind = "Frost"
+  static readonly kind = "Window"
   readonly discriminator = 35
-  readonly kind = "Frost"
+  readonly kind = "Window"
 
-  toJSON(): FrostJSON {
+  toJSON(): WindowJSON {
     return {
-      kind: "Frost",
+      kind: "Window",
     }
   }
 
   toEncodable() {
     return {
-      Frost: {},
+      Window: {},
     }
   }
 }
 
-export interface MagnetJSON {
-  kind: "Magnet"
+export interface EggJSON {
+  kind: "Egg"
 }
 
-export class Magnet {
+export class Egg {
   static readonly discriminator = 36
-  static readonly kind = "Magnet"
+  static readonly kind = "Egg"
   readonly discriminator = 36
-  readonly kind = "Magnet"
+  readonly kind = "Egg"
 
-  toJSON(): MagnetJSON {
+  toJSON(): EggJSON {
     return {
-      kind: "Magnet",
+      kind: "Egg",
     }
   }
 
   toEncodable() {
     return {
-      Magnet: {},
+      Egg: {},
     }
   }
 }
 
-export interface FossilJSON {
-  kind: "Fossil"
+export interface BloodJSON {
+  kind: "Blood"
 }
 
-export class Fossil {
+export class Blood {
   static readonly discriminator = 37
-  static readonly kind = "Fossil"
+  static readonly kind = "Blood"
   readonly discriminator = 37
-  readonly kind = "Fossil"
+  readonly kind = "Blood"
 
-  toJSON(): FossilJSON {
+  toJSON(): BloodJSON {
     return {
-      kind: "Fossil",
+      kind: "Blood",
     }
   }
 
   toEncodable() {
     return {
-      Fossil: {},
+      Blood: {},
     }
   }
 }
 
-export interface HotSpringsJSON {
-  kind: "HotSprings"
+export interface SpinachJSON {
+  kind: "Spinach"
 }
 
-export class HotSprings {
+export class Spinach {
   static readonly discriminator = 38
-  static readonly kind = "HotSprings"
+  static readonly kind = "Spinach"
   readonly discriminator = 38
-  readonly kind = "HotSprings"
+  readonly kind = "Spinach"
 
-  toJSON(): HotSpringsJSON {
+  toJSON(): SpinachJSON {
     return {
-      kind: "HotSprings",
+      kind: "Spinach",
     }
   }
 
   toEncodable() {
     return {
-      HotSprings: {},
+      Spinach: {},
     }
   }
 }
 
-export interface PondJSON {
-  kind: "Pond"
+export interface SteelJSON {
+  kind: "Steel"
 }
 
-export class Pond {
+export class Steel {
   static readonly discriminator = 39
-  static readonly kind = "Pond"
+  static readonly kind = "Steel"
   readonly discriminator = 39
-  readonly kind = "Pond"
+  readonly kind = "Steel"
 
-  toJSON(): PondJSON {
+  toJSON(): SteelJSON {
     return {
-      kind: "Pond",
+      kind: "Steel",
     }
   }
 
   toEncodable() {
     return {
-      Pond: {},
+      Steel: {},
     }
   }
 }
 
-export interface CoalJSON {
-  kind: "Coal"
+export interface WheelJSON {
+  kind: "Wheel"
 }
 
-export class Coal {
+export class Wheel {
   static readonly discriminator = 40
-  static readonly kind = "Coal"
+  static readonly kind = "Wheel"
   readonly discriminator = 40
-  readonly kind = "Coal"
+  readonly kind = "Wheel"
 
-  toJSON(): CoalJSON {
+  toJSON(): WheelJSON {
     return {
-      kind: "Coal",
+      kind: "Wheel",
     }
   }
 
   toEncodable() {
     return {
-      Coal: {},
+      Wheel: {},
     }
   }
 }
 
-export interface TelescopeJSON {
-  kind: "Telescope"
+export interface PalmTreeJSON {
+  kind: "PalmTree"
 }
 
-export class Telescope {
+export class PalmTree {
   static readonly discriminator = 41
-  static readonly kind = "Telescope"
+  static readonly kind = "PalmTree"
   readonly discriminator = 41
-  readonly kind = "Telescope"
+  readonly kind = "PalmTree"
 
-  toJSON(): TelescopeJSON {
+  toJSON(): PalmTreeJSON {
     return {
-      kind: "Telescope",
+      kind: "PalmTree",
     }
   }
 
   toEncodable() {
     return {
-      Telescope: {},
+      PalmTree: {},
     }
   }
 }
 
-export interface VolcanoJSON {
-  kind: "Volcano"
+export interface WallJSON {
+  kind: "Wall"
 }
 
-export class Volcano {
+export class Wall {
   static readonly discriminator = 42
-  static readonly kind = "Volcano"
+  static readonly kind = "Wall"
   readonly discriminator = 42
-  readonly kind = "Volcano"
+  readonly kind = "Wall"
 
-  toJSON(): VolcanoJSON {
+  toJSON(): WallJSON {
     return {
-      kind: "Volcano",
+      kind: "Wall",
     }
   }
 
   toEncodable() {
     return {
-      Volcano: {},
+      Wall: {},
     }
   }
 }
 
-export interface PlasticJSON {
-  kind: "Plastic"
+export interface WaxJSON {
+  kind: "Wax"
 }
 
-export class Plastic {
+export class Wax {
   static readonly discriminator = 43
-  static readonly kind = "Plastic"
+  static readonly kind = "Wax"
   readonly discriminator = 43
-  readonly kind = "Plastic"
+  readonly kind = "Wax"
 
-  toJSON(): PlasticJSON {
+  toJSON(): WaxJSON {
     return {
-      kind: "Plastic",
+      kind: "Wax",
     }
   }
 
   toEncodable() {
     return {
-      Plastic: {},
+      Wax: {},
     }
   }
 }
 
-export interface GasolineJSON {
-  kind: "Gasoline"
+export interface AcidJSON {
+  kind: "Acid"
 }
 
-export class Gasoline {
+export class Acid {
   static readonly discriminator = 44
-  static readonly kind = "Gasoline"
+  static readonly kind = "Acid"
   readonly discriminator = 44
-  readonly kind = "Gasoline"
+  readonly kind = "Acid"
 
-  toJSON(): GasolineJSON {
+  toJSON(): AcidJSON {
     return {
-      kind: "Gasoline",
+      kind: "Acid",
     }
   }
 
   toEncodable() {
     return {
-      Gasoline: {},
+      Acid: {},
     }
   }
 }
 
-export interface BottleJSON {
-  kind: "Bottle"
+export interface DiamondJSON {
+  kind: "Diamond"
 }
 
-export class Bottle {
+export class Diamond {
   static readonly discriminator = 45
-  static readonly kind = "Bottle"
+  static readonly kind = "Diamond"
   readonly discriminator = 45
-  readonly kind = "Bottle"
+  readonly kind = "Diamond"
 
-  toJSON(): BottleJSON {
+  toJSON(): DiamondJSON {
     return {
-      kind: "Bottle",
+      kind: "Diamond",
     }
   }
 
   toEncodable() {
     return {
-      Bottle: {},
+      Diamond: {},
     }
   }
 }
 
-export interface SkyJSON {
-  kind: "Sky"
+export interface FuelJSON {
+  kind: "Fuel"
 }
 
-export class Sky {
+export class Fuel {
   static readonly discriminator = 46
-  static readonly kind = "Sky"
+  static readonly kind = "Fuel"
   readonly discriminator = 46
-  readonly kind = "Sky"
+  readonly kind = "Fuel"
 
-  toJSON(): SkyJSON {
+  toJSON(): FuelJSON {
     return {
-      kind: "Sky",
+      kind: "Fuel",
     }
   }
 
   toEncodable() {
     return {
-      Sky: {},
+      Fuel: {},
     }
   }
 }
 
-export interface StormJSON {
-  kind: "Storm"
+export interface ChainJSON {
+  kind: "Chain"
 }
 
-export class Storm {
+export class Chain {
   static readonly discriminator = 47
-  static readonly kind = "Storm"
+  static readonly kind = "Chain"
   readonly discriminator = 47
-  readonly kind = "Storm"
+  readonly kind = "Chain"
 
-  toJSON(): StormJSON {
+  toJSON(): ChainJSON {
     return {
-      kind: "Storm",
+      kind: "Chain",
     }
   }
 
   toEncodable() {
     return {
-      Storm: {},
+      Chain: {},
     }
   }
 }
 
-export interface PlantJSON {
-  kind: "Plant"
+export interface SpiderJSON {
+  kind: "Spider"
 }
 
-export class Plant {
+export class Spider {
   static readonly discriminator = 48
-  static readonly kind = "Plant"
+  static readonly kind = "Spider"
   readonly discriminator = 48
-  readonly kind = "Plant"
+  readonly kind = "Spider"
 
-  toJSON(): PlantJSON {
+  toJSON(): SpiderJSON {
     return {
-      kind: "Plant",
+      kind: "Spider",
     }
   }
 
   toEncodable() {
     return {
-      Plant: {},
+      Spider: {},
     }
   }
 }
 
-export interface NailJSON {
-  kind: "Nail"
+export interface DuckJSON {
+  kind: "Duck"
 }
 
-export class Nail {
+export class Duck {
   static readonly discriminator = 49
-  static readonly kind = "Nail"
+  static readonly kind = "Duck"
   readonly discriminator = 49
-  readonly kind = "Nail"
+  readonly kind = "Duck"
 
-  toJSON(): NailJSON {
+  toJSON(): DuckJSON {
     return {
-      kind: "Nail",
+      kind: "Duck",
     }
   }
 
   toEncodable() {
     return {
-      Nail: {},
+      Duck: {},
     }
   }
 }
 
-export interface SoundJSON {
-  kind: "Sound"
+export interface SiliconeJSON {
+  kind: "Silicone"
 }
 
-export class Sound {
+export class Silicone {
   static readonly discriminator = 50
-  static readonly kind = "Sound"
+  static readonly kind = "Silicone"
   readonly discriminator = 50
-  readonly kind = "Sound"
+  readonly kind = "Silicone"
 
-  toJSON(): SoundJSON {
+  toJSON(): SiliconeJSON {
     return {
-      kind: "Sound",
+      kind: "Silicone",
     }
   }
 
   toEncodable() {
     return {
-      Sound: {},
+      Silicone: {},
     }
   }
 }
 
-export interface PaintJSON {
-  kind: "Paint"
+export interface BladeJSON {
+  kind: "Blade"
 }
 
-export class Paint {
+export class Blade {
   static readonly discriminator = 51
-  static readonly kind = "Paint"
+  static readonly kind = "Blade"
   readonly discriminator = 51
-  readonly kind = "Paint"
+  readonly kind = "Blade"
 
-  toJSON(): PaintJSON {
+  toJSON(): BladeJSON {
     return {
-      kind: "Paint",
+      kind: "Blade",
     }
   }
 
   toEncodable() {
     return {
-      Paint: {},
+      Blade: {},
     }
   }
 }
 
-export interface AlcoholJSON {
-  kind: "Alcohol"
+export interface PuppetJSON {
+  kind: "Puppet"
 }
 
-export class Alcohol {
+export class Puppet {
   static readonly discriminator = 52
-  static readonly kind = "Alcohol"
+  static readonly kind = "Puppet"
   readonly discriminator = 52
-  readonly kind = "Alcohol"
+  readonly kind = "Puppet"
 
-  toJSON(): AlcoholJSON {
+  toJSON(): PuppetJSON {
     return {
-      kind: "Alcohol",
+      kind: "Puppet",
     }
   }
 
   toEncodable() {
     return {
-      Alcohol: {},
+      Puppet: {},
     }
   }
 }
 
-export interface DesertJSON {
-  kind: "Desert"
+export interface GrassJSON {
+  kind: "Grass"
 }
 
-export class Desert {
+export class Grass {
   static readonly discriminator = 53
-  static readonly kind = "Desert"
+  static readonly kind = "Grass"
   readonly discriminator = 53
-  readonly kind = "Desert"
+  readonly kind = "Grass"
 
-  toJSON(): DesertJSON {
+  toJSON(): GrassJSON {
     return {
-      kind: "Desert",
+      kind: "Grass",
     }
   }
 
   toEncodable() {
     return {
-      Desert: {},
+      Grass: {},
     }
   }
 }
 
-export interface SolarPanelJSON {
-  kind: "SolarPanel"
+export interface BenchJSON {
+  kind: "Bench"
 }
 
-export class SolarPanel {
+export class Bench {
   static readonly discriminator = 54
-  static readonly kind = "SolarPanel"
+  static readonly kind = "Bench"
   readonly discriminator = 54
-  readonly kind = "SolarPanel"
+  readonly kind = "Bench"
 
-  toJSON(): SolarPanelJSON {
+  toJSON(): BenchJSON {
     return {
-      kind: "SolarPanel",
+      kind: "Bench",
     }
   }
 
   toEncodable() {
     return {
-      SolarPanel: {},
+      Bench: {},
     }
   }
 }
 
-export interface WindmillJSON {
-  kind: "Windmill"
+export interface GreenhouseJSON {
+  kind: "Greenhouse"
 }
 
-export class Windmill {
+export class Greenhouse {
   static readonly discriminator = 55
-  static readonly kind = "Windmill"
+  static readonly kind = "Greenhouse"
   readonly discriminator = 55
-  readonly kind = "Windmill"
+  readonly kind = "Greenhouse"
 
-  toJSON(): WindmillJSON {
+  toJSON(): GreenhouseJSON {
     return {
-      kind: "Windmill",
+      kind: "Greenhouse",
     }
   }
 
   toEncodable() {
     return {
-      Windmill: {},
+      Greenhouse: {},
     }
   }
 }
 
-export interface FurnaceJSON {
-  kind: "Furnace"
+export interface VineJSON {
+  kind: "Vine"
 }
 
-export class Furnace {
+export class Vine {
   static readonly discriminator = 56
-  static readonly kind = "Furnace"
+  static readonly kind = "Vine"
   readonly discriminator = 56
-  readonly kind = "Furnace"
+  readonly kind = "Vine"
 
-  toJSON(): FurnaceJSON {
+  toJSON(): VineJSON {
     return {
-      kind: "Furnace",
+      kind: "Vine",
     }
   }
 
   toEncodable() {
     return {
-      Furnace: {},
+      Vine: {},
     }
   }
 }
 
-export interface DamJSON {
-  kind: "Dam"
+export interface HeartJSON {
+  kind: "Heart"
 }
 
-export class Dam {
+export class Heart {
   static readonly discriminator = 57
-  static readonly kind = "Dam"
+  static readonly kind = "Heart"
   readonly discriminator = 57
-  readonly kind = "Dam"
+  readonly kind = "Heart"
 
-  toJSON(): DamJSON {
+  toJSON(): HeartJSON {
     return {
-      kind: "Dam",
+      kind: "Heart",
     }
   }
 
   toEncodable() {
     return {
-      Dam: {},
+      Heart: {},
     }
   }
 }
 
-export interface FireExtinguisherJSON {
-  kind: "FireExtinguisher"
+export interface MusselJSON {
+  kind: "Mussel"
 }
 
-export class FireExtinguisher {
+export class Mussel {
   static readonly discriminator = 58
-  static readonly kind = "FireExtinguisher"
+  static readonly kind = "Mussel"
   readonly discriminator = 58
-  readonly kind = "FireExtinguisher"
+  readonly kind = "Mussel"
 
-  toJSON(): FireExtinguisherJSON {
+  toJSON(): MusselJSON {
     return {
-      kind: "FireExtinguisher",
+      kind: "Mussel",
     }
   }
 
   toEncodable() {
     return {
-      FireExtinguisher: {},
+      Mussel: {},
     }
   }
 }
 
-export interface SquidJSON {
-  kind: "Squid"
+export interface CoconutJSON {
+  kind: "Coconut"
 }
 
-export class Squid {
+export class Coconut {
   static readonly discriminator = 59
-  static readonly kind = "Squid"
+  static readonly kind = "Coconut"
   readonly discriminator = 59
-  readonly kind = "Squid"
+  readonly kind = "Coconut"
 
-  toJSON(): SquidJSON {
+  toJSON(): CoconutJSON {
     return {
-      kind: "Squid",
+      kind: "Coconut",
     }
   }
 
   toEncodable() {
     return {
-      Squid: {},
+      Coconut: {},
     }
   }
 }
 
-export interface TreeJSON {
-  kind: "Tree"
+export interface HorseshoeJSON {
+  kind: "Horseshoe"
 }
 
-export class Tree {
+export class Horseshoe {
   static readonly discriminator = 60
-  static readonly kind = "Tree"
+  static readonly kind = "Horseshoe"
   readonly discriminator = 60
-  readonly kind = "Tree"
+  readonly kind = "Horseshoe"
 
-  toJSON(): TreeJSON {
+  toJSON(): HorseshoeJSON {
     return {
-      kind: "Tree",
+      kind: "Horseshoe",
     }
   }
 
   toEncodable() {
     return {
-      Tree: {},
+      Horseshoe: {},
     }
   }
 }
 
-export interface CoralJSON {
-  kind: "Coral"
+export interface MouseJSON {
+  kind: "Mouse"
 }
 
-export class Coral {
+export class Mouse {
   static readonly discriminator = 61
-  static readonly kind = "Coral"
+  static readonly kind = "Mouse"
   readonly discriminator = 61
-  readonly kind = "Coral"
+  readonly kind = "Mouse"
 
-  toJSON(): CoralJSON {
+  toJSON(): MouseJSON {
     return {
-      kind: "Coral",
+      kind: "Mouse",
     }
   }
 
   toEncodable() {
     return {
-      Coral: {},
+      Mouse: {},
     }
   }
 }
 
-export interface GasJSON {
-  kind: "Gas"
+export interface KeyJSON {
+  kind: "Key"
 }
 
-export class Gas {
+export class Key {
   static readonly discriminator = 62
-  static readonly kind = "Gas"
+  static readonly kind = "Key"
   readonly discriminator = 62
-  readonly kind = "Gas"
+  readonly kind = "Key"
 
-  toJSON(): GasJSON {
+  toJSON(): KeyJSON {
     return {
-      kind: "Gas",
+      kind: "Key",
     }
   }
 
   toEncodable() {
     return {
-      Gas: {},
+      Key: {},
     }
   }
 }
 
-export interface MeteorJSON {
-  kind: "Meteor"
+export interface HoneyJSON {
+  kind: "Honey"
 }
 
-export class Meteor {
+export class Honey {
   static readonly discriminator = 63
-  static readonly kind = "Meteor"
+  static readonly kind = "Honey"
   readonly discriminator = 63
-  readonly kind = "Meteor"
+  readonly kind = "Honey"
 
-  toJSON(): MeteorJSON {
+  toJSON(): HoneyJSON {
     return {
-      kind: "Meteor",
+      kind: "Honey",
     }
   }
 
   toEncodable() {
     return {
-      Meteor: {},
+      Honey: {},
     }
   }
 }
 
-export interface ElectricityJSON {
-  kind: "Electricity"
+export interface BananaJSON {
+  kind: "Banana"
 }
 
-export class Electricity {
+export class Banana {
   static readonly discriminator = 64
-  static readonly kind = "Electricity"
+  static readonly kind = "Banana"
   readonly discriminator = 64
-  readonly kind = "Electricity"
+  readonly kind = "Banana"
 
-  toJSON(): ElectricityJSON {
+  toJSON(): BananaJSON {
     return {
-      kind: "Electricity",
+      kind: "Banana",
     }
   }
 
   toEncodable() {
     return {
-      Electricity: {},
+      Banana: {},
     }
   }
 }
 
-export interface WireJSON {
-  kind: "Wire"
+export interface RingJSON {
+  kind: "Ring"
 }
 
-export class Wire {
+export class Ring {
   static readonly discriminator = 65
-  static readonly kind = "Wire"
+  static readonly kind = "Ring"
   readonly discriminator = 65
-  readonly kind = "Wire"
+  readonly kind = "Ring"
 
-  toJSON(): WireJSON {
+  toJSON(): RingJSON {
     return {
-      kind: "Wire",
+      kind: "Ring",
     }
   }
 
   toEncodable() {
     return {
-      Wire: {},
+      Ring: {},
     }
   }
 }
 
-export interface BeanJSON {
-  kind: "Bean"
+export interface EngineJSON {
+  kind: "Engine"
 }
 
-export class Bean {
+export class Engine {
   static readonly discriminator = 66
-  static readonly kind = "Bean"
+  static readonly kind = "Engine"
   readonly discriminator = 66
-  readonly kind = "Bean"
+  readonly kind = "Engine"
 
-  toJSON(): BeanJSON {
+  toJSON(): EngineJSON {
     return {
-      kind: "Bean",
+      kind: "Engine",
     }
   }
 
   toEncodable() {
     return {
-      Bean: {},
+      Engine: {},
     }
   }
 }
 
-export interface SugarJSON {
-  kind: "Sugar"
+export interface KiwiJSON {
+  kind: "Kiwi"
 }
 
-export class Sugar {
+export class Kiwi {
   static readonly discriminator = 67
-  static readonly kind = "Sugar"
+  static readonly kind = "Kiwi"
   readonly discriminator = 67
-  readonly kind = "Sugar"
+  readonly kind = "Kiwi"
 
-  toJSON(): SugarJSON {
+  toJSON(): KiwiJSON {
     return {
-      kind: "Sugar",
+      kind: "Kiwi",
     }
   }
 
   toEncodable() {
     return {
-      Sugar: {},
+      Kiwi: {},
     }
   }
 }
 
-export interface ExplosionJSON {
-  kind: "Explosion"
+export interface GoldJSON {
+  kind: "Gold"
 }
 
-export class Explosion {
+export class Gold {
   static readonly discriminator = 68
-  static readonly kind = "Explosion"
+  static readonly kind = "Gold"
   readonly discriminator = 68
-  readonly kind = "Explosion"
+  readonly kind = "Gold"
 
-  toJSON(): ExplosionJSON {
+  toJSON(): GoldJSON {
     return {
-      kind: "Explosion",
+      kind: "Gold",
     }
   }
 
   toEncodable() {
     return {
-      Explosion: {},
+      Gold: {},
     }
   }
 }
 
-export interface MusicJSON {
-  kind: "Music"
+export interface WebJSON {
+  kind: "Web"
 }
 
-export class Music {
+export class Web {
   static readonly discriminator = 69
-  static readonly kind = "Music"
+  static readonly kind = "Web"
   readonly discriminator = 69
-  readonly kind = "Music"
+  readonly kind = "Web"
 
-  toJSON(): MusicJSON {
+  toJSON(): WebJSON {
     return {
-      kind: "Music",
+      kind: "Web",
     }
   }
 
   toEncodable() {
     return {
-      Music: {},
+      Web: {},
     }
   }
 }
 
-export interface ClothJSON {
-  kind: "Cloth"
+export interface BatteryJSON {
+  kind: "Battery"
 }
 
-export class Cloth {
+export class Battery {
   static readonly discriminator = 70
-  static readonly kind = "Cloth"
+  static readonly kind = "Battery"
   readonly discriminator = 70
-  readonly kind = "Cloth"
+  readonly kind = "Battery"
 
-  toJSON(): ClothJSON {
+  toJSON(): BatteryJSON {
     return {
-      kind: "Cloth",
+      kind: "Battery",
     }
   }
 
   toEncodable() {
     return {
-      Cloth: {},
+      Battery: {},
     }
   }
 }
 
-export interface UmbrellaJSON {
-  kind: "Umbrella"
+export interface MicrochipJSON {
+  kind: "Microchip"
 }
 
-export class Umbrella {
+export class Microchip {
   static readonly discriminator = 71
-  static readonly kind = "Umbrella"
+  static readonly kind = "Microchip"
   readonly discriminator = 71
-  readonly kind = "Umbrella"
+  readonly kind = "Microchip"
 
-  toJSON(): UmbrellaJSON {
+  toJSON(): MicrochipJSON {
     return {
-      kind: "Umbrella",
+      kind: "Microchip",
     }
   }
 
   toEncodable() {
     return {
-      Umbrella: {},
+      Microchip: {},
     }
   }
 }
 
-export interface BalloonJSON {
-  kind: "Balloon"
+export interface SwordJSON {
+  kind: "Sword"
 }
 
-export class Balloon {
+export class Sword {
   static readonly discriminator = 72
-  static readonly kind = "Balloon"
+  static readonly kind = "Sword"
   readonly discriminator = 72
-  readonly kind = "Balloon"
+  readonly kind = "Sword"
 
-  toJSON(): BalloonJSON {
+  toJSON(): SwordJSON {
     return {
-      kind: "Balloon",
+      kind: "Sword",
     }
   }
 
   toEncodable() {
     return {
-      Balloon: {},
+      Sword: {},
     }
   }
 }
 
-export interface IslandJSON {
-  kind: "Island"
+export interface MirrorJSON {
+  kind: "Mirror"
 }
 
-export class Island {
+export class Mirror {
   static readonly discriminator = 73
-  static readonly kind = "Island"
+  static readonly kind = "Mirror"
   readonly discriminator = 73
-  readonly kind = "Island"
+  readonly kind = "Mirror"
 
-  toJSON(): IslandJSON {
+  toJSON(): MirrorJSON {
     return {
-      kind: "Island",
+      kind: "Mirror",
     }
   }
 
   toEncodable() {
     return {
-      Island: {},
+      Mirror: {},
     }
   }
 }
 
-export interface CactusJSON {
-  kind: "Cactus"
+export interface GardenJSON {
+  kind: "Garden"
 }
 
-export class Cactus {
+export class Garden {
   static readonly discriminator = 74
-  static readonly kind = "Cactus"
+  static readonly kind = "Garden"
   readonly discriminator = 74
-  readonly kind = "Cactus"
+  readonly kind = "Garden"
 
-  toJSON(): CactusJSON {
+  toJSON(): GardenJSON {
     return {
-      kind: "Cactus",
+      kind: "Garden",
     }
   }
 
   toEncodable() {
     return {
-      Cactus: {},
+      Garden: {},
     }
   }
 }
 
-export interface IceJSON {
-  kind: "Ice"
+export interface RubyJSON {
+  kind: "Ruby"
 }
 
-export class Ice {
+export class Ruby {
   static readonly discriminator = 75
-  static readonly kind = "Ice"
+  static readonly kind = "Ruby"
   readonly discriminator = 75
-  readonly kind = "Ice"
+  readonly kind = "Ruby"
 
-  toJSON(): IceJSON {
+  toJSON(): RubyJSON {
     return {
-      kind: "Ice",
+      kind: "Ruby",
     }
   }
 
   toEncodable() {
     return {
-      Ice: {},
+      Ruby: {},
     }
   }
 }
 
-export interface BlizzardJSON {
-  kind: "Blizzard"
+export interface PearlJSON {
+  kind: "Pearl"
 }
 
-export class Blizzard {
+export class Pearl {
   static readonly discriminator = 76
-  static readonly kind = "Blizzard"
+  static readonly kind = "Pearl"
   readonly discriminator = 76
-  readonly kind = "Blizzard"
+  readonly kind = "Pearl"
 
-  toJSON(): BlizzardJSON {
+  toJSON(): PearlJSON {
     return {
-      kind: "Blizzard",
+      kind: "Pearl",
     }
   }
 
   toEncodable() {
     return {
-      Blizzard: {},
+      Pearl: {},
     }
   }
 }
 
-export interface InkJSON {
-  kind: "Ink"
+export interface BlenderJSON {
+  kind: "Blender"
 }
 
-export class Ink {
+export class Blender {
   static readonly discriminator = 77
-  static readonly kind = "Ink"
+  static readonly kind = "Blender"
   readonly discriminator = 77
-  readonly kind = "Ink"
+  readonly kind = "Blender"
 
-  toJSON(): InkJSON {
+  toJSON(): BlenderJSON {
     return {
-      kind: "Ink",
+      kind: "Blender",
     }
   }
 
   toEncodable() {
     return {
-      Ink: {},
+      Blender: {},
     }
   }
 }
 
-export interface PaperJSON {
-  kind: "Paper"
+export interface CarJSON {
+  kind: "Car"
 }
 
-export class Paper {
+export class Car {
   static readonly discriminator = 78
-  static readonly kind = "Paper"
+  static readonly kind = "Car"
   readonly discriminator = 78
-  readonly kind = "Paper"
+  readonly kind = "Car"
 
-  toJSON(): PaperJSON {
+  toJSON(): CarJSON {
     return {
-      kind: "Paper",
+      kind: "Car",
     }
   }
 
   toEncodable() {
     return {
-      Paper: {},
+      Car: {},
     }
   }
 }
 
-export interface AppleJSON {
-  kind: "Apple"
+export interface HorseJSON {
+  kind: "Horse"
 }
 
-export class Apple {
+export class Horse {
   static readonly discriminator = 79
-  static readonly kind = "Apple"
+  static readonly kind = "Horse"
   readonly discriminator = 79
-  readonly kind = "Apple"
+  readonly kind = "Horse"
 
-  toJSON(): AppleJSON {
+  toJSON(): HorseJSON {
     return {
-      kind: "Apple",
+      kind: "Horse",
     }
   }
 
   toEncodable() {
     return {
-      Apple: {},
+      Horse: {},
     }
   }
 }
 
-export interface WoodJSON {
-  kind: "Wood"
+export interface ComputerJSON {
+  kind: "Computer"
 }
 
-export class Wood {
+export class Computer {
   static readonly discriminator = 80
-  static readonly kind = "Wood"
+  static readonly kind = "Computer"
   readonly discriminator = 80
-  readonly kind = "Wood"
+  readonly kind = "Computer"
 
-  toJSON(): WoodJSON {
+  toJSON(): ComputerJSON {
     return {
-      kind: "Wood",
+      kind: "Computer",
     }
   }
 
   toEncodable() {
     return {
-      Wood: {},
+      Computer: {},
     }
   }
 }
 
-export interface AntennaJSON {
-  kind: "Antenna"
+export interface PianoJSON {
+  kind: "Piano"
 }
 
-export class Antenna {
+export class Piano {
   static readonly discriminator = 81
-  static readonly kind = "Antenna"
+  static readonly kind = "Piano"
   readonly discriminator = 81
-  readonly kind = "Antenna"
+  readonly kind = "Piano"
 
-  toJSON(): AntennaJSON {
+  toJSON(): PianoJSON {
     return {
-      kind: "Antenna",
+      kind: "Piano",
     }
   }
 
   toEncodable() {
     return {
-      Antenna: {},
+      Piano: {},
     }
   }
 }
 
-export interface DolphinJSON {
-  kind: "Dolphin"
+export interface MoneyJSON {
+  kind: "Money"
 }
 
-export class Dolphin {
+export class Money {
   static readonly discriminator = 82
-  static readonly kind = "Dolphin"
+  static readonly kind = "Money"
   readonly discriminator = 82
-  readonly kind = "Dolphin"
+  readonly kind = "Money"
 
-  toJSON(): DolphinJSON {
+  toJSON(): MoneyJSON {
     return {
-      kind: "Dolphin",
+      kind: "Money",
     }
   }
 
   toEncodable() {
     return {
-      Dolphin: {},
+      Money: {},
     }
   }
 }
 
-export interface BeachJSON {
-  kind: "Beach"
+export interface KeyboardJSON {
+  kind: "Keyboard"
 }
 
-export class Beach {
+export class Keyboard {
   static readonly discriminator = 83
-  static readonly kind = "Beach"
+  static readonly kind = "Keyboard"
   readonly discriminator = 83
-  readonly kind = "Beach"
+  readonly kind = "Keyboard"
 
-  toJSON(): BeachJSON {
+  toJSON(): KeyboardJSON {
     return {
-      kind: "Beach",
+      kind: "Keyboard",
     }
   }
 
   toEncodable() {
     return {
-      Beach: {},
+      Keyboard: {},
     }
   }
 }
 
-export interface FireworksJSON {
-  kind: "Fireworks"
+export interface BikeJSON {
+  kind: "Bike"
 }
 
-export class Fireworks {
+export class Bike {
   static readonly discriminator = 84
-  static readonly kind = "Fireworks"
+  static readonly kind = "Bike"
   readonly discriminator = 84
-  readonly kind = "Fireworks"
+  readonly kind = "Bike"
 
-  toJSON(): FireworksJSON {
+  toJSON(): BikeJSON {
     return {
-      kind: "Fireworks",
+      kind: "Bike",
     }
   }
 
   toEncodable() {
     return {
-      Fireworks: {},
+      Bike: {},
     }
   }
 }
 
-export interface LightningJSON {
-  kind: "Lightning"
+export interface NecklaceJSON {
+  kind: "Necklace"
 }
 
-export class Lightning {
+export class Necklace {
   static readonly discriminator = 85
-  static readonly kind = "Lightning"
+  static readonly kind = "Necklace"
   readonly discriminator = 85
-  readonly kind = "Lightning"
+  readonly kind = "Necklace"
 
-  toJSON(): LightningJSON {
+  toJSON(): NecklaceJSON {
     return {
-      kind: "Lightning",
+      kind: "Necklace",
     }
   }
 
   toEncodable() {
     return {
-      Lightning: {},
+      Necklace: {},
     }
   }
 }
 
-export interface HailJSON {
-  kind: "Hail"
+export interface StatueJSON {
+  kind: "Statue"
 }
 
-export class Hail {
+export class Statue {
   static readonly discriminator = 86
-  static readonly kind = "Hail"
+  static readonly kind = "Statue"
   readonly discriminator = 86
-  readonly kind = "Hail"
+  readonly kind = "Statue"
 
-  toJSON(): HailJSON {
+  toJSON(): StatueJSON {
     return {
-      kind: "Hail",
+      kind: "Statue",
     }
   }
 
   toEncodable() {
     return {
-      Hail: {},
+      Statue: {},
     }
   }
 }
 
-export interface ArtJSON {
-  kind: "Art"
+export interface MonkeyJSON {
+  kind: "Monkey"
 }
 
-export class Art {
+export class Monkey {
   static readonly discriminator = 87
-  static readonly kind = "Art"
+  static readonly kind = "Monkey"
   readonly discriminator = 87
-  readonly kind = "Art"
+  readonly kind = "Monkey"
 
-  toJSON(): ArtJSON {
+  toJSON(): MonkeyJSON {
     return {
-      kind: "Art",
+      kind: "Monkey",
     }
   }
 
   toEncodable() {
     return {
-      Art: {},
+      Monkey: {},
     }
   }
 }
 
-export interface CoffeeJSON {
-  kind: "Coffee"
+export interface CellphoneJSON {
+  kind: "Cellphone"
 }
 
-export class Coffee {
+export class Cellphone {
   static readonly discriminator = 88
-  static readonly kind = "Coffee"
+  static readonly kind = "Cellphone"
   readonly discriminator = 88
-  readonly kind = "Coffee"
+  readonly kind = "Cellphone"
 
-  toJSON(): CoffeeJSON {
+  toJSON(): CellphoneJSON {
     return {
-      kind: "Coffee",
+      kind: "Cellphone",
     }
   }
 
   toEncodable() {
     return {
-      Coffee: {},
+      Cellphone: {},
     }
   }
 }
 
-export interface TequilaJSON {
-  kind: "Tequila"
+export interface HouseJSON {
+  kind: "House"
 }
 
-export class Tequila {
+export class House {
   static readonly discriminator = 89
-  static readonly kind = "Tequila"
+  static readonly kind = "House"
   readonly discriminator = 89
-  readonly kind = "Tequila"
+  readonly kind = "House"
 
-  toJSON(): TequilaJSON {
+  toJSON(): HouseJSON {
     return {
-      kind: "Tequila",
+      kind: "House",
     }
   }
 
   toEncodable() {
     return {
-      Tequila: {},
+      House: {},
     }
   }
 }
 
-export interface RodJSON {
-  kind: "Rod"
+export interface BoatJSON {
+  kind: "Boat"
 }
 
-export class Rod {
+export class Boat {
   static readonly discriminator = 90
-  static readonly kind = "Rod"
+  static readonly kind = "Boat"
   readonly discriminator = 90
-  readonly kind = "Rod"
+  readonly kind = "Boat"
 
-  toJSON(): RodJSON {
+  toJSON(): BoatJSON {
     return {
-      kind: "Rod",
+      kind: "Boat",
     }
   }
 
   toEncodable() {
     return {
-      Rod: {},
+      Boat: {},
     }
   }
 }
 
-export interface BlueprintJSON {
-  kind: "Blueprint"
+export interface SmoothieJSON {
+  kind: "Smoothie"
 }
 
-export class Blueprint {
+export class Smoothie {
   static readonly discriminator = 91
-  static readonly kind = "Blueprint"
+  static readonly kind = "Smoothie"
   readonly discriminator = 91
-  readonly kind = "Blueprint"
+  readonly kind = "Smoothie"
 
-  toJSON(): BlueprintJSON {
+  toJSON(): SmoothieJSON {
     return {
-      kind: "Blueprint",
+      kind: "Smoothie",
     }
   }
 
   toEncodable() {
     return {
-      Blueprint: {},
+      Smoothie: {},
     }
   }
 }
 
-export interface HammerJSON {
-  kind: "Hammer"
+export interface InternetJSON {
+  kind: "Internet"
 }
 
-export class Hammer {
+export class Internet {
   static readonly discriminator = 92
-  static readonly kind = "Hammer"
+  static readonly kind = "Internet"
   readonly discriminator = 92
-  readonly kind = "Hammer"
+  readonly kind = "Internet"
 
-  toJSON(): HammerJSON {
+  toJSON(): InternetJSON {
     return {
-      kind: "Hammer",
+      kind: "Internet",
     }
   }
 
   toEncodable() {
     return {
-      Hammer: {},
+      Internet: {},
     }
   }
 }
 
-export interface FishJSON {
-  kind: "Fish"
+export interface ThiefJSON {
+  kind: "Thief"
 }
 
-export class Fish {
+export class Thief {
   static readonly discriminator = 93
-  static readonly kind = "Fish"
+  static readonly kind = "Thief"
   readonly discriminator = 93
-  readonly kind = "Fish"
+  readonly kind = "Thief"
 
-  toJSON(): FishJSON {
+  toJSON(): ThiefJSON {
     return {
-      kind: "Fish",
+      kind: "Thief",
     }
   }
 
   toEncodable() {
     return {
-      Fish: {},
+      Thief: {},
     }
   }
 }
 
-export interface CoinJSON {
-  kind: "Coin"
+export interface LoanSharkJSON {
+  kind: "LoanShark"
 }
 
-export class Coin {
+export class LoanShark {
   static readonly discriminator = 94
-  static readonly kind = "Coin"
+  static readonly kind = "LoanShark"
   readonly discriminator = 94
-  readonly kind = "Coin"
+  readonly kind = "LoanShark"
 
-  toJSON(): CoinJSON {
+  toJSON(): LoanSharkJSON {
     return {
-      kind: "Coin",
+      kind: "LoanShark",
     }
   }
 
   toEncodable() {
     return {
-      Coin: {},
+      LoanShark: {},
     }
   }
 }
 
-export interface IceStormJSON {
-  kind: "IceStorm"
+export interface ZooJSON {
+  kind: "Zoo"
 }
 
-export class IceStorm {
+export class Zoo {
   static readonly discriminator = 95
-  static readonly kind = "IceStorm"
+  static readonly kind = "Zoo"
   readonly discriminator = 95
-  readonly kind = "IceStorm"
+  readonly kind = "Zoo"
 
-  toJSON(): IceStormJSON {
+  toJSON(): ZooJSON {
     return {
-      kind: "IceStorm",
+      kind: "Zoo",
     }
   }
 
   toEncodable() {
     return {
-      IceStorm: {},
+      Zoo: {},
     }
   }
 }
 
-export interface TShirtJSON {
-  kind: "TShirt"
+export interface SafeJSON {
+  kind: "Safe"
 }
 
-export class TShirt {
+export class Safe {
   static readonly discriminator = 96
-  static readonly kind = "TShirt"
+  static readonly kind = "Safe"
   readonly discriminator = 96
-  readonly kind = "TShirt"
+  readonly kind = "Safe"
 
-  toJSON(): TShirtJSON {
+  toJSON(): SafeJSON {
     return {
-      kind: "TShirt",
+      kind: "Safe",
     }
   }
 
   toEncodable() {
     return {
-      TShirt: {},
+      Safe: {},
     }
   }
 }
 
-export interface YachtJSON {
-  kind: "Yacht"
+export interface RaceJSON {
+  kind: "Race"
 }
 
-export class Yacht {
+export class Race {
   static readonly discriminator = 97
-  static readonly kind = "Yacht"
+  static readonly kind = "Race"
   readonly discriminator = 97
-  readonly kind = "Yacht"
+  readonly kind = "Race"
 
-  toJSON(): YachtJSON {
+  toJSON(): RaceJSON {
     return {
-      kind: "Yacht",
+      kind: "Race",
     }
   }
 
   toEncodable() {
     return {
-      Yacht: {},
+      Race: {},
     }
   }
 }
 
-export interface PartyJSON {
-  kind: "Party"
+export interface ToyJSON {
+  kind: "Toy"
 }
 
-export class Party {
+export class Toy {
   static readonly discriminator = 98
-  static readonly kind = "Party"
+  static readonly kind = "Toy"
   readonly discriminator = 98
-  readonly kind = "Party"
+  readonly kind = "Toy"
 
-  toJSON(): PartyJSON {
+  toJSON(): ToyJSON {
     return {
-      kind: "Party",
+      kind: "Toy",
     }
   }
 
   toEncodable() {
     return {
-      Party: {},
+      Toy: {},
     }
   }
 }
 
-export interface WhaleJSON {
-  kind: "Whale"
+export interface GiftJSON {
+  kind: "Gift"
 }
 
-export class Whale {
+export class Gift {
   static readonly discriminator = 99
-  static readonly kind = "Whale"
+  static readonly kind = "Gift"
   readonly discriminator = 99
-  readonly kind = "Whale"
+  readonly kind = "Gift"
 
-  toJSON(): WhaleJSON {
+  toJSON(): GiftJSON {
     return {
-      kind: "Whale",
+      kind: "Gift",
     }
   }
 
   toEncodable() {
     return {
-      Whale: {},
+      Gift: {},
     }
   }
 }
@@ -2309,305 +2309,305 @@ export function fromDecoded(obj: any): types.ElementNameKind {
     throw new Error("Invalid enum object")
   }
 
-  if ("Air" in obj) {
-    return new Air()
+  if ("Flame" in obj) {
+    return new Flame()
   }
-  if ("Fire" in obj) {
-    return new Fire()
+  if ("Sea" in obj) {
+    return new Sea()
   }
-  if ("Earth" in obj) {
-    return new Earth()
+  if ("Leaf" in obj) {
+    return new Leaf()
   }
-  if ("Water" in obj) {
-    return new Water()
+  if ("Stick" in obj) {
+    return new Stick()
   }
-  if ("Heat" in obj) {
-    return new Heat()
+  if ("BrokenGlass" in obj) {
+    return new BrokenGlass()
   }
-  if ("Steam" in obj) {
-    return new Steam()
+  if ("Compression" in obj) {
+    return new Compression()
   }
-  if ("Mud" in obj) {
-    return new Mud()
+  if ("Rubber" in obj) {
+    return new Rubber()
   }
-  if ("Pressure" in obj) {
-    return new Pressure()
+  if ("Pebble" in obj) {
+    return new Pebble()
   }
-  if ("Rain" in obj) {
-    return new Rain()
+  if ("Oxygen" in obj) {
+    return new Oxygen()
   }
-  if ("Wind" in obj) {
-    return new Wind()
+  if ("Carbon" in obj) {
+    return new Carbon()
   }
-  if ("Lava" in obj) {
-    return new Lava()
+  if ("Rock" in obj) {
+    return new Rock()
   }
-  if ("Life" in obj) {
-    return new Life()
+  if ("Toxic" in obj) {
+    return new Toxic()
   }
-  if ("Smoke" in obj) {
-    return new Smoke()
+  if ("TemperedGlass" in obj) {
+    return new TemperedGlass()
   }
-  if ("Dust" in obj) {
-    return new Dust()
+  if ("Salt" in obj) {
+    return new Salt()
   }
-  if ("Fog" in obj) {
-    return new Fog()
+  if ("FreshWater" in obj) {
+    return new FreshWater()
   }
-  if ("Energy" in obj) {
-    return new Energy()
+  if ("Flower" in obj) {
+    return new Flower()
   }
-  if ("Seed" in obj) {
-    return new Seed()
+  if ("Mold" in obj) {
+    return new Mold()
   }
-  if ("Metal" in obj) {
-    return new Metal()
+  if ("WoodenPlank" in obj) {
+    return new WoodenPlank()
   }
-  if ("Ocean" in obj) {
-    return new Ocean()
+  if ("Nest" in obj) {
+    return new Nest()
   }
-  if ("Glass" in obj) {
-    return new Glass()
+  if ("Bones" in obj) {
+    return new Bones()
   }
-  if ("Clay" in obj) {
-    return new Clay()
+  if ("Iron" in obj) {
+    return new Iron()
   }
-  if ("Cloud" in obj) {
-    return new Cloud()
+  if ("Organism" in obj) {
+    return new Organism()
   }
-  if ("Stone" in obj) {
-    return new Stone()
+  if ("Lead" in obj) {
+    return new Lead()
   }
-  if ("Sun" in obj) {
-    return new Sun()
+  if ("Brick" in obj) {
+    return new Brick()
   }
-  if ("Time" in obj) {
-    return new Time()
+  if ("Bee" in obj) {
+    return new Bee()
   }
-  if ("Oil" in obj) {
-    return new Oil()
+  if ("Hourglass" in obj) {
+    return new Hourglass()
   }
-  if ("Wave" in obj) {
-    return new Wave()
+  if ("Tire" in obj) {
+    return new Tire()
   }
-  if ("Ash" in obj) {
-    return new Ash()
+  if ("Aluminum" in obj) {
+    return new Aluminum()
   }
-  if ("Swamp" in obj) {
-    return new Swamp()
+  if ("Silver" in obj) {
+    return new Silver()
   }
-  if ("River" in obj) {
-    return new River()
+  if ("Soil" in obj) {
+    return new Soil()
   }
-  if ("Worm" in obj) {
-    return new Worm()
+  if ("Marble" in obj) {
+    return new Marble()
   }
-  if ("Tornado" in obj) {
-    return new Tornado()
+  if ("Gravel" in obj) {
+    return new Gravel()
   }
-  if ("Sand" in obj) {
-    return new Sand()
+  if ("String" in obj) {
+    return new String()
   }
-  if ("Mountain" in obj) {
-    return new Mountain()
+  if ("Chair" in obj) {
+    return new Chair()
   }
-  if ("Snow" in obj) {
-    return new Snow()
+  if ("Fireplace" in obj) {
+    return new Fireplace()
   }
-  if ("Frost" in obj) {
-    return new Frost()
+  if ("Window" in obj) {
+    return new Window()
   }
-  if ("Magnet" in obj) {
-    return new Magnet()
+  if ("Egg" in obj) {
+    return new Egg()
   }
-  if ("Fossil" in obj) {
-    return new Fossil()
+  if ("Blood" in obj) {
+    return new Blood()
   }
-  if ("HotSprings" in obj) {
-    return new HotSprings()
+  if ("Spinach" in obj) {
+    return new Spinach()
   }
-  if ("Pond" in obj) {
-    return new Pond()
+  if ("Steel" in obj) {
+    return new Steel()
   }
-  if ("Coal" in obj) {
-    return new Coal()
+  if ("Wheel" in obj) {
+    return new Wheel()
   }
-  if ("Telescope" in obj) {
-    return new Telescope()
+  if ("PalmTree" in obj) {
+    return new PalmTree()
   }
-  if ("Volcano" in obj) {
-    return new Volcano()
+  if ("Wall" in obj) {
+    return new Wall()
   }
-  if ("Plastic" in obj) {
-    return new Plastic()
+  if ("Wax" in obj) {
+    return new Wax()
   }
-  if ("Gasoline" in obj) {
-    return new Gasoline()
+  if ("Acid" in obj) {
+    return new Acid()
   }
-  if ("Bottle" in obj) {
-    return new Bottle()
+  if ("Diamond" in obj) {
+    return new Diamond()
   }
-  if ("Sky" in obj) {
-    return new Sky()
+  if ("Fuel" in obj) {
+    return new Fuel()
   }
-  if ("Storm" in obj) {
-    return new Storm()
+  if ("Chain" in obj) {
+    return new Chain()
   }
-  if ("Plant" in obj) {
-    return new Plant()
+  if ("Spider" in obj) {
+    return new Spider()
   }
-  if ("Nail" in obj) {
-    return new Nail()
+  if ("Duck" in obj) {
+    return new Duck()
   }
-  if ("Sound" in obj) {
-    return new Sound()
+  if ("Silicone" in obj) {
+    return new Silicone()
   }
-  if ("Paint" in obj) {
-    return new Paint()
+  if ("Blade" in obj) {
+    return new Blade()
   }
-  if ("Alcohol" in obj) {
-    return new Alcohol()
+  if ("Puppet" in obj) {
+    return new Puppet()
   }
-  if ("Desert" in obj) {
-    return new Desert()
+  if ("Grass" in obj) {
+    return new Grass()
   }
-  if ("SolarPanel" in obj) {
-    return new SolarPanel()
+  if ("Bench" in obj) {
+    return new Bench()
   }
-  if ("Windmill" in obj) {
-    return new Windmill()
+  if ("Greenhouse" in obj) {
+    return new Greenhouse()
   }
-  if ("Furnace" in obj) {
-    return new Furnace()
+  if ("Vine" in obj) {
+    return new Vine()
   }
-  if ("Dam" in obj) {
-    return new Dam()
+  if ("Heart" in obj) {
+    return new Heart()
   }
-  if ("FireExtinguisher" in obj) {
-    return new FireExtinguisher()
+  if ("Mussel" in obj) {
+    return new Mussel()
   }
-  if ("Squid" in obj) {
-    return new Squid()
+  if ("Coconut" in obj) {
+    return new Coconut()
   }
-  if ("Tree" in obj) {
-    return new Tree()
+  if ("Horseshoe" in obj) {
+    return new Horseshoe()
   }
-  if ("Coral" in obj) {
-    return new Coral()
+  if ("Mouse" in obj) {
+    return new Mouse()
   }
-  if ("Gas" in obj) {
-    return new Gas()
+  if ("Key" in obj) {
+    return new Key()
   }
-  if ("Meteor" in obj) {
-    return new Meteor()
+  if ("Honey" in obj) {
+    return new Honey()
   }
-  if ("Electricity" in obj) {
-    return new Electricity()
+  if ("Banana" in obj) {
+    return new Banana()
   }
-  if ("Wire" in obj) {
-    return new Wire()
+  if ("Ring" in obj) {
+    return new Ring()
   }
-  if ("Bean" in obj) {
-    return new Bean()
+  if ("Engine" in obj) {
+    return new Engine()
   }
-  if ("Sugar" in obj) {
-    return new Sugar()
+  if ("Kiwi" in obj) {
+    return new Kiwi()
   }
-  if ("Explosion" in obj) {
-    return new Explosion()
+  if ("Gold" in obj) {
+    return new Gold()
   }
-  if ("Music" in obj) {
-    return new Music()
+  if ("Web" in obj) {
+    return new Web()
   }
-  if ("Cloth" in obj) {
-    return new Cloth()
+  if ("Battery" in obj) {
+    return new Battery()
   }
-  if ("Umbrella" in obj) {
-    return new Umbrella()
+  if ("Microchip" in obj) {
+    return new Microchip()
   }
-  if ("Balloon" in obj) {
-    return new Balloon()
+  if ("Sword" in obj) {
+    return new Sword()
   }
-  if ("Island" in obj) {
-    return new Island()
+  if ("Mirror" in obj) {
+    return new Mirror()
   }
-  if ("Cactus" in obj) {
-    return new Cactus()
+  if ("Garden" in obj) {
+    return new Garden()
   }
-  if ("Ice" in obj) {
-    return new Ice()
+  if ("Ruby" in obj) {
+    return new Ruby()
   }
-  if ("Blizzard" in obj) {
-    return new Blizzard()
+  if ("Pearl" in obj) {
+    return new Pearl()
   }
-  if ("Ink" in obj) {
-    return new Ink()
+  if ("Blender" in obj) {
+    return new Blender()
   }
-  if ("Paper" in obj) {
-    return new Paper()
+  if ("Car" in obj) {
+    return new Car()
   }
-  if ("Apple" in obj) {
-    return new Apple()
+  if ("Horse" in obj) {
+    return new Horse()
   }
-  if ("Wood" in obj) {
-    return new Wood()
+  if ("Computer" in obj) {
+    return new Computer()
   }
-  if ("Antenna" in obj) {
-    return new Antenna()
+  if ("Piano" in obj) {
+    return new Piano()
   }
-  if ("Dolphin" in obj) {
-    return new Dolphin()
+  if ("Money" in obj) {
+    return new Money()
   }
-  if ("Beach" in obj) {
-    return new Beach()
+  if ("Keyboard" in obj) {
+    return new Keyboard()
   }
-  if ("Fireworks" in obj) {
-    return new Fireworks()
+  if ("Bike" in obj) {
+    return new Bike()
   }
-  if ("Lightning" in obj) {
-    return new Lightning()
+  if ("Necklace" in obj) {
+    return new Necklace()
   }
-  if ("Hail" in obj) {
-    return new Hail()
+  if ("Statue" in obj) {
+    return new Statue()
   }
-  if ("Art" in obj) {
-    return new Art()
+  if ("Monkey" in obj) {
+    return new Monkey()
   }
-  if ("Coffee" in obj) {
-    return new Coffee()
+  if ("Cellphone" in obj) {
+    return new Cellphone()
   }
-  if ("Tequila" in obj) {
-    return new Tequila()
+  if ("House" in obj) {
+    return new House()
   }
-  if ("Rod" in obj) {
-    return new Rod()
+  if ("Boat" in obj) {
+    return new Boat()
   }
-  if ("Blueprint" in obj) {
-    return new Blueprint()
+  if ("Smoothie" in obj) {
+    return new Smoothie()
   }
-  if ("Hammer" in obj) {
-    return new Hammer()
+  if ("Internet" in obj) {
+    return new Internet()
   }
-  if ("Fish" in obj) {
-    return new Fish()
+  if ("Thief" in obj) {
+    return new Thief()
   }
-  if ("Coin" in obj) {
-    return new Coin()
+  if ("LoanShark" in obj) {
+    return new LoanShark()
   }
-  if ("IceStorm" in obj) {
-    return new IceStorm()
+  if ("Zoo" in obj) {
+    return new Zoo()
   }
-  if ("TShirt" in obj) {
-    return new TShirt()
+  if ("Safe" in obj) {
+    return new Safe()
   }
-  if ("Yacht" in obj) {
-    return new Yacht()
+  if ("Race" in obj) {
+    return new Race()
   }
-  if ("Party" in obj) {
-    return new Party()
+  if ("Toy" in obj) {
+    return new Toy()
   }
-  if ("Whale" in obj) {
-    return new Whale()
+  if ("Gift" in obj) {
+    return new Gift()
   }
 
   throw new Error("Invalid enum object")
@@ -2615,411 +2615,411 @@ export function fromDecoded(obj: any): types.ElementNameKind {
 
 export function fromJSON(obj: types.ElementNameJSON): types.ElementNameKind {
   switch (obj.kind) {
-    case "Air": {
-      return new Air()
+    case "Flame": {
+      return new Flame()
     }
-    case "Fire": {
-      return new Fire()
+    case "Sea": {
+      return new Sea()
     }
-    case "Earth": {
-      return new Earth()
+    case "Leaf": {
+      return new Leaf()
     }
-    case "Water": {
-      return new Water()
+    case "Stick": {
+      return new Stick()
     }
-    case "Heat": {
-      return new Heat()
+    case "BrokenGlass": {
+      return new BrokenGlass()
     }
-    case "Steam": {
-      return new Steam()
+    case "Compression": {
+      return new Compression()
     }
-    case "Mud": {
-      return new Mud()
+    case "Rubber": {
+      return new Rubber()
     }
-    case "Pressure": {
-      return new Pressure()
+    case "Pebble": {
+      return new Pebble()
     }
-    case "Rain": {
-      return new Rain()
+    case "Oxygen": {
+      return new Oxygen()
     }
-    case "Wind": {
-      return new Wind()
+    case "Carbon": {
+      return new Carbon()
     }
-    case "Lava": {
-      return new Lava()
+    case "Rock": {
+      return new Rock()
     }
-    case "Life": {
-      return new Life()
+    case "Toxic": {
+      return new Toxic()
     }
-    case "Smoke": {
-      return new Smoke()
+    case "TemperedGlass": {
+      return new TemperedGlass()
     }
-    case "Dust": {
-      return new Dust()
+    case "Salt": {
+      return new Salt()
     }
-    case "Fog": {
-      return new Fog()
+    case "FreshWater": {
+      return new FreshWater()
     }
-    case "Energy": {
-      return new Energy()
+    case "Flower": {
+      return new Flower()
     }
-    case "Seed": {
-      return new Seed()
+    case "Mold": {
+      return new Mold()
     }
-    case "Metal": {
-      return new Metal()
+    case "WoodenPlank": {
+      return new WoodenPlank()
     }
-    case "Ocean": {
-      return new Ocean()
+    case "Nest": {
+      return new Nest()
     }
-    case "Glass": {
-      return new Glass()
+    case "Bones": {
+      return new Bones()
     }
-    case "Clay": {
-      return new Clay()
+    case "Iron": {
+      return new Iron()
     }
-    case "Cloud": {
-      return new Cloud()
+    case "Organism": {
+      return new Organism()
     }
-    case "Stone": {
-      return new Stone()
+    case "Lead": {
+      return new Lead()
     }
-    case "Sun": {
-      return new Sun()
+    case "Brick": {
+      return new Brick()
     }
-    case "Time": {
-      return new Time()
+    case "Bee": {
+      return new Bee()
     }
-    case "Oil": {
-      return new Oil()
+    case "Hourglass": {
+      return new Hourglass()
     }
-    case "Wave": {
-      return new Wave()
+    case "Tire": {
+      return new Tire()
     }
-    case "Ash": {
-      return new Ash()
+    case "Aluminum": {
+      return new Aluminum()
     }
-    case "Swamp": {
-      return new Swamp()
+    case "Silver": {
+      return new Silver()
     }
-    case "River": {
-      return new River()
+    case "Soil": {
+      return new Soil()
     }
-    case "Worm": {
-      return new Worm()
+    case "Marble": {
+      return new Marble()
     }
-    case "Tornado": {
-      return new Tornado()
+    case "Gravel": {
+      return new Gravel()
     }
-    case "Sand": {
-      return new Sand()
+    case "String": {
+      return new String()
     }
-    case "Mountain": {
-      return new Mountain()
+    case "Chair": {
+      return new Chair()
     }
-    case "Snow": {
-      return new Snow()
+    case "Fireplace": {
+      return new Fireplace()
     }
-    case "Frost": {
-      return new Frost()
+    case "Window": {
+      return new Window()
     }
-    case "Magnet": {
-      return new Magnet()
+    case "Egg": {
+      return new Egg()
     }
-    case "Fossil": {
-      return new Fossil()
+    case "Blood": {
+      return new Blood()
     }
-    case "HotSprings": {
-      return new HotSprings()
+    case "Spinach": {
+      return new Spinach()
     }
-    case "Pond": {
-      return new Pond()
+    case "Steel": {
+      return new Steel()
     }
-    case "Coal": {
-      return new Coal()
+    case "Wheel": {
+      return new Wheel()
     }
-    case "Telescope": {
-      return new Telescope()
+    case "PalmTree": {
+      return new PalmTree()
     }
-    case "Volcano": {
-      return new Volcano()
+    case "Wall": {
+      return new Wall()
     }
-    case "Plastic": {
-      return new Plastic()
+    case "Wax": {
+      return new Wax()
     }
-    case "Gasoline": {
-      return new Gasoline()
+    case "Acid": {
+      return new Acid()
     }
-    case "Bottle": {
-      return new Bottle()
+    case "Diamond": {
+      return new Diamond()
     }
-    case "Sky": {
-      return new Sky()
+    case "Fuel": {
+      return new Fuel()
     }
-    case "Storm": {
-      return new Storm()
+    case "Chain": {
+      return new Chain()
     }
-    case "Plant": {
-      return new Plant()
+    case "Spider": {
+      return new Spider()
     }
-    case "Nail": {
-      return new Nail()
+    case "Duck": {
+      return new Duck()
     }
-    case "Sound": {
-      return new Sound()
+    case "Silicone": {
+      return new Silicone()
     }
-    case "Paint": {
-      return new Paint()
+    case "Blade": {
+      return new Blade()
     }
-    case "Alcohol": {
-      return new Alcohol()
+    case "Puppet": {
+      return new Puppet()
     }
-    case "Desert": {
-      return new Desert()
+    case "Grass": {
+      return new Grass()
     }
-    case "SolarPanel": {
-      return new SolarPanel()
+    case "Bench": {
+      return new Bench()
     }
-    case "Windmill": {
-      return new Windmill()
+    case "Greenhouse": {
+      return new Greenhouse()
     }
-    case "Furnace": {
-      return new Furnace()
+    case "Vine": {
+      return new Vine()
     }
-    case "Dam": {
-      return new Dam()
+    case "Heart": {
+      return new Heart()
     }
-    case "FireExtinguisher": {
-      return new FireExtinguisher()
+    case "Mussel": {
+      return new Mussel()
     }
-    case "Squid": {
-      return new Squid()
+    case "Coconut": {
+      return new Coconut()
     }
-    case "Tree": {
-      return new Tree()
+    case "Horseshoe": {
+      return new Horseshoe()
     }
-    case "Coral": {
-      return new Coral()
+    case "Mouse": {
+      return new Mouse()
     }
-    case "Gas": {
-      return new Gas()
+    case "Key": {
+      return new Key()
     }
-    case "Meteor": {
-      return new Meteor()
+    case "Honey": {
+      return new Honey()
     }
-    case "Electricity": {
-      return new Electricity()
+    case "Banana": {
+      return new Banana()
     }
-    case "Wire": {
-      return new Wire()
+    case "Ring": {
+      return new Ring()
     }
-    case "Bean": {
-      return new Bean()
+    case "Engine": {
+      return new Engine()
     }
-    case "Sugar": {
-      return new Sugar()
+    case "Kiwi": {
+      return new Kiwi()
     }
-    case "Explosion": {
-      return new Explosion()
+    case "Gold": {
+      return new Gold()
     }
-    case "Music": {
-      return new Music()
+    case "Web": {
+      return new Web()
     }
-    case "Cloth": {
-      return new Cloth()
+    case "Battery": {
+      return new Battery()
     }
-    case "Umbrella": {
-      return new Umbrella()
+    case "Microchip": {
+      return new Microchip()
     }
-    case "Balloon": {
-      return new Balloon()
+    case "Sword": {
+      return new Sword()
     }
-    case "Island": {
-      return new Island()
+    case "Mirror": {
+      return new Mirror()
     }
-    case "Cactus": {
-      return new Cactus()
+    case "Garden": {
+      return new Garden()
     }
-    case "Ice": {
-      return new Ice()
+    case "Ruby": {
+      return new Ruby()
     }
-    case "Blizzard": {
-      return new Blizzard()
+    case "Pearl": {
+      return new Pearl()
     }
-    case "Ink": {
-      return new Ink()
+    case "Blender": {
+      return new Blender()
     }
-    case "Paper": {
-      return new Paper()
+    case "Car": {
+      return new Car()
     }
-    case "Apple": {
-      return new Apple()
+    case "Horse": {
+      return new Horse()
     }
-    case "Wood": {
-      return new Wood()
+    case "Computer": {
+      return new Computer()
     }
-    case "Antenna": {
-      return new Antenna()
+    case "Piano": {
+      return new Piano()
     }
-    case "Dolphin": {
-      return new Dolphin()
+    case "Money": {
+      return new Money()
     }
-    case "Beach": {
-      return new Beach()
+    case "Keyboard": {
+      return new Keyboard()
     }
-    case "Fireworks": {
-      return new Fireworks()
+    case "Bike": {
+      return new Bike()
     }
-    case "Lightning": {
-      return new Lightning()
+    case "Necklace": {
+      return new Necklace()
     }
-    case "Hail": {
-      return new Hail()
+    case "Statue": {
+      return new Statue()
     }
-    case "Art": {
-      return new Art()
+    case "Monkey": {
+      return new Monkey()
     }
-    case "Coffee": {
-      return new Coffee()
+    case "Cellphone": {
+      return new Cellphone()
     }
-    case "Tequila": {
-      return new Tequila()
+    case "House": {
+      return new House()
     }
-    case "Rod": {
-      return new Rod()
+    case "Boat": {
+      return new Boat()
     }
-    case "Blueprint": {
-      return new Blueprint()
+    case "Smoothie": {
+      return new Smoothie()
     }
-    case "Hammer": {
-      return new Hammer()
+    case "Internet": {
+      return new Internet()
     }
-    case "Fish": {
-      return new Fish()
+    case "Thief": {
+      return new Thief()
     }
-    case "Coin": {
-      return new Coin()
+    case "LoanShark": {
+      return new LoanShark()
     }
-    case "IceStorm": {
-      return new IceStorm()
+    case "Zoo": {
+      return new Zoo()
     }
-    case "TShirt": {
-      return new TShirt()
+    case "Safe": {
+      return new Safe()
     }
-    case "Yacht": {
-      return new Yacht()
+    case "Race": {
+      return new Race()
     }
-    case "Party": {
-      return new Party()
+    case "Toy": {
+      return new Toy()
     }
-    case "Whale": {
-      return new Whale()
+    case "Gift": {
+      return new Gift()
     }
   }
 }
 
 export function layout(property?: string) {
   const ret = borsh.rustEnum([
-    borsh.struct([], "Air"),
-    borsh.struct([], "Fire"),
-    borsh.struct([], "Earth"),
-    borsh.struct([], "Water"),
-    borsh.struct([], "Heat"),
-    borsh.struct([], "Steam"),
-    borsh.struct([], "Mud"),
-    borsh.struct([], "Pressure"),
-    borsh.struct([], "Rain"),
-    borsh.struct([], "Wind"),
-    borsh.struct([], "Lava"),
-    borsh.struct([], "Life"),
-    borsh.struct([], "Smoke"),
-    borsh.struct([], "Dust"),
-    borsh.struct([], "Fog"),
-    borsh.struct([], "Energy"),
-    borsh.struct([], "Seed"),
-    borsh.struct([], "Metal"),
-    borsh.struct([], "Ocean"),
-    borsh.struct([], "Glass"),
-    borsh.struct([], "Clay"),
-    borsh.struct([], "Cloud"),
-    borsh.struct([], "Stone"),
-    borsh.struct([], "Sun"),
-    borsh.struct([], "Time"),
-    borsh.struct([], "Oil"),
-    borsh.struct([], "Wave"),
-    borsh.struct([], "Ash"),
-    borsh.struct([], "Swamp"),
-    borsh.struct([], "River"),
-    borsh.struct([], "Worm"),
-    borsh.struct([], "Tornado"),
-    borsh.struct([], "Sand"),
-    borsh.struct([], "Mountain"),
-    borsh.struct([], "Snow"),
-    borsh.struct([], "Frost"),
-    borsh.struct([], "Magnet"),
-    borsh.struct([], "Fossil"),
-    borsh.struct([], "HotSprings"),
-    borsh.struct([], "Pond"),
-    borsh.struct([], "Coal"),
-    borsh.struct([], "Telescope"),
-    borsh.struct([], "Volcano"),
-    borsh.struct([], "Plastic"),
-    borsh.struct([], "Gasoline"),
-    borsh.struct([], "Bottle"),
-    borsh.struct([], "Sky"),
-    borsh.struct([], "Storm"),
-    borsh.struct([], "Plant"),
-    borsh.struct([], "Nail"),
-    borsh.struct([], "Sound"),
-    borsh.struct([], "Paint"),
-    borsh.struct([], "Alcohol"),
-    borsh.struct([], "Desert"),
-    borsh.struct([], "SolarPanel"),
-    borsh.struct([], "Windmill"),
-    borsh.struct([], "Furnace"),
-    borsh.struct([], "Dam"),
-    borsh.struct([], "FireExtinguisher"),
-    borsh.struct([], "Squid"),
-    borsh.struct([], "Tree"),
-    borsh.struct([], "Coral"),
-    borsh.struct([], "Gas"),
-    borsh.struct([], "Meteor"),
-    borsh.struct([], "Electricity"),
-    borsh.struct([], "Wire"),
-    borsh.struct([], "Bean"),
-    borsh.struct([], "Sugar"),
-    borsh.struct([], "Explosion"),
-    borsh.struct([], "Music"),
-    borsh.struct([], "Cloth"),
-    borsh.struct([], "Umbrella"),
-    borsh.struct([], "Balloon"),
-    borsh.struct([], "Island"),
-    borsh.struct([], "Cactus"),
-    borsh.struct([], "Ice"),
-    borsh.struct([], "Blizzard"),
-    borsh.struct([], "Ink"),
-    borsh.struct([], "Paper"),
-    borsh.struct([], "Apple"),
-    borsh.struct([], "Wood"),
-    borsh.struct([], "Antenna"),
-    borsh.struct([], "Dolphin"),
-    borsh.struct([], "Beach"),
-    borsh.struct([], "Fireworks"),
-    borsh.struct([], "Lightning"),
-    borsh.struct([], "Hail"),
-    borsh.struct([], "Art"),
-    borsh.struct([], "Coffee"),
-    borsh.struct([], "Tequila"),
-    borsh.struct([], "Rod"),
-    borsh.struct([], "Blueprint"),
-    borsh.struct([], "Hammer"),
-    borsh.struct([], "Fish"),
-    borsh.struct([], "Coin"),
-    borsh.struct([], "IceStorm"),
-    borsh.struct([], "TShirt"),
-    borsh.struct([], "Yacht"),
-    borsh.struct([], "Party"),
-    borsh.struct([], "Whale"),
+    borsh.struct([], "Flame"),
+    borsh.struct([], "Sea"),
+    borsh.struct([], "Leaf"),
+    borsh.struct([], "Stick"),
+    borsh.struct([], "BrokenGlass"),
+    borsh.struct([], "Compression"),
+    borsh.struct([], "Rubber"),
+    borsh.struct([], "Pebble"),
+    borsh.struct([], "Oxygen"),
+    borsh.struct([], "Carbon"),
+    borsh.struct([], "Rock"),
+    borsh.struct([], "Toxic"),
+    borsh.struct([], "TemperedGlass"),
+    borsh.struct([], "Salt"),
+    borsh.struct([], "FreshWater"),
+    borsh.struct([], "Flower"),
+    borsh.struct([], "Mold"),
+    borsh.struct([], "WoodenPlank"),
+    borsh.struct([], "Nest"),
+    borsh.struct([], "Bones"),
+    borsh.struct([], "Iron"),
+    borsh.struct([], "Organism"),
+    borsh.struct([], "Lead"),
+    borsh.struct([], "Brick"),
+    borsh.struct([], "Bee"),
+    borsh.struct([], "Hourglass"),
+    borsh.struct([], "Tire"),
+    borsh.struct([], "Aluminum"),
+    borsh.struct([], "Silver"),
+    borsh.struct([], "Soil"),
+    borsh.struct([], "Marble"),
+    borsh.struct([], "Gravel"),
+    borsh.struct([], "String"),
+    borsh.struct([], "Chair"),
+    borsh.struct([], "Fireplace"),
+    borsh.struct([], "Window"),
+    borsh.struct([], "Egg"),
+    borsh.struct([], "Blood"),
+    borsh.struct([], "Spinach"),
+    borsh.struct([], "Steel"),
+    borsh.struct([], "Wheel"),
+    borsh.struct([], "PalmTree"),
+    borsh.struct([], "Wall"),
+    borsh.struct([], "Wax"),
+    borsh.struct([], "Acid"),
+    borsh.struct([], "Diamond"),
+    borsh.struct([], "Fuel"),
+    borsh.struct([], "Chain"),
+    borsh.struct([], "Spider"),
+    borsh.struct([], "Duck"),
+    borsh.struct([], "Silicone"),
+    borsh.struct([], "Blade"),
+    borsh.struct([], "Puppet"),
+    borsh.struct([], "Grass"),
+    borsh.struct([], "Bench"),
+    borsh.struct([], "Greenhouse"),
+    borsh.struct([], "Vine"),
+    borsh.struct([], "Heart"),
+    borsh.struct([], "Mussel"),
+    borsh.struct([], "Coconut"),
+    borsh.struct([], "Horseshoe"),
+    borsh.struct([], "Mouse"),
+    borsh.struct([], "Key"),
+    borsh.struct([], "Honey"),
+    borsh.struct([], "Banana"),
+    borsh.struct([], "Ring"),
+    borsh.struct([], "Engine"),
+    borsh.struct([], "Kiwi"),
+    borsh.struct([], "Gold"),
+    borsh.struct([], "Web"),
+    borsh.struct([], "Battery"),
+    borsh.struct([], "Microchip"),
+    borsh.struct([], "Sword"),
+    borsh.struct([], "Mirror"),
+    borsh.struct([], "Garden"),
+    borsh.struct([], "Ruby"),
+    borsh.struct([], "Pearl"),
+    borsh.struct([], "Blender"),
+    borsh.struct([], "Car"),
+    borsh.struct([], "Horse"),
+    borsh.struct([], "Computer"),
+    borsh.struct([], "Piano"),
+    borsh.struct([], "Money"),
+    borsh.struct([], "Keyboard"),
+    borsh.struct([], "Bike"),
+    borsh.struct([], "Necklace"),
+    borsh.struct([], "Statue"),
+    borsh.struct([], "Monkey"),
+    borsh.struct([], "Cellphone"),
+    borsh.struct([], "House"),
+    borsh.struct([], "Boat"),
+    borsh.struct([], "Smoothie"),
+    borsh.struct([], "Internet"),
+    borsh.struct([], "Thief"),
+    borsh.struct([], "LoanShark"),
+    borsh.struct([], "Zoo"),
+    borsh.struct([], "Safe"),
+    borsh.struct([], "Race"),
+    borsh.struct([], "Toy"),
+    borsh.struct([], "Gift"),
   ])
   if (property !== undefined) {
     return ret.replicate(property)

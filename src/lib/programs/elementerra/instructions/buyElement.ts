@@ -4,60 +4,42 @@ import * as borsh from "@coral-xyz/borsh" // eslint-disable-line @typescript-esl
 import * as types from "../types" // eslint-disable-line @typescript-eslint/no-unused-vars
 import { PROGRAM_ID } from "../programId"
 
-export interface LevelUpArgs {
-  root: Array<number>
-  dataHash: Array<number>
-  creatorHash: Array<number>
-  nonce: BN
-  index: number
-  levelUpRequirements: types.LevelUpRequirementsFields
+export interface BuyElementArgs {
+  element: types.ElementNameKind
 }
 
-export interface LevelUpAccounts {
+export interface BuyElementAccounts {
   associatedTokenProgram: PublicKey
   tokenProgram: PublicKey
   systemProgram: PublicKey
   rent: PublicKey
   authority: PublicKey
   programSigner: PublicKey
+  solReceiver: PublicKey
   season: PublicKey
-  metaplexMetadataAccount: PublicKey
-  nftMint: PublicKey
-  nftToken: PublicKey
   player: PublicKey
-  levelAttributes: PublicKey
-  drkeMint: PublicKey
+  element: PublicKey
+  elementumMint: PublicKey
   userTokenAccount: PublicKey
-  packTreeAuthority: PublicKey
-  packMerkleTree: PublicKey
-  packLeafOwner: PublicKey
-  packLeafDelegate: PublicKey
-  packCollectionMint: PublicKey
-  packCollectionMetadata: PublicKey
-  packCollectionMasterEdition: PublicKey
   treeAuthority: PublicKey
+  bubblegumSigner: PublicKey
   merkleTree: PublicKey
   leafOwner: PublicKey
   leafDelegate: PublicKey
-  bubblegumSigner: PublicKey
+  collectionMint: PublicKey
+  collectionMetadata: PublicKey
+  collectionMasterEdition: PublicKey
   metaplexTokenMetadataProgram: PublicKey
   bubblegumProgram: PublicKey
   compressionProgram: PublicKey
   logWrapper: PublicKey
 }
 
-export const layout = borsh.struct([
-  borsh.array(borsh.u8(), 32, "root"),
-  borsh.array(borsh.u8(), 32, "dataHash"),
-  borsh.array(borsh.u8(), 32, "creatorHash"),
-  borsh.u64("nonce"),
-  borsh.u32("index"),
-  types.LevelUpRequirements.layout("levelUpRequirements"),
-])
+export const layout = borsh.struct([types.ElementName.layout("element")])
 
-export function levelUp(
-  args: LevelUpArgs,
-  accounts: LevelUpAccounts,
+export function buyElement(
+  args: BuyElementArgs,
+  accounts: BuyElementAccounts,
   programId: PublicKey = PROGRAM_ID
 ) {
   const keys: Array<AccountMeta> = [
@@ -71,38 +53,24 @@ export function levelUp(
     { pubkey: accounts.rent, isSigner: false, isWritable: false },
     { pubkey: accounts.authority, isSigner: true, isWritable: true },
     { pubkey: accounts.programSigner, isSigner: false, isWritable: false },
-    { pubkey: accounts.season, isSigner: false, isWritable: false },
-    {
-      pubkey: accounts.metaplexMetadataAccount,
-      isSigner: false,
-      isWritable: false,
-    },
-    { pubkey: accounts.nftMint, isSigner: false, isWritable: false },
-    { pubkey: accounts.nftToken, isSigner: false, isWritable: false },
+    { pubkey: accounts.solReceiver, isSigner: false, isWritable: true },
+    { pubkey: accounts.season, isSigner: false, isWritable: true },
     { pubkey: accounts.player, isSigner: false, isWritable: true },
-    { pubkey: accounts.levelAttributes, isSigner: false, isWritable: true },
-    { pubkey: accounts.drkeMint, isSigner: false, isWritable: true },
+    { pubkey: accounts.element, isSigner: false, isWritable: false },
+    { pubkey: accounts.elementumMint, isSigner: false, isWritable: true },
     { pubkey: accounts.userTokenAccount, isSigner: false, isWritable: true },
-    { pubkey: accounts.packTreeAuthority, isSigner: false, isWritable: true },
-    { pubkey: accounts.packMerkleTree, isSigner: false, isWritable: true },
-    { pubkey: accounts.packLeafOwner, isSigner: false, isWritable: false },
-    { pubkey: accounts.packLeafDelegate, isSigner: false, isWritable: false },
-    { pubkey: accounts.packCollectionMint, isSigner: false, isWritable: false },
-    {
-      pubkey: accounts.packCollectionMetadata,
-      isSigner: false,
-      isWritable: true,
-    },
-    {
-      pubkey: accounts.packCollectionMasterEdition,
-      isSigner: false,
-      isWritable: true,
-    },
     { pubkey: accounts.treeAuthority, isSigner: false, isWritable: true },
+    { pubkey: accounts.bubblegumSigner, isSigner: false, isWritable: false },
     { pubkey: accounts.merkleTree, isSigner: false, isWritable: true },
     { pubkey: accounts.leafOwner, isSigner: false, isWritable: false },
     { pubkey: accounts.leafDelegate, isSigner: false, isWritable: false },
-    { pubkey: accounts.bubblegumSigner, isSigner: false, isWritable: false },
+    { pubkey: accounts.collectionMint, isSigner: false, isWritable: true },
+    { pubkey: accounts.collectionMetadata, isSigner: false, isWritable: true },
+    {
+      pubkey: accounts.collectionMasterEdition,
+      isSigner: false,
+      isWritable: true,
+    },
     {
       pubkey: accounts.metaplexTokenMetadataProgram,
       isSigner: false,
@@ -112,18 +80,11 @@ export function levelUp(
     { pubkey: accounts.compressionProgram, isSigner: false, isWritable: false },
     { pubkey: accounts.logWrapper, isSigner: false, isWritable: false },
   ]
-  const identifier = Buffer.from([128, 64, 197, 116, 226, 129, 119, 234])
+  const identifier = Buffer.from([197, 89, 62, 207, 0, 241, 32, 30])
   const buffer = Buffer.alloc(1000)
   const len = layout.encode(
     {
-      root: args.root,
-      dataHash: args.dataHash,
-      creatorHash: args.creatorHash,
-      nonce: args.nonce,
-      index: args.index,
-      levelUpRequirements: types.LevelUpRequirements.toEncodable(
-        args.levelUpRequirements
-      ),
+      element: args.element.toEncodable(),
     },
     buffer
   )

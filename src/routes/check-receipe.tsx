@@ -1,19 +1,15 @@
 import _ from "lodash";
-import {
-  createEffect,
-  createResource,
-  createSignal,
-  For,
-  Show,
-  Suspense,
-} from "solid-js";
-import { checkReceipe, CheckReceipeResponse } from "~/lib/apiClient";
-import { ElementJSON, fetchElements, slugifyElementName } from "~/lib/elements";
+import { createResource, createSignal, For, Show, Suspense } from "solid-js";
+import { useElementsContext } from "~/contexts/ElementsContext";
+import { checkReceipe } from "~/lib/apiClient";
+import { ElementWithAddress, slugifyElementName } from "~/lib/elements";
 
 type Receipe = [string, string, string, string];
 
 export default function CheckReceipe() {
-  const [elements] = createResource(fetchElements);
+  const { getElements } = useElementsContext();
+
+  const [elements] = createResource(async () => getElements(2));
 
   const [request, setRequest] = createSignal<Receipe | undefined>();
 
@@ -31,12 +27,12 @@ export default function CheckReceipe() {
     return res;
   });
 
-  function availableElements(): ElementJSON[] {
-    const e = _.clone(elements());
-    if (_.isNil(e)) {
+  function availableElements() {
+    const elements_ = _.clone(elements());
+    if (_.isEmpty(elements_)) {
       return [];
     }
-    const available = _.orderBy(_.values(_.get(e, 2)), ["tier", "name"]);
+    const available = _.orderBy(elements_, ["tierNumber", "name"]);
     setReceipe([
       available[0].name,
       available[0].name,
@@ -130,13 +126,13 @@ export default function CheckReceipe() {
   );
 }
 
-function ElementsOptions(props: { elements: ElementJSON[] }) {
+function ElementsOptions(props: { elements: ElementWithAddress[] }) {
   return (
     <For each={props.elements}>
       {(element) => (
         <>
           <option value={element.name}>
-            {element.name} T{element.tier}
+            {element.name} T{element.tierNumber}
           </option>
         </>
       )}

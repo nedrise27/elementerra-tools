@@ -6,7 +6,7 @@ import {
   ParentProps,
   useContext,
 } from "solid-js";
-import { ElementJSON } from "~/lib/elements";
+import { ElementWithAddress, fetchElements } from "~/lib/elements";
 
 type ElementsContextType = ReturnType<typeof initialize>;
 
@@ -32,20 +32,26 @@ export function useElementsContext() {
 }
 
 function initialize() {
-  const [elements, setElements] =
-    createSignal<Record<string, Record<string, ElementJSON>>>();
+  const [elements, setElements] = createSignal<ElementWithAddress[]>([]);
 
-  function fromSeason(season: number): Record<string, ElementJSON> {
-    const e = _.get(elements(), season);
-    if (_.isNil(e)) {
-      throw new Error("Please set elements first");
+  async function getElements(seasonNumber?: number) {
+    if (_.isEmpty(elements())) {
+      const res = await fetchElements();
+      setElements(res);
     }
-    return e;
+    if (!_.isNil(seasonNumber)) {
+      return _.filter(elements(), { seasonNumber });
+    }
+    return elements();
+  }
+
+  async function getElement(address: string) {
+    const elements_ = await getElements();
+    return _.find(elements_, { address });
   }
 
   return {
-    elements,
-    fromSeason,
-    setElements,
+    getElements,
+    getElement,
   };
 }

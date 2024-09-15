@@ -70,7 +70,7 @@ export class Player {
     borsh.u64("numberOfFailedAttempts"),
     borsh.u64("numberOfElementsBurned"),
     borsh.u64("numberOfElementumBurned"),
-    borsh.array(borsh.u32(), 19, "numberOfTimeCreatedElement"),
+    borsh.array(borsh.u32(), 100, "numberOfTimeCreatedElement"),
     borsh.publicKey("referrerTreasury"),
     borsh.publicKey("referrerMember"),
     borsh.i64("numberOfElementsInventedUpdated"),
