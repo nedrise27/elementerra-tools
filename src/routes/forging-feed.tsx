@@ -65,6 +65,8 @@ export default function ForgingFeed() {
           }
         }
       );
+
+      setSocket(socket_);
     }
   });
 
