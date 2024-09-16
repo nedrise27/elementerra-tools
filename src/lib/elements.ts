@@ -8,6 +8,7 @@ export const PADDING_ADDRESS = "11111111111111111111111111111111";
 export type ElementWithAddress = ElementJSON & {
   address: string;
   tierNumber: number;
+  price: number;
 };
 
 export async function fetchElements(): Promise<ElementWithAddress[]> {
@@ -34,6 +35,7 @@ export async function fetchElements(): Promise<ElementWithAddress[]> {
       address: rawElement.pubkey.toString(),
       tierNumber: tier,
       isDiscovered: tier === 0 ? true : e.isDiscovered,
+      price: e.cost.toNumber(),
     };
 
     elements.push(element);

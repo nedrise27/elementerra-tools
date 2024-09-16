@@ -22,8 +22,8 @@ type Elements = Record<number, Record<string, ElementJSON>>;
 type Ordering =
   | "tierNumber:asc"
   | "tierNumber:desc"
-  | "cost:asc"
-  | "cost:desc"
+  | "price:asc"
+  | "price:desc"
   | "name:asc"
   | "name:desc";
 
@@ -61,8 +61,8 @@ export default function Elements() {
       { key: "Tier descending", value: "tierNumber:desc" },
       { key: "Name ascending", value: "name:asc" },
       { key: "Name descending", value: "name:desc" },
-      { key: "Price ascending", value: "cost:asc" },
-      { key: "Price descending", value: "cost:desc" },
+      { key: "Price ascending", value: "price:asc" },
+      { key: "Price descending", value: "price:desc" },
     ];
   }
 
@@ -125,8 +125,8 @@ export default function Elements() {
 
     filtered = _.orderBy(filtered, [field, "name"], [order, "asc"]);
 
-    if (field === "cost") {
-      const parts = _.partition(filtered, (e) => e.cost != "0");
+    if (field === "price") {
+      const parts = _.partition(filtered, (e) => e.price != 0);
       filtered = [...parts[0], ...parts[1]];
     }
 
@@ -294,9 +294,9 @@ export default function Elements() {
                         {element.name}
                       </A>
                       <p class="font-normal text-gray-400">
-                        {element.cost == "0"
+                        {element.price === 0
                           ? "Price TBD"
-                          : element.cost + " DKRE"}
+                          : element.price + " DKRE"}
                       </p>
                       <Show
                         when={
