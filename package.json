@@ -19,6 +19,7 @@
     "@types/lodash": "^4.17.7",
     "bn.js": "^5.2.1",
     "lodash": "^4.17.21",
+    "socket.io-client": "^4.7.5",
     "solid-js": "^1.8.18",
     "string-similarity-js": "^2.1.4",
     "vinxi": "^0.4.0"

@@ -2,7 +2,12 @@ import { useParams } from "@solidjs/router";
 import _ from "lodash";
 import { createEffect, createResource, For, Show, Suspense } from "solid-js";
 import { useElementsContext } from "~/contexts/ElementsContext";
-import { getExtendedRecipe, getImageUrlByName } from "~/lib/elements";
+import {
+  ElementWithAddress,
+  ExtendedRecipe,
+  getExtendedRecipe,
+  getImageUrlByName,
+} from "~/lib/elements";
 
 export function elementDetailPath(id: string) {
   return `/elements/${id}`;
@@ -63,20 +68,11 @@ export default function ElementDetail() {
                   </p>
                   <For each={getExtendedRecipe(element()!, elements()!)}>
                     {(recipe, index) => (
-                      <div class="mb-6 flex justify-between items-center">
-                        <div class="flex justify-start gap-2">
-                          <For each={Object.keys(recipe)}>
-                            {(elementName) => (
-                              <p class="text-nowrap">
-                                {recipe[elementName].amount} {elementName}
-                              </p>
-                            )}
-                          </For>
-                        </div>
-                        <p class="text-gray-400 text-nowrap">
-                          {"<="} T{element()!.tierNumber - 1 - index()}
-                        </p>
-                      </div>
+                      <RecipeRow
+                        element={element()!}
+                        recipe={recipe}
+                        index={index()}
+                      />
                     )}
                   </For>
                 </Show>
@@ -86,5 +82,54 @@ export default function ElementDetail() {
         </Show>
       </Suspense>
     </>
+  );
+}
+
+type RecipeRowProps = {
+  element: ElementWithAddress;
+  recipe: ExtendedRecipe;
+  index: number;
+};
+
+function RecipeRow(props: RecipeRowProps) {
+  const tier = props.element.tierNumber - props.index - 1;
+
+  function recipeElements() {
+    return _.orderBy(
+      Object.values(props.recipe),
+      ["element.tierNumber", "element.name"],
+      ["desc", "asc"]
+    );
+  }
+
+  return (
+    <div class="min-w-72 mb-6">
+      <p class="text-gray-400 text-sm">
+        <Show
+          when={tier === props.element.tierNumber - 1}
+          fallback={
+            <Show when={tier !== 0} fallback={<>Tier 0</>}>
+              Tier {"<="} {tier}
+            </Show>
+          }
+        >
+          Recipe
+        </Show>
+      </p>
+      <div class="w-full border p-2 border-gray-500 rounded flex flex-wrap justify-start gap-4">
+        <For each={recipeElements()}>
+          {({ element, amount }) => (
+            <p
+              class="text-nowrap"
+              classList={{
+                "text-gray-400": element.tierNumber !== tier,
+              }}
+            >
+              {amount} {element.name}
+            </p>
+          )}
+        </For>
+      </div>
+    </div>
   );
 }

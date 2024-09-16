@@ -16,6 +16,7 @@ export function Header() {
             <Navlink path="/check-receipe" name="Check Recipe" />
             <Navlink path="/invent" name="Invent" />
             <Navlink path="/elements" name="Elements" />
+            <Navlink path="/forging-feed" name="Forging Feed" />
           </div>
         </div>
       </nav>
