@@ -5,14 +5,16 @@ export function Header() {
     <>
       <nav class="border-b border-slate-800">
         <div
-          class="flex flex-wrap items-center justify-between mx-auto p-4"
+          class="p-4 flex flex-wrap items-baseline justify-start gap-10"
           aria-label="Global"
         >
-          <A href="/">Elementerra Tools</A>
+          <div class="mr-4 text-lg text-nowrap">
+            <A href="/">Elementerra Tools</A>
+          </div>
 
-          <div class="flex gap-6">
+          <div class="flex flex-wrap gap-6">
             <Navlink path="/check-receipe" name="Check Recipe" />
-            {/* <Navlink path="/invent" name="Invent" /> */}
+            <Navlink path="/invent" name="Invent" />
             <Navlink path="/elements" name="Elements" />
           </div>
         </div>

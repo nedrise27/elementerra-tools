@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { createResource, createSignal, onMount, Suspense } from "solid-js";
+import { Button } from "~/components/Button";
 
 import { ELE_CURRENCY_SYMBOL } from "~/lib/constants";
 import {
@@ -37,7 +38,6 @@ export default function Home() {
   });
 
   async function handleElePerHourInput(value: string) {
-    await handleRefreshPrices();
     const v = _.toInteger(value);
     if (!_.isNil(v) && !_.isNaN(v)) {
       setElePerHour(v);
@@ -122,13 +122,7 @@ export default function Home() {
         </div>
 
         <div class="w-full flex justify-end">
-          <button
-            type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            onClick={handleRefreshPrices}
-          >
-            Refresh
-          </button>
+          <Button onClick={handleRefreshPrices}>Refresh</Button>
         </div>
       </div>
     </>

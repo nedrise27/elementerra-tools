@@ -32,7 +32,10 @@ export default function CheckReceipe() {
     if (_.isEmpty(elements_)) {
       return [];
     }
-    const available = _.orderBy(elements_, ["tierNumber", "name"]);
+    const available = _.orderBy(_.filter(elements_, { isDiscovered: true }), [
+      "tierNumber",
+      "name",
+    ]);
     setReceipe([
       available[0].name,
       available[0].name,

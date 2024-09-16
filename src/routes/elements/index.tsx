@@ -15,6 +15,7 @@ import { useElementsContext } from "~/contexts/ElementsContext";
 import { ElementWithAddress, getImageUrlByName } from "~/lib/elements";
 import { ElementJSON } from "~/lib/programs/elementerra/accounts";
 import { elementDetailPath } from "./[id]";
+import { Select } from "~/components/Select";
 
 type Elements = Record<number, Record<string, ElementJSON>>;
 
@@ -48,17 +49,20 @@ export default function Elements() {
   >([]);
 
   function availableSeasons() {
-    return [1, 2];
+    return [
+      { key: "Season 1", value: "1" },
+      { key: "Season 2", value: "2" },
+    ];
   }
 
   function availableOrdering() {
     return [
+      { key: "Tier ascending", value: "tierNumber:asc" },
+      { key: "Tier descending", value: "tierNumber:desc" },
       { key: "Name ascending", value: "name:asc" },
       { key: "Name descending", value: "name:desc" },
       { key: "Price ascending", value: "cost:asc" },
       { key: "Price descending", value: "cost:desc" },
-      { key: "Tier ascending", value: "tierNumber:asc" },
-      { key: "Tier descending", value: "tierNumber:desc" },
     ];
   }
 
@@ -77,16 +81,6 @@ export default function Elements() {
     return _.range(0, maxTier + 1);
   }
 
-  function elementsById() {
-    let elementRecord: Record<string, ElementJSON> = {};
-    for (const e of elements() || []) {
-      const hash = new PublicKey(e.hash).toString();
-      _.set(elementRecord, hash, e);
-    }
-
-    return elementRecord;
-  }
-
   createEffect(() => {
     const elements_ = (elements() || []).filter(
       (e) => e.seasonNumber === season()
@@ -101,10 +95,15 @@ export default function Elements() {
     } else if (inventedFilter() === "chests available") {
       filtered = _.filter(
         elements_,
-        ({ numberOfRewards }) => numberOfRewards > 0
+        ({ numberOfRewards, isDiscovered }) =>
+          numberOfRewards > 0 && isDiscovered
       );
     } else if (inventedFilter() === "no chests available") {
-      filtered = _.filter(elements_, { numberOfRewards: 0 });
+      filtered = _.filter(
+        elements_,
+        ({ numberOfRewards, isDiscovered }) =>
+          numberOfRewards <= 0 || !isDiscovered
+      );
     } else {
       filtered = _.clone(elements_);
     }
@@ -151,12 +150,12 @@ export default function Elements() {
     setSeason(parseInt(value, 10));
   }
 
-  function handleChangeOrdering(value: Ordering) {
-    setOrdering(value);
+  function handleChangeOrdering(value: string) {
+    setOrdering(value as Ordering);
   }
 
-  function handleChangeFilter(value: Filter) {
-    setInventedFilter(value);
+  function handleChangeFilter(value: string) {
+    setInventedFilter(value as Filter);
   }
 
   function handleTierFilterSelect(target: HTMLInputElement) {
@@ -213,53 +212,21 @@ export default function Elements() {
         </div>
 
         <div class="w-full mb-4 pb-2 border-b border-gray-600 flex flex-wrap gap-1">
-          <select
-            class="min-w-28 mr-4 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+          <Select
             value={season()}
-            onInput={({ currentTarget }) =>
-              handleChangeSeason(currentTarget.value)
-            }
-          >
-            <For each={availableSeasons()}>
-              {(s) => (
-                <option selected={s == season()} value={s}>
-                  Season {s}
-                </option>
-              )}
-            </For>
-          </select>
-
-          <select
-            class="min-w-28 mr-4 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            options={availableSeasons()}
+            onInput={handleChangeSeason}
+          />
+          <Select
             value={ordering()}
-            onInput={({ currentTarget }) =>
-              handleChangeOrdering(currentTarget.value as Ordering)
-            }
-          >
-            <For each={availableOrdering()}>
-              {(o) => (
-                <option selected={o.value == ordering()} value={o.value}>
-                  {o.key}
-                </option>
-              )}
-            </For>
-          </select>
-
-          <select
-            class="min-w-28 mr-4 border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            options={availableOrdering()}
+            onInput={handleChangeOrdering}
+          />
+          <Select
             value={inventedFilter()}
-            onInput={({ currentTarget }) =>
-              handleChangeFilter(currentTarget.value as Filter)
-            }
-          >
-            <For each={availableFilters()}>
-              {(f) => (
-                <option selected={f.value == inventedFilter()} value={f.value}>
-                  {f.key}
-                </option>
-              )}
-            </For>
-          </select>
+            options={availableFilters()}
+            onInput={handleChangeFilter}
+          />
 
           <div class="flex flex-wrap items-center gap-3">
             <For each={availableTiers()}>
