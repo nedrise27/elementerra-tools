@@ -43,6 +43,8 @@ export default function Invent() {
   const [possibilities, setPossibilities] =
     createSignal<ElementWithAddress[][]>();
 
+  const [showElements, setShowElements] = createSignal(false);
+
   function availableElements() {
     const elements_ = elements();
     if (!_.isNil(elements_)) {
@@ -137,6 +139,21 @@ export default function Invent() {
     setElementsToGuess([...elementsToGuess(), defaultElementToGuess()]);
   }
 
+  function handleSelectElement(element: ElementWithAddress) {
+    setElementsToGuess([
+      ...elementsToGuess(),
+      {
+        element,
+        minAmount: 0,
+        maxAmount: 4,
+      },
+    ]);
+  }
+
+  function handleToggleShowElements() {
+    setShowElements(!showElements());
+  }
+
   async function handleRequestSuggetions() {
     const elements = elementsToGuess().map((e) => ({
       element: slugifyElementName(e.element.name),
@@ -161,7 +178,40 @@ export default function Invent() {
     <>
       <Suspense fallback={<strong>Fetching Elements ...</strong>}>
         <div>
-          <table class="w-full mb-2 text-sm text-left rtl:text-right text-gray-400">
+          <div class="mb-2 flex justify-end">
+            <Button
+              extraClass="bg-gray-600 hover:bg-gray-700"
+              onClick={handleToggleShowElements}
+            >
+              <Show when={showElements()} fallback={"Show Elements"}>
+                Hide Elements
+              </Show>
+            </Button>
+          </div>
+          <Show when={showElements()}>
+            <div class="w-full mb-4 flex flex-wrap gap-1 justify-center">
+              <For each={availableElements()}>
+                {(element) => (
+                  <>
+                    <div
+                      class="w-24 px-2 pb-1 pt-5 relative border rounded shadow border-gray-600 hover:cursor-pointer hover:bg-gray-800"
+                      onClick={() => handleSelectElement(element)}
+                    >
+                      <p class="absolute top-0 text-sm text-gray-400">
+                        {element.name} T{element.tierNumber}
+                      </p>
+                      <img
+                        class=""
+                        src={getImageUrlByName(element.name)}
+                        alt=""
+                      />
+                    </div>
+                  </>
+                )}
+              </For>
+            </div>
+          </Show>
+          <table class="w-full mb-4 text-sm text-left rtl:text-right text-gray-400">
             <thead class="text-xs uppercase bg-gray-700 text-gray-400">
               <tr>
                 <th scope="col" class="px-1 py-3">
@@ -249,7 +299,15 @@ export default function Invent() {
             </tbody>
           </table>
 
-          <div class="w-full mb-4 flex justify-end">
+          <div class="w-full mb-4 flex justify-between items-center">
+            <Show when={result.state === "ready"} fallback={<div></div>}>
+              <div class="w-full flex justify-center">
+                <p class="text-lg">
+                  Recipes for a Tier {request()?.tier} element
+                </p>
+              </div>
+            </Show>
+
             <Button extraClass="w-20" onClick={handleRequestSuggetions}>
               Go
             </Button>
@@ -262,39 +320,23 @@ export default function Invent() {
                   <table class="w-full mb-2 text-sm text-left rtl:text-right text-gray-400">
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                       <tr>
-                        <th colSpan="5" class="px-1 py-3">
+                        <th colSpan="4" class="px-1 py-3">
                           <p>
                             No one tried these recipes yet. Count:{" "}
                             {result()?.numberOfPossibilies}
                           </p>
                         </th>
+                        <th class="hidden md:table-cell">Cost</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <For each={possibilities()}>
                         {(possibilities, index) => (
-                          <tr class="border-b bg-gray-800 border-gray-700">
-                            <For each={possibilities}>
-                              {(item) => (
-                                <td class="px-1 py-4">
-                                  <div class="flex items-center gap-1">
-                                    <p class="hidden md:block">{item.name}</p>
-                                    <img
-                                      class="max-w-8"
-                                      src={getImageUrlByName(item.name)}
-                                    />
-                                  </div>
-                                </td>
-                              )}
-                            </For>
-                            <td>
-                              <Button
-                                onClick={() => handleRemovePossibility(index())}
-                              >
-                                <DeleteIcon class="w-4 h-4 text-gray-400" />
-                              </Button>
-                            </td>
-                          </tr>
+                          <NotTriedRow
+                            possibilities={possibilities}
+                            onRemove={() => handleRemovePossibility(index())}
+                          />
                         )}
                       </For>
                     </tbody>
@@ -344,5 +386,36 @@ export default function Invent() {
         </div>
       </Suspense>
     </>
+  );
+}
+
+type NotTriedRowProps = {
+  possibilities: ElementWithAddress[];
+  onRemove: () => void;
+};
+
+function NotTriedRow(props: NotTriedRowProps) {
+  const cost = props.possibilities.reduce((acc, curr) => acc + curr.price, 0);
+  return (
+    <tr class="border-b bg-gray-800 border-gray-700">
+      <For each={props.possibilities}>
+        {(item) => (
+          <td class="p-2">
+            <div class="flex items-center gap-1">
+              <p class="hidden md:block">{item.name}</p>
+              <img class="max-w-8" src={getImageUrlByName(item.name)} />
+            </div>
+          </td>
+        )}
+      </For>
+      <td class="p-2 hidden md:table-cell">
+        <p>{cost} DRKE</p>
+      </td>
+      <td>
+        <Button onClick={props.onRemove}>
+          <DeleteIcon class="w-4 h-4 text-gray-400" />
+        </Button>
+      </td>
+    </tr>
   );
 }
