@@ -1,4 +1,4 @@
-import { Router } from "@solidjs/router";
+import { Route, Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { ErrorBoundary, Suspense } from "solid-js";
 
