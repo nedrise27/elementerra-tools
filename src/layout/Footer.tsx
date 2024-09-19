@@ -24,7 +24,7 @@ export function Footer() {
           </A>
         </div>
       </div>
-      <A href="/404"></A>
+      <A href="/element"></A>
     </footer>
   );
 }

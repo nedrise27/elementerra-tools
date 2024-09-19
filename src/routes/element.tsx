@@ -9,10 +9,6 @@ import {
   getImageUrlByName,
 } from "~/lib/elements";
 
-export function elementDetailPath(id: string) {
-  return `/element?id=${id}`;
-}
-
 export default function ElementDetail() {
   const [searchParams] = useSearchParams();
   const { getElement, getElements } = useElementsContext();

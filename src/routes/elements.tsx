@@ -14,7 +14,6 @@ import stringSimilarity from "string-similarity-js";
 import { useElementsContext } from "~/contexts/ElementsContext";
 import { ElementWithAddress, getImageUrlByName } from "~/lib/elements";
 import { ElementJSON } from "~/lib/programs/elementerra/accounts";
-import { elementDetailPath } from "./element";
 import { Select } from "~/components/Select";
 import { Button } from "~/components/Button";
 
@@ -289,7 +288,7 @@ export default function Elements() {
                           {element.isDiscovered ? "invented" : "not invented"}
                         </p>
                       </div>
-                      <A href={elementDetailPath(element.address)}>
+                      <A href={`/element?id=${element.address}`}>
                         <img
                           class="max-w-16 rounded-t-lg"
                           classList={{
@@ -302,7 +301,7 @@ export default function Elements() {
                     </div>
                     <div class="">
                       <A
-                        href={elementDetailPath(element.address)}
+                        href={`/element?id=${element.address}`}
                         class="font-lg text-nowrap"
                       >
                         {element.name}
