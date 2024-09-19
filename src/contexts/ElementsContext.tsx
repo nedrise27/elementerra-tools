@@ -34,6 +34,12 @@ export function useElementsContext() {
 function initialize() {
   const [elements, setElements] = createSignal<ElementWithAddress[]>([]);
 
+  async function refreshElements() {
+    const res = await fetchElements();
+    setElements(res);
+    return elements();
+  }
+
   async function getElements(seasonNumber?: number) {
     if (_.isEmpty(elements())) {
       const res = await fetchElements();
@@ -53,5 +59,6 @@ function initialize() {
   return {
     getElements,
     getElement,
+    refreshElements,
   };
 }

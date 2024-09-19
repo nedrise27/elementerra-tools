@@ -1,5 +1,5 @@
 import { PublicKey } from "@solana/web3.js";
-import _ from "lodash";
+import _, { values } from "lodash";
 import {
   createEffect,
   createResource,
@@ -16,6 +16,7 @@ import { ElementWithAddress, getImageUrlByName } from "~/lib/elements";
 import { ElementJSON } from "~/lib/programs/elementerra/accounts";
 import { elementDetailPath } from "./[id]";
 import { Select } from "~/components/Select";
+import { Button } from "~/components/Button";
 
 type Elements = Record<number, Record<string, ElementJSON>>;
 
@@ -35,7 +36,7 @@ type Filter =
   | "no chests available";
 
 export default function Elements() {
-  const { getElements } = useElementsContext();
+  const { refreshElements } = useElementsContext();
 
   const [season, setSeason] = createSignal(2);
   const [ordering, setOrdering] = createSignal<Ordering>("tierNumber:asc");
@@ -43,7 +44,7 @@ export default function Elements() {
   const [tierFilters, setTierFilters] = createSignal<Set<number>>(new Set());
   const [inventedFilter, setInventedFilter] = createSignal<Filter>("all");
 
-  const [elements] = createResource(async () => getElements());
+  const [elements, { refetch }] = createResource(async () => refreshElements());
   const [elementsDisplay, setElementsDisplay] = createSignal<
     ElementWithAddress[]
   >([]);
@@ -77,8 +78,16 @@ export default function Elements() {
   }
 
   function availableTiers() {
-    const maxTier = _.max(elements()?.map((e) => e.tierNumber)) || 0;
-    return _.range(0, maxTier + 1);
+    return [
+      { key: "T0", value: "0" },
+      { key: "T1", value: "1" },
+      { key: "T2", value: "2" },
+      { key: "T3", value: "3" },
+      { key: "T4", value: "4" },
+      { key: "T5", value: "5" },
+      { key: "T6", value: "6" },
+      { key: "T7", value: "7" },
+    ];
   }
 
   createEffect(() => {
@@ -170,89 +179,94 @@ export default function Elements() {
     setTierFilters(tiersToFilter);
   }
 
+  async function handleRefreshElements() {
+    await refetch();
+  }
+
   return (
     <>
-      <Suspense fallback={<strong>Fetching Elements ...</strong>}>
-        <div class="w-full mb-4">
-          <label
-            for="search"
-            class="mb-2 text-sm font-medium sr-only text-white"
-          >
-            Search
-          </label>
-          <div class="relative">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg
-                class="w-4 h-4 text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+      <div class="w-full mb-4">
+        <label for="search" class="mb-2 text-sm font-medium sr-only text-white">
+          Search
+        </label>
+        <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg
+              class="w-4 h-4 text-gray-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+          <input
+            type="search"
+            id="search"
+            class="block w-full p-4 ps-10 text-sm border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Search"
+            value={search()}
+            onInput={({ currentTarget }) =>
+              handleSearchInput(currentTarget.value)
+            }
+          />
+        </div>
+      </div>
+
+      <div class="w-full mb-4 pb-2 border-b border-gray-600 flex flex-wrap gap-1">
+        <Select
+          value={season()}
+          options={availableSeasons()}
+          onInput={handleChangeSeason}
+        />
+        <Select
+          value={ordering()}
+          options={availableOrdering()}
+          onInput={handleChangeOrdering}
+        />
+        <Select
+          value={inventedFilter()}
+          options={availableFilters()}
+          onInput={handleChangeFilter}
+        />
+
+        <div class="flex flex-wrap items-center gap-3">
+          <For each={availableTiers()}>
+            {({ key, value }) => (
+              <div class="flex items-center">
+                <input
+                  id={"tier-checkbox-" + key}
+                  type="checkbox"
+                  value={value}
+                  onChange={({ currentTarget }) =>
+                    handleTierFilterSelect(currentTarget)
+                  }
+                  class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600"
                 />
-              </svg>
-            </div>
-            <input
-              type="search"
-              id="search"
-              class="block w-full p-4 ps-10 text-sm border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Search"
-              value={search()}
-              onInput={({ currentTarget }) =>
-                handleSearchInput(currentTarget.value)
-              }
-            />
-          </div>
+                <label
+                  for={"tier-checkbox-" + key}
+                  class="ms-2 text-sm font-medium text-gray-300"
+                >
+                  {key}
+                </label>
+              </div>
+            )}
+          </For>
         </div>
 
-        <div class="w-full mb-4 pb-2 border-b border-gray-600 flex flex-wrap gap-1">
-          <Select
-            value={season()}
-            options={availableSeasons()}
-            onInput={handleChangeSeason}
-          />
-          <Select
-            value={ordering()}
-            options={availableOrdering()}
-            onInput={handleChangeOrdering}
-          />
-          <Select
-            value={inventedFilter()}
-            options={availableFilters()}
-            onInput={handleChangeFilter}
-          />
-
-          <div class="flex flex-wrap items-center gap-3">
-            <For each={availableTiers()}>
-              {(tier) => (
-                <div class="flex items-center">
-                  <input
-                    id={"tier-checkbox-" + tier}
-                    type="checkbox"
-                    value={tier}
-                    onChange={({ currentTarget }) =>
-                      handleTierFilterSelect(currentTarget)
-                    }
-                    class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600"
-                  />
-                  <label
-                    for={"tier-checkbox-" + tier}
-                    class="ms-2 text-sm font-medium text-gray-300"
-                  >
-                    T{tier}
-                  </label>
-                </div>
-              )}
-            </For>
-          </div>
+        <div class="flex-1 flex justify-end">
+          <Button onClick={handleRefreshElements}>Refresh</Button>
         </div>
+      </div>
 
+      <Suspense fallback={<strong>Fetching Elements ...</strong>}>
         <Show
           when={!_.isNil(elements())}
           fallback={<strong>Loading ...</strong>}
