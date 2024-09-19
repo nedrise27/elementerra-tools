@@ -12,7 +12,7 @@ export default defineConfig({
     static: true,
     prerender: {
       failOnError: true,
-      routes: ["/", "/elements/[id]"],
+      routes: ["/"],
       crawlLinks: true,
     },
   },
