@@ -28,6 +28,11 @@ type ElementToGuess = {
   maxAmount: number;
 };
 
+type ResultRow = {
+  elements: ElementWithAddress[];
+  cost: number;
+};
+
 export default function Invent() {
   const { getElements } = useElementsContext();
 
@@ -40,8 +45,8 @@ export default function Invent() {
 
   const [request, setRequest] = createSignal<GetRecipeSuggestionRequest>();
   const [result] = createResource(request, getRecipeSuggestions);
-  const [possibilities, setPossibilities] =
-    createSignal<ElementWithAddress[][]>();
+  const [possibilities, setPossibilities] = createSignal<ResultRow[]>();
+  const [alreadyTried, setAlreadyTried] = createSignal<ResultRow[]>();
 
   const [showElements, setShowElements] = createSignal(false);
 
@@ -62,19 +67,21 @@ export default function Invent() {
     }));
   }
 
-  function defaultElementToGuess() {
-    return {
-      element: _.first(availableElements())!,
-      minAmount: 0,
-      maxAmount: 4,
-    };
+  function defaultElementsToGuess() {
+    return [
+      {
+        element: _.first(availableElements())!,
+        minAmount: 0,
+        maxAmount: 4,
+      },
+    ];
   }
 
   createEffect(() => {
     const elements_ = availableElements();
     if (!_.isNil(elements_) && !_.isEmpty(elements_)) {
       if (_.isEmpty(elementsToGuess())) {
-        setElementsToGuess([defaultElementToGuess()]);
+        setElementsToGuess(defaultElementsToGuess());
       }
       const rec: Record<string, ElementWithAddress> = {};
       for (const e of elements_) {
@@ -89,16 +96,31 @@ export default function Invent() {
 
   createEffect(() => {
     if (result.state === "ready") {
-      const possibilities_ = [];
+      const possibilities_: ResultRow[] = [];
       for (const p of result()?.possibilities) {
-        const possibility = [];
+        const elements = [];
+        let cost = 0;
         for (const item of p) {
           const e = elementsBySlug()![item];
-          possibility.push(e);
+          elements.push(e);
+          cost += e.price;
         }
-        possibilities_.push(possibility);
+        possibilities_.push({ elements, cost });
       }
       setPossibilities(possibilities_);
+
+      const alreadyTried_ = [];
+      for (const n of result()?.alreadyTried) {
+        const elements = [];
+        let cost = 0;
+        for (const item of n) {
+          const e = elementsBySlug()![item];
+          elements.push(e);
+          cost += e.price;
+        }
+        alreadyTried_.push({ elements, cost });
+      }
+      setAlreadyTried(alreadyTried_);
     }
   });
 
@@ -136,7 +158,30 @@ export default function Invent() {
   }
 
   function handleAddElement() {
-    setElementsToGuess([...elementsToGuess(), defaultElementToGuess()]);
+    const availableElements_ = availableElements();
+    const elementsToGuess_ = elementsToGuess();
+    if (_.isNil(availableElements_)) return;
+
+    let next = availableElements_[0];
+    for (const available of availableElements_) {
+      if (
+        _.isNil(
+          elementsToGuess_.find((e) => e.element.address === available.address)
+        )
+      ) {
+        next = available;
+        break;
+      }
+    }
+
+    setElementsToGuess([
+      ...elementsToGuess(),
+      {
+        element: next,
+        minAmount: 0,
+        maxAmount: 4,
+      },
+    ]);
   }
 
   function handleSelectElement(element: ElementWithAddress) {
@@ -241,7 +286,7 @@ export default function Invent() {
                       <tr class="border-b bg-gray-800 border-gray-700">
                         <th
                           scope="row"
-                          class="px-1 py-4 font-medium whitespace-nowrap text-white"
+                          class="px-4 py-2 font-medium whitespace-nowrap text-white"
                         >
                           <Select
                             value={elementToGuess.element.address}
@@ -320,21 +365,19 @@ export default function Invent() {
                   <table class="w-full mb-2 text-sm text-left rtl:text-right text-gray-400">
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                       <tr>
-                        <th colSpan="4" class="px-1 py-3">
+                        <th colSpan="6" class="px-1 py-3">
                           <p>
                             No one tried these recipes yet. Count:{" "}
                             {result()?.numberOfPossibilies}
                           </p>
                         </th>
-                        <th class="hidden md:table-cell">Cost</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <For each={possibilities()}>
-                        {(possibilities, index) => (
+                        {(resultRow, index) => (
                           <NotTriedRow
-                            possibilities={possibilities}
+                            resultRow={resultRow}
                             onRemove={() => handleRemovePossibility(index())}
                           />
                         )}
@@ -347,34 +390,15 @@ export default function Invent() {
                   <table class="w-full mb-2 text-sm text-left rtl:text-right text-gray-400">
                     <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                       <tr>
-                        <th colSpan="4" class="px-1 py-3">
+                        <th colSpan="6" class="px-1 py-3">
                           <p>These recipes were already tried</p>
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <For each={result()?.alreadyTried}>
-                        {(alreadyTried) => (
-                          <tr class="border-b bg-gray-800 border-gray-700">
-                            <For each={alreadyTried}>
-                              {(item) => {
-                                const e = elementsBySlug()![item];
-                                return (
-                                  <>
-                                    <td class="px-1 py-4">
-                                      <div class="flex items-center gap-1">
-                                        <p class="hidden md:block">{e.name}</p>
-                                        <img
-                                          class="max-w-8"
-                                          src={getImageUrlByName(e.name)}
-                                        />
-                                      </div>
-                                    </td>
-                                  </>
-                                );
-                              }}
-                            </For>
-                          </tr>
+                      <For each={alreadyTried()}>
+                        {(resultRow) => (
+                          <AlreadyTriedRow resultRow={resultRow} />
                         )}
                       </For>
                     </tbody>
@@ -390,18 +414,17 @@ export default function Invent() {
 }
 
 type NotTriedRowProps = {
-  possibilities: ElementWithAddress[];
+  resultRow: ResultRow;
   onRemove: () => void;
 };
 
 function NotTriedRow(props: NotTriedRowProps) {
-  const cost = props.possibilities.reduce((acc, curr) => acc + curr.price, 0);
   return (
     <tr class="border-b bg-gray-800 border-gray-700">
-      <For each={props.possibilities}>
+      <For each={props.resultRow.elements}>
         {(item) => (
-          <td class="p-2">
-            <div class="flex items-center gap-1">
+          <td class="">
+            <div class="p-2 flex justify-center items-center gap-1">
               <p class="hidden md:block">{item.name}</p>
               <img class="max-w-8" src={getImageUrlByName(item.name)} />
             </div>
@@ -409,12 +432,44 @@ function NotTriedRow(props: NotTriedRowProps) {
         )}
       </For>
       <td class="p-2 hidden md:table-cell">
-        <p>{cost} DRKE</p>
+        <div class="w-32 text-right">
+          <p>{props.resultRow.cost} DRKE</p>
+        </div>
       </td>
       <td>
-        <Button onClick={props.onRemove}>
-          <DeleteIcon class="w-4 h-4 text-gray-400" />
-        </Button>
+        <div class="w-10">
+          <Button onClick={props.onRemove}>
+            <DeleteIcon class="w-4 h-4 text-gray-400" />
+          </Button>
+        </div>
+      </td>
+    </tr>
+  );
+}
+
+type AlreadyTriedRowProps = {
+  resultRow: ResultRow;
+};
+
+function AlreadyTriedRow(props: AlreadyTriedRowProps) {
+  return (
+    <tr class="border-b bg-gray-800 border-gray-700">
+      <For each={props.resultRow.elements}>
+        {(item) => (
+          <>
+            <td class="">
+              <div class="p-2 flex justify-center items-center gap-1">
+                <p class="hidden md:block">{item.name}</p>
+                <img class="max-w-8" src={getImageUrlByName(item.name)} />
+              </div>
+            </td>
+          </>
+        )}
+      </For>
+      <td class="p-2 hidden md:table-cell">
+        <div class="w-32 text-right">
+          <p>{props.resultRow.cost} DRKE</p>
+        </div>
       </td>
     </tr>
   );
