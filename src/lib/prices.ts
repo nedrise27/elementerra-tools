@@ -15,14 +15,14 @@ export async function fetchEleSolPrice() {
     `https://price.jup.ag/v6/price?ids=${ELE_CURRENCY_TOKEN_ADDRESS}&vsToken=SOL`
   );
   const body = await res.json();
-  const price = body.data?.[ELE_CURRENCY_TOKEN_ADDRESS]?.price;
+  let price = body.data?.[ELE_CURRENCY_TOKEN_ADDRESS]?.price;
 
   if (!_.isFinite(price)) {
     const res = await fetch(
-      "https://quote-api.jup.ag/v6/quote?inputMint=drkeyEtLXvHSRjCcnQbqaQSt3kaeUo2h5a4NyTVjWZd&outputMint=So11111111111111111111111111111111111111112&amount=10000000&slippageBps=300&computeAutoSlippage=true&swapMode=ExactIn&onlyDirectRoutes=false&asLegacyTransaction=false&maxAccounts=64&minimizeSlippage=false"
+      `https://quote-api.jup.ag/v6/quote?inputMint=${ELE_CURRENCY_TOKEN_ADDRESS}&outputMint=So11111111111111111111111111111111111111112&amount=10000000&slippageBps=300&computeAutoSlippage=true&swapMode=ExactIn&onlyDirectRoutes=false&asLegacyTransaction=false&maxAccounts=64&minimizeSlippage=false`
     );
     const body = await res.json();
-    return _.toInteger(body.outAmount) / 10 ** 12;
+    price = _.toInteger(body.outAmount) / 10 ** 12;
   }
 
   return price;
@@ -33,5 +33,15 @@ export async function fetchEleUsdcPrice() {
     `https://price.jup.ag/v6/price?ids=${ELE_CURRENCY_TOKEN_ADDRESS}&vsToken=USDC`
   );
   const body = await res.json();
-  return body.data?.[ELE_CURRENCY_TOKEN_ADDRESS]?.price;
+  let price = body.data?.[ELE_CURRENCY_TOKEN_ADDRESS]?.price;
+
+  if (!_.isFinite(price)) {
+    const res = await fetch(
+      `https://quote-api.jup.ag/v6/quote?inputMint=${ELE_CURRENCY_TOKEN_ADDRESS}&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=10000000&slippageBps=300&computeAutoSlippage=true&swapMode=ExactIn&onlyDirectRoutes=false&asLegacyTransaction=false&maxAccounts=64&minimizeSlippage=false`
+    );
+    const body = await res.json();
+    price = _.toInteger(body.outAmount) / 10 ** 9;
+  }
+
+  return price;
 }
