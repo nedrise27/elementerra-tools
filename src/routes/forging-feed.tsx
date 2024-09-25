@@ -71,7 +71,10 @@ export default function ForgingFeed() {
   });
 
   function handleUpdateMessages(forgeEvent: ForgeEvent) {
-    if (forgeEvent.preferHidden) {
+    if (
+      forgeEvent.preferHidden &&
+      forgeEvent.eventTopic !== EventTopics.inventing
+    ) {
       return;
     }
 
