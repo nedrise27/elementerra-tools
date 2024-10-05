@@ -2,7 +2,7 @@
   "name": "elementerra-tools",
   "type": "module",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "dev": "vinxi dev",
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.5",
+    "@types/node": "^22.7.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.45",
     "tailwindcss": "^3.4.11",

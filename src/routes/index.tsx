@@ -29,12 +29,13 @@ export default function Home() {
     return calculatePrice(price, eph * hours);
   }
 
-  onMount(() => {
+  onMount(async () => {
     const savedElePerHour = localStorage?.getItem(ELE_PER_HOUR_KEY);
     if (!_.isNil(savedElePerHour)) {
       const elePerHour = _.toInteger(savedElePerHour);
       setElePerHour(elePerHour);
     }
+    await handleRefreshPrices();
   });
 
   async function handleElePerHourInput(value: string) {
