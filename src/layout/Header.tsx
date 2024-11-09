@@ -4,19 +4,31 @@ export function Header() {
   return (
     <>
       <nav class="border-b border-slate-800">
-        <div
-          class="p-4 flex flex-wrap items-baseline justify-start gap-10"
-          aria-label="Global"
-        >
-          <div class="mr-4 text-lg text-nowrap">
-            <A href="/">Elementerra Tools</A>
+        <div class="flex flex-wrap items-baseline justify-between">
+          <div
+            class="p-4 flex flex-wrap items-baseline justify-start gap-10"
+            aria-label="Global"
+          >
+            <div class="mr-4 text-lg text-nowrap">
+              <A href="/">Elementerra Tools</A>
+            </div>
+
+            <div class="flex flex-wrap gap-6">
+              <Navlink path="/check-receipe" name="Check Recipe" />
+              <Navlink path="/invent" name="Invent" />
+              <Navlink path="/elements" name="Elements" />
+              <Navlink path="/forging-feed" name="Forging Feed" />
+            </div>
           </div>
 
-          <div class="flex flex-wrap gap-6">
-            <Navlink path="/check-receipe" name="Check Recipe" />
-            <Navlink path="/invent" name="Invent" />
-            <Navlink path="/elements" name="Elements" />
-            <Navlink path="/forging-feed" name="Forging Feed" />
+          <div class="pr-10">
+            <a
+              class="text-lg font-bold text-green-500 border border-green-500 rounded py-1 px-2"
+              target="_blank"
+              href="https://stake.getsession.org/faucet/lzsiK9G9vkkDl9lIBYohWtaLw7EYCkR9Dz5ysZ3Ehw94lu1QrgOcLn"
+            >
+              Use my Session Token referral!
+            </a>
           </div>
         </div>
       </nav>
