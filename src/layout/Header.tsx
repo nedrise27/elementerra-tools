@@ -22,13 +22,13 @@ export function Header() {
           </div>
 
           <div class="pr-10">
-            <a
+            {/* <a
               class="text-lg font-bold text-green-500 border border-green-500 rounded py-1 px-2"
               target="_blank"
               href="https://stake.getsession.org/faucet/lzsiK9G9vkkDl9lIBYohWtaLw7EYCkR9Dz5ysZ3Ehw94lu1QrgOcLn"
             >
               Use my Session Token referral!
-            </a>
+            </a> */}
           </div>
         </div>
       </nav>
