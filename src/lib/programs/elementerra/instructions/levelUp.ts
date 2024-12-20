@@ -10,7 +10,6 @@ export interface LevelUpArgs {
   creatorHash: Array<number>
   nonce: BN
   index: number
-  levelUpRequirements: types.LevelUpRequirementsFields
 }
 
 export interface LevelUpAccounts {
@@ -24,9 +23,10 @@ export interface LevelUpAccounts {
   metaplexMetadataAccount: PublicKey
   nftMint: PublicKey
   nftToken: PublicKey
+  element: PublicKey
   player: PublicKey
   levelAttributes: PublicKey
-  drkeMint: PublicKey
+  elementumMint: PublicKey
   userTokenAccount: PublicKey
   packTreeAuthority: PublicKey
   packMerkleTree: PublicKey
@@ -52,7 +52,6 @@ export const layout = borsh.struct([
   borsh.array(borsh.u8(), 32, "creatorHash"),
   borsh.u64("nonce"),
   borsh.u32("index"),
-  types.LevelUpRequirements.layout("levelUpRequirements"),
 ])
 
 export function levelUp(
@@ -79,9 +78,10 @@ export function levelUp(
     },
     { pubkey: accounts.nftMint, isSigner: false, isWritable: false },
     { pubkey: accounts.nftToken, isSigner: false, isWritable: false },
+    { pubkey: accounts.element, isSigner: false, isWritable: false },
     { pubkey: accounts.player, isSigner: false, isWritable: true },
     { pubkey: accounts.levelAttributes, isSigner: false, isWritable: true },
-    { pubkey: accounts.drkeMint, isSigner: false, isWritable: true },
+    { pubkey: accounts.elementumMint, isSigner: false, isWritable: true },
     { pubkey: accounts.userTokenAccount, isSigner: false, isWritable: true },
     { pubkey: accounts.packTreeAuthority, isSigner: false, isWritable: true },
     { pubkey: accounts.packMerkleTree, isSigner: false, isWritable: true },
@@ -121,9 +121,6 @@ export function levelUp(
       creatorHash: args.creatorHash,
       nonce: args.nonce,
       index: args.index,
-      levelUpRequirements: types.LevelUpRequirements.toEncodable(
-        args.levelUpRequirements
-      ),
     },
     buffer
   )

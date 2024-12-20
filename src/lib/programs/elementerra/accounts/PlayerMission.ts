@@ -17,7 +17,6 @@ export interface PlayerMissionFields {
   authority: PublicKey
   request: PublicKey
   completed: boolean
-  rewardEarned: types.MissionRewardKind
 }
 
 export interface PlayerMissionJSON {
@@ -33,7 +32,6 @@ export interface PlayerMissionJSON {
   authority: string
   request: string
   completed: boolean
-  rewardEarned: types.MissionRewardJSON
 }
 
 /** PDA ["player_mission_", season_number, mission pub, player pub ] */
@@ -50,7 +48,6 @@ export class PlayerMission {
   readonly authority: PublicKey
   readonly request: PublicKey
   readonly completed: boolean
-  readonly rewardEarned: types.MissionRewardKind
 
   static readonly discriminator = Buffer.from([
     92, 53, 224, 173, 241, 39, 182, 72,
@@ -63,13 +60,12 @@ export class PlayerMission {
     borsh.publicKey("mission"),
     borsh.u32("result"),
     borsh.u8("numberOfRequirementsLeftToComplete"),
-    borsh.array(borsh.publicKey(), 4, "requirementsFilled"),
+    borsh.array(borsh.publicKey(), 6, "requirementsFilled"),
     borsh.i64("startedAt"),
     types.MissionStatus.layout("status"),
     borsh.publicKey("authority"),
     borsh.publicKey("request"),
     borsh.bool("completed"),
-    types.MissionReward.layout("rewardEarned"),
   ])
 
   constructor(fields: PlayerMissionFields) {
@@ -86,7 +82,6 @@ export class PlayerMission {
     this.authority = fields.authority
     this.request = fields.request
     this.completed = fields.completed
-    this.rewardEarned = fields.rewardEarned
   }
 
   static async fetch(
@@ -146,7 +141,6 @@ export class PlayerMission {
       authority: dec.authority,
       request: dec.request,
       completed: dec.completed,
-      rewardEarned: types.MissionReward.fromDecoded(dec.rewardEarned),
     })
   }
 
@@ -167,7 +161,6 @@ export class PlayerMission {
       authority: this.authority.toString(),
       request: this.request.toString(),
       completed: this.completed,
-      rewardEarned: this.rewardEarned.toJSON(),
     }
   }
 
@@ -188,7 +181,6 @@ export class PlayerMission {
       authority: new PublicKey(obj.authority),
       request: new PublicKey(obj.request),
       completed: obj.completed,
-      rewardEarned: types.MissionReward.fromJSON(obj.rewardEarned),
     })
   }
 }

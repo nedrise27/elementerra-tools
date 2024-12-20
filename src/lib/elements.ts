@@ -5,6 +5,11 @@ import { solanaClient } from "./solanaClient";
 
 export const PADDING_ADDRESS = "11111111111111111111111111111111";
 
+const BROKEN_ELEMENTS = [
+  "Fr6pnKEFTjGV36Y7NXNmGx7MBCjT6gUHE4M9azvBifni",
+  "HJAmECqZCVp3pZniMrBViLvgVFHXsLgnpB7fA3sTtiGK",
+];
+
 export type ElementWithAddress = ElementJSON & {
   address: string;
   tierNumber: number;
@@ -27,6 +32,9 @@ export async function fetchElements(): Promise<ElementWithAddress[]> {
   const elements: ElementWithAddress[] = [];
 
   for (const rawElement of elementsRaw) {
+    if (BROKEN_ELEMENTS.includes(rawElement.pubkey.toString())) {
+      continue;
+    }
     const e = Element.decode(rawElement.account.data);
     const tier = e.tier.discriminator;
 

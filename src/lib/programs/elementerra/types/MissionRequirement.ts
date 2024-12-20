@@ -3,40 +3,40 @@ import BN from "bn.js" // eslint-disable-line @typescript-eslint/no-unused-vars
 import * as types from "../types" // eslint-disable-line @typescript-eslint/no-unused-vars
 import * as borsh from "@coral-xyz/borsh"
 
-export type ElementerraPnftFields = {
+export type ElementerraPNFTFields = {
   collection: PublicKey
   criteria: types.ElementerraPNFTCriteriaKind
 }
-export type ElementerraPnftValue = {
+export type ElementerraPNFTValue = {
   collection: PublicKey
   criteria: types.ElementerraPNFTCriteriaKind
 }
 
-export interface ElementerraPnftJSON {
-  kind: "ElementerraPnft"
+export interface ElementerraPNFTJSON {
+  kind: "ElementerraPNFT"
   value: {
     collection: string
     criteria: types.ElementerraPNFTCriteriaJSON
   }
 }
 
-export class ElementerraPnft {
+export class ElementerraPNFT {
   static readonly discriminator = 0
-  static readonly kind = "ElementerraPnft"
+  static readonly kind = "ElementerraPNFT"
   readonly discriminator = 0
-  readonly kind = "ElementerraPnft"
-  readonly value: ElementerraPnftValue
+  readonly kind = "ElementerraPNFT"
+  readonly value: ElementerraPNFTValue
 
-  constructor(value: ElementerraPnftFields) {
+  constructor(value: ElementerraPNFTFields) {
     this.value = {
       collection: value.collection,
       criteria: value.criteria,
     }
   }
 
-  toJSON(): ElementerraPnftJSON {
+  toJSON(): ElementerraPNFTJSON {
     return {
-      kind: "ElementerraPnft",
+      kind: "ElementerraPNFT",
       value: {
         collection: this.value.collection.toString(),
         criteria: this.value.criteria.toJSON(),
@@ -46,7 +46,58 @@ export class ElementerraPnft {
 
   toEncodable() {
     return {
-      ElementerraPnft: {
+      ElementerraPNFT: {
+        collection: this.value.collection,
+        criteria: this.value.criteria.toEncodable(),
+      },
+    }
+  }
+}
+
+export type ElementerraCNFTFields = {
+  collection: PublicKey
+  criteria: types.ElementerraCNFTCriteriaKind
+}
+export type ElementerraCNFTValue = {
+  collection: PublicKey
+  criteria: types.ElementerraCNFTCriteriaKind
+}
+
+export interface ElementerraCNFTJSON {
+  kind: "ElementerraCNFT"
+  value: {
+    collection: string
+    criteria: types.ElementerraCNFTCriteriaJSON
+  }
+}
+
+export class ElementerraCNFT {
+  static readonly discriminator = 1
+  static readonly kind = "ElementerraCNFT"
+  readonly discriminator = 1
+  readonly kind = "ElementerraCNFT"
+  readonly value: ElementerraCNFTValue
+
+  constructor(value: ElementerraCNFTFields) {
+    this.value = {
+      collection: value.collection,
+      criteria: value.criteria,
+    }
+  }
+
+  toJSON(): ElementerraCNFTJSON {
+    return {
+      kind: "ElementerraCNFT",
+      value: {
+        collection: this.value.collection.toString(),
+        criteria: this.value.criteria.toJSON(),
+      },
+    }
+  }
+
+  toEncodable() {
+    return {
+      ElementerraCNFT: {
         collection: this.value.collection,
         criteria: this.value.criteria.toEncodable(),
       },
@@ -72,9 +123,9 @@ export interface TokenJSON {
 }
 
 export class Token {
-  static readonly discriminator = 1
+  static readonly discriminator = 2
   static readonly kind = "Token"
-  readonly discriminator = 1
+  readonly discriminator = 2
   readonly kind = "Token"
   readonly value: TokenValue
 
@@ -110,9 +161,9 @@ export interface NoneJSON {
 }
 
 export class None {
-  static readonly discriminator = 2
+  static readonly discriminator = 3
   static readonly kind = "None"
-  readonly discriminator = 2
+  readonly discriminator = 3
   readonly kind = "None"
 
   toJSON(): NoneJSON {
@@ -134,11 +185,18 @@ export function fromDecoded(obj: any): types.MissionRequirementKind {
     throw new Error("Invalid enum object")
   }
 
-  if ("ElementerraPnft" in obj) {
-    const val = obj["ElementerraPnft"]
-    return new ElementerraPnft({
+  if ("ElementerraPNFT" in obj) {
+    const val = obj["ElementerraPNFT"]
+    return new ElementerraPNFT({
       collection: val["collection"],
       criteria: types.ElementerraPNFTCriteria.fromDecoded(val["criteria"]),
+    })
+  }
+  if ("ElementerraCNFT" in obj) {
+    const val = obj["ElementerraCNFT"]
+    return new ElementerraCNFT({
+      collection: val["collection"],
+      criteria: types.ElementerraCNFTCriteria.fromDecoded(val["criteria"]),
     })
   }
   if ("Token" in obj) {
@@ -159,10 +217,16 @@ export function fromJSON(
   obj: types.MissionRequirementJSON
 ): types.MissionRequirementKind {
   switch (obj.kind) {
-    case "ElementerraPnft": {
-      return new ElementerraPnft({
+    case "ElementerraPNFT": {
+      return new ElementerraPNFT({
         collection: new PublicKey(obj.value.collection),
         criteria: types.ElementerraPNFTCriteria.fromJSON(obj.value.criteria),
+      })
+    }
+    case "ElementerraCNFT": {
+      return new ElementerraCNFT({
+        collection: new PublicKey(obj.value.collection),
+        criteria: types.ElementerraCNFTCriteria.fromJSON(obj.value.criteria),
       })
     }
     case "Token": {
@@ -184,7 +248,14 @@ export function layout(property?: string) {
         borsh.publicKey("collection"),
         types.ElementerraPNFTCriteria.layout("criteria"),
       ],
-      "ElementerraPnft"
+      "ElementerraPNFT"
+    ),
+    borsh.struct(
+      [
+        borsh.publicKey("collection"),
+        types.ElementerraCNFTCriteria.layout("criteria"),
+      ],
+      "ElementerraCNFT"
     ),
     borsh.struct([borsh.publicKey("mint"), borsh.u64("amount")], "Token"),
     borsh.struct([], "None"),

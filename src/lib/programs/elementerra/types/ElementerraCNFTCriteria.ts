@@ -50,15 +50,18 @@ export class Crystal {
 
 export type ElementFields = {
   tier: types.TierKind
+  name: types.ElementNameKind
 }
 export type ElementValue = {
   tier: types.TierKind
+  name: types.ElementNameKind
 }
 
 export interface ElementJSON {
   kind: "Element"
   value: {
     tier: types.TierJSON
+    name: types.ElementNameJSON
   }
 }
 
@@ -72,6 +75,7 @@ export class Element {
   constructor(value: ElementFields) {
     this.value = {
       tier: value.tier,
+      name: value.name,
     }
   }
 
@@ -80,6 +84,7 @@ export class Element {
       kind: "Element",
       value: {
         tier: this.value.tier.toJSON(),
+        name: this.value.name.toJSON(),
       },
     }
   }
@@ -88,6 +93,7 @@ export class Element {
     return {
       Element: {
         tier: this.value.tier.toEncodable(),
+        name: this.value.name.toEncodable(),
       },
     }
   }
@@ -132,6 +138,7 @@ export function fromDecoded(obj: any): types.ElementerraCNFTCriteriaKind {
     const val = obj["Element"]
     return new Element({
       tier: types.Tier.fromDecoded(val["tier"]),
+      name: types.ElementName.fromDecoded(val["name"]),
     })
   }
   if ("None" in obj) {
@@ -153,6 +160,7 @@ export function fromJSON(
     case "Element": {
       return new Element({
         tier: types.Tier.fromJSON(obj.value.tier),
+        name: types.ElementName.fromJSON(obj.value.name),
       })
     }
     case "None": {
@@ -164,7 +172,10 @@ export function fromJSON(
 export function layout(property?: string) {
   const ret = borsh.rustEnum([
     borsh.struct([types.CrystalTier.layout("tier")], "Crystal"),
-    borsh.struct([types.Tier.layout("tier")], "Element"),
+    borsh.struct(
+      [types.Tier.layout("tier"), types.ElementName.layout("name")],
+      "Element"
+    ),
     borsh.struct([], "None"),
   ])
   if (property !== undefined) {
