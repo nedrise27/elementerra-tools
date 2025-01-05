@@ -12,13 +12,6 @@ export function Header() {
             <div class="mr-4 text-lg text-nowrap">
               <A href="/">Elementerra Tools</A>
             </div>
-
-            <div class="flex flex-wrap gap-6">
-              <Navlink path="/check-receipe" name="Check Recipe" />
-              <Navlink path="/invent" name="Invent" />
-              <Navlink path="/elements" name="Elements" />
-              <Navlink path="/forging-feed" name="Forging Feed" />
-            </div>
           </div>
 
           <div class="pr-10">
